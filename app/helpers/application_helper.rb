@@ -1,6 +1,6 @@
 module ApplicationHelper
 
 	def has_coordinates?
-		!!session[:coordinates]
+		session[:coordinates].present?
 	end
 end
