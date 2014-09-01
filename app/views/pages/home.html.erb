@@ -1,0 +1,79 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="panel panel-default">
+        <div class="panel-body test">
+          <div style="font-size:22px;" class="panel-title">Atlanta, GA
+            <img style="width:35px;" class="pull-right" src="http://www.tuindiner.nl/wp-content/uploads/2013/03/mas-fork.png"></img>
+          </div>
+        </div>
+        <div style='width: 748px;'>
+  		  <div id="map" style='width: 748px; height: 327px;'></div>
+		</div>
+
+        <div class="panel-heading">
+          <div class="row">
+            <div class="col-md-3">
+              <button class="btn btn-default">Now</button>
+            </div>
+          	<div class="col-md-3 col-md-offset-6">
+		          <div class="range range-primary">
+		           <input type="range" name="range" min="1" max="50" value="10" onchange="range.value=value">
+		            <output id="range">10 miles</output>
+		          </div>
+		        </div>
+		      </div>
+        </div>
+	      <table class="table">
+		      <tbody>
+		        <tr>
+		          <td style="border:none;">
+		          <span class="btn btn-sm btn-default glyphicon glyphicon-chevron-up">10
+		          </span>
+		          <span style="font-size:16px;margin-left:5px;margin-top:5px;"><strong>Hangovers</strong></span>
+		          </td>
+		          <td>$4.50</td>
+		        </tr>
+		        <tr>
+		          <td>
+		          <span class="btn btn-sm btn-default glyphicon glyphicon-chevron-up">10
+		          </span>
+		          <span style="font-size:16px;margin-left:5px;margin-top:5px;"><strong>Lost Dog</strong></span>
+		          </td>
+		          <td>$3.50</td>
+		        </tr>
+		        <tr>
+		          <td>
+		          <span class="btn btn-sm btn-default glyphicon glyphicon-chevron-up">10
+		          </span>
+		          <span style="font-size:16px;margin-left:5px;margin-top:5px;"><strong>Big Sky</strong></span>
+		          </td>
+		          <td>$5.00</td>
+		        </tr>
+	        </tbody>
+	  		</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<% content_for :scripts do %>
+
+<script>
+handler = Gmaps.build('Google');
+handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+  markers = handler.addMarkers([
+    {
+      "lat": <%= @lat %>,
+      "lng": <%= @long %>,
+    }
+  ]);
+  handler.bounds.extendWith(markers);
+  handler.map.centerOn(marker);
+});
+</script>
+
+
+<% end %>
+
