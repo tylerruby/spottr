@@ -65,8 +65,11 @@
       marker = handler.addMarker({
           "lat": <%= @lat %>,
           "lng": <%= @long %>,
+          "infowindow": "Current Location"
         });
       handler.map.centerOn(marker);
+      handler.addMarkers(<%=raw @hash.to_json %>);
+      handler.getMap().setZoom(14);
     });
   </script>
 <% end %>
