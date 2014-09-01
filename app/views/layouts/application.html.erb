@@ -13,23 +13,21 @@
 
 <body>
 
-<%= render "layouts/header" %>
-<%= yield %>
+  <%= render "layouts/header" %>
+  <%= yield %>
 
-<%= unless has_coordinates? %>
-  <script>
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(function(position) {
-        var latitude = position.coords.latitude;
-        var longitude = position.coords.longitude;
+  <% unless has_coordinates? %>
+    <script>
+      if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+          var latitude = position.coords.latitude;
+          var longitude = position.coords.longitude;
 
-        $.post('coordinates', { latitude: latitude, longitude: longitude }, function(){})
-      });
-    }
-  </script>
-<% end %>
-
+          $.post('session_coordinates', { latitude: latitude, longitude: longitude }, function(){})
+        });
+      }
+    </script>
+  <% end %>
   <%= yield :scripts if content_for? :scripts %>
-
 </body>
 </html>
