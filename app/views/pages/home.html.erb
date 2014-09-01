@@ -67,6 +67,7 @@
           "lng": <%= @long %>,
         });
       handler.map.centerOn(marker);
+      handler.getMap().setZoom(12);
     });
   </script>
 <% end %>
