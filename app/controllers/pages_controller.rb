@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
   def home
-  	if !!session[:coordinates]
-      coordinates = session[:coordinates].split(',')
+  	if !!session_coordinates
+      coordinates = session_coordinates.split(',')
       @lat = coordinates[0]
       @long = coordinates[1]
     end
