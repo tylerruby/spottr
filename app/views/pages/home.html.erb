@@ -26,33 +26,18 @@
         </div>
 	      <table class="table">
 		      <tbody>
-		        <tr>
-		          <td style="border:none;">
-		          <span class="btn btn-sm btn-default glyphicon glyphicon-chevron-up">10
-		          </span>
-		          <span style="font-size:16px;margin-left:5px;margin-top:5px;"><strong>Hangovers</strong></span>
-		          </td>
-		          <td>$4.50</td>
-		        </tr>
-		        <tr>
-		          <td>
-		          <span class="btn btn-sm btn-default glyphicon glyphicon-chevron-up">10
-		          </span>
-		          <span style="font-size:16px;margin-left:5px;margin-top:5px;"><strong>Lost Dog</strong></span>
-		          </td>
-		          <td>$3.50</td>
-		        </tr>
-		        <tr>
-		          <td>
-		          <span class="btn btn-sm btn-default glyphicon glyphicon-chevron-up">10
-		          </span>
-		          <span style="font-size:16px;margin-left:5px;margin-top:5px;"><strong>Big Sky</strong></span>
-		          </td>
-		          <td>$5.00</td>
-		        </tr>
+            <% @places.each do |place| %>
+  		        <tr>
+  		          <td style="border:none;">
+  		          <span class="btn btn-sm btn-default glyphicon glyphicon-chevron-up">10
+  		          </span>
+  		          <span style="font-size:16px;margin-left:5px;margin-top:5px;"><strong><%= place.title %></strong></span>
+  		          </td>
+  		          <td>$4.50</td>
+  		        </tr>
+            <% end %>
 	        </tbody>
 	  		</table>
-
       </div>
     </div>
   </div>
