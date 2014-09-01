@@ -59,21 +59,14 @@
 </div>
 
 <% content_for :scripts do %>
-
-<script>
-handler = Gmaps.build('Google');
-handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
-  markers = handler.addMarkers([
-    {
-      "lat": <%= @lat %>,
-      "lng": <%= @long %>,
-    }
-  ]);
-  handler.bounds.extendWith(markers);
-  handler.map.centerOn(marker);
-});
-</script>
-
-
+  <script>
+    handler = Gmaps.build('Google');
+    handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+      marker = handler.addMarker({
+          "lat": <%= @lat %>,
+          "lng": <%= @long %>,
+        });
+      handler.map.centerOn(marker);
+    });
+  </script>
 <% end %>
-
