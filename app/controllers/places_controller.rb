@@ -20,6 +20,7 @@ class PlacesController < ApplicationController
     current_coordinates = session_coordinates.split(',')
     place.latitude = current_coordinates[0]
     place.longitude = current_coordinates[1]
+    place.user = current_user
 
     if place.save
       flash[:notice] = 'Place created'

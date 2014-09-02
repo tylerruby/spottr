@@ -5,4 +5,8 @@ class Place < ActiveRecord::Base
     end
   end
   after_validation :reverse_geocode  # auto-fetch address
+
+  belongs_to :user
+
+  validates_presence_of :user_id
 end

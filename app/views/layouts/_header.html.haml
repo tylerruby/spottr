@@ -13,5 +13,12 @@
       %ul.nav.navbar-nav
       = render 'places/form'
       %ul.nav.navbar-nav.navbar-right
-        %li
-          = link_to 'Add location', '#', id: 'add-location'
+        - if current_user
+          %li= link_to 'New Spot', '#', id: 'add-location'
+        %li= link_to "Login", new_user_session_path
+
+:javascript
+  $('#add-location').on('click', function(e){
+    e.preventDefault();
+    $('#location-form').toggleClass('hide');
+  });
