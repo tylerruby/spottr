@@ -1,6 +1,7 @@
 class Place < ActiveRecord::Base
   reverse_geocoded_by :latitude, :longitude do |obj,results|
     if geo = results.first
+      binding.pry
       obj.city    = geo.city
     end
   end
