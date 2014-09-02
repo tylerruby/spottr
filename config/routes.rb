@@ -4,10 +4,10 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-   root 'pages#home'
+   root 'places#index'
 
    post 'session_coordinates' => 'session_coordinates#create'
-   resources :places, only: :create
+   resources :places, only: [:create, :index]
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
