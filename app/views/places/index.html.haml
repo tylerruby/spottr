@@ -4,7 +4,7 @@
       .panel.panel-default
         .panel-body.test
           .panel-title{:style => "font-size:22px;"}
-            Atlanta, GA
+            = Place.last.city
             %img.pull-right{:src => "http://www.tuindiner.nl/wp-content/uploads/2013/03/mas-fork.png", :style => "width:35px;"}
         %div{:style => "width: 748px;"}
           #map{:style => "width: 748px; height: 327px;"}
