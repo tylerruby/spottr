@@ -3,20 +3,33 @@
     <div class="col-md-8 col-md-offset-2">
       <div class="panel panel-default">
         <div class="panel-body test">
-          <div style="font-size:22px;" class="panel-title">Atlanta, GA
-            <img style="width:35px;" class="pull-right" src="http://www.tuindiner.nl/wp-content/uploads/2013/03/mas-fork.png"></img>
+          <div style="font-size:22px; margin-top:5px; margin-left:10px;" class="panel-title">Atlanta, GA
           </div>
         </div>
-        <div style='width: 748px;'>
-  		  <div id="map" style='width: 748px; height: 327px;'></div>
+        <div style='width: 100%'>
+  		  <div id="map" style='width: 100%; height: 327px;'></div>
 		</div>
 
-        <div class="panel-heading">
+        <div class="panel-heading" style="background:#fff;">
           <div class="row">
-            <div class="col-md-3">
-              <button class="btn btn-default">Now</button>
+            <div class="col-md-5">
+              <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                  Now <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#">Today</a></li>
+                  <li><a href="#">Week</a></li>
+                  <li><a href="#">Month</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">All</a></li>
+                </ul>
+              </div>
+              <button class="btn btn-default fa fa-cutlery"></button>
+              <button class="btn btn-default fa fa-beer"></button>
+              <button class="btn btn-default fa fa-music"></button>
             </div>
-          	<div class="col-md-3 col-md-offset-6">
+          	<div class="col-md-3 col-md-offset-3">
 		          <div class="range range-primary">
 		           <input type="range" name="range" min="1" max="50" value="10" onchange="range.value=value">
 		            <output id="range">10 miles</output>
@@ -24,11 +37,11 @@
 		        </div>
 		      </div>
         </div>
-	      <table class="table">
+	      <table class="table table-striped striped" style="">
 		      <tbody>
             <% @places.each do |place| %>
   		        <tr>
-  		          <td style="border:none;">
+  		          <td>
   		          <span class="btn btn-sm btn-default glyphicon glyphicon-chevron-up">10
   		          </span>
   		          <span style="font-size:16px;margin-left:5px;margin-top:5px;"><strong><%= place.title %></strong></span>
@@ -52,8 +65,9 @@
           "lng": <%= @long %>,
           "infowindow": "Current Location"
         });
+      handler.addMarkers(<%=raw @hash.to_json %>);
       handler.map.centerOn(marker);
-      handler.getMap().setZoom(12);
+      handler.getMap().setZoom(14);
     });
   </script>
 <% end %>

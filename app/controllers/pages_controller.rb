@@ -13,4 +13,7 @@ class PagesController < ApplicationController
       marker.infowindow place.title
     end
   end
+
+  def show
+  end
 end

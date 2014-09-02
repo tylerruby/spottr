@@ -1,5 +1,6 @@
-<%= form_for :place, url: places_path do |f| %>
-  Title:
-  <%= f.text_field :title %>
-  <%= f.submit %>
+<%= form_for :place, url: places_path, html: { id: 'location-form', class: 'hide navbar-form navbar-left' } do |f| %>
+  <div class="form-group">
+	  <%= f.text_field :title, class: 'form-control', placeholder: 'Add a place' %>
+	  <%= f.submit 'Save', class: 'btn btn-default' %>
+  </div>
 <% end %>
