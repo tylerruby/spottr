@@ -1,0 +1,42 @@
+.container
+  .row
+    .col-md-8.col-md-offset-2
+      .panel.panel-default
+        .panel-body.test
+          .panel-title{:style => "font-size:22px;"}
+            Atlanta, GA
+            %img.pull-right{:src => "http://www.tuindiner.nl/wp-content/uploads/2013/03/mas-fork.png", :style => "width:35px;"}
+        %div{:style => "width: 748px;"}
+          #map{:style => "width: 748px; height: 327px;"}
+        .panel-heading
+          .row
+            .col-md-3
+              %button.btn.btn-default Now
+            .col-md-3.col-md-offset-6
+              .range.range-primary
+                %input{:max => "50", :min => "1", :name => "range", :onchange => "range.value=value", :type => "range", :value => "10"}
+                  %output#range 10 miles
+        %table.table
+          %tbody
+            - @places.each do |place|
+              %tr
+                %td{:style => "border:none;"}
+                  %span.btn.btn-sm.btn-default.glyphicon.glyphicon-chevron-up
+                    10
+                  %span{:style => "font-size:16px;margin-left:5px;margin-top:5px;"}
+                    %strong= place.title
+                %td $4.50
+
+- content_for :scripts do
+  :javascript
+    handler = Gmaps.build('Google');
+    handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+        marker = handler.addMarker({
+            "lat":  #{@lat},
+            "lng":  #{@long},
+            "infowindow": "Current Location"
+        });
+        handler.map.centerOn(marker);
+        handler.addMarkers(#{raw @hash.to_json});
+        handler.getMap().setZoom(14);
+    });
