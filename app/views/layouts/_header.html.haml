@@ -11,12 +11,7 @@
     / Collect the nav links, forms, and other content for toggling
     #bs-example-navbar-collapse-1.collapse.navbar-collapse
       %ul.nav.navbar-nav
-      %form.navbar-form.navbar-left{:role => "search"}
-        .form-group
-          %input.form-control{:placeholder => "Search", :type => "text"}
-        %button.btn.btn-default{:type => "submit"} Submit
+      = render 'places/form'
       %ul.nav.navbar-nav.navbar-right
         %li
           = link_to 'Add location', '#', id: 'add-location'
-  %div
-    = render 'places/form'
