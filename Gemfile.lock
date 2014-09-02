@@ -41,11 +41,7 @@ GEM
     coffee-script-source (1.8.0)
     erubis (2.7.0)
     execjs (2.2.1)
-    geokit (1.8.5)
-      multi_json (>= 1.3.2)
-    geokit-rails (2.0.1)
-      geokit (~> 1.5)
-      rails (>= 3.0)
+    geocoder (1.2.4)
     gmaps4rails (2.1.2)
     haml (4.0.5)
       tilt
@@ -132,7 +128,7 @@ PLATFORMS
 DEPENDENCIES
   bootstrap-sass
   coffee-rails (~> 4.0.0)
-  geokit-rails
+  geocoder
   gmaps4rails
   haml
   jbuilder (~> 2.0)
