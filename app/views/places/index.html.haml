@@ -4,15 +4,31 @@
       .panel.panel-default
         .panel-body.test
           .panel-title{:style => "font-size:22px;"}
-            = Place.last.city
+            Atlanta
             %img.pull-right{:src => "http://www.tuindiner.nl/wp-content/uploads/2013/03/mas-fork.png", :style => "width:35px;"}
         %div{:style => "width: 748px;"}
           #map{:style => "width: 748px; height: 327px;"}
-        .panel-heading
+        .panel-heading{:style => "background:#fff;"}
           .row
-            .col-md-3
-              %button.btn.btn-default Now
-            .col-md-3.col-md-offset-6
+            .col-md-5
+              .btn-group
+                %button.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown", :type => "button"}
+                  Now
+                  %span.caret
+                %ul.dropdown-menu{:role => "menu"}
+                  %li
+                    %a{:href => "#"} Today
+                  %li
+                    %a{:href => "#"} Week
+                  %li
+                    %a{:href => "#"} Month
+                  %li.divider
+                  %li
+                    %a{:href => "#"} All
+              %button.btn.btn-default.fa.fa-cutlery
+              %button.btn.btn-default.fa.fa-beer
+              %button.btn.btn-default.fa.fa-music
+            .col-md-3.col-md-offset-3
               .range.range-primary
                 %input{:max => "50", :min => "1", :name => "range", :onchange => "range.value=value", :type => "range", :value => "10"}
                   %output#range 10 miles
