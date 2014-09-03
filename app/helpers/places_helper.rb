@@ -5,7 +5,7 @@ module PlacesHelper
   end
 
   def current_city
-    return session_coordinates if session_coordinates.present?
+    return session[:current_city] if session[:current_city].present?
 
     if has_coordinates?
       results = Geocoder.search(session_coordinates).first
