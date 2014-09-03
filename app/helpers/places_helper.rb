@@ -7,7 +7,11 @@ module PlacesHelper
   def current_city
     return session[:current_city] if session[:current_city].present?
 
-    results = Geocoder.search(session_coordinates).first
-    session[:current_city] = "#{results.city}, #{results.state}"
+    if has_coordinates?
+      results = Geocoder.search(session_coordinates).first
+      session[:current_city] = "#{results.city}, #{results.state}"
+    else
+      'No Current City'
+    end
   end
 end
