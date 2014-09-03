@@ -11,8 +11,12 @@ class PlacesController < ApplicationController
     @hash = Gmaps4rails.build_markers(@places) do |place, marker|
       marker.lat place.latitude
       marker.lng place.longitude
-      marker.infowindow place.title
+      marker.infowindow view_context.link_to place.title, place
     end
+  end
+
+  def show
+    @place = Place.find(params[:id])
   end
 
   def create

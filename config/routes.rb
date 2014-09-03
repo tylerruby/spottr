@@ -8,7 +8,7 @@ Rails.application.routes.draw do
    root 'places#index'
 
    post 'session_coordinates' => 'session_coordinates#create'
-   resources :places, only: [:create, :index]
+   resources :places, only: [:create, :index, :show]
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
