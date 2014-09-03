@@ -1,11 +1,11 @@
 module PlacesHelper
 
   def has_coordinates?
-    session[:coordinates].present?
+    session_coordinates.present?
   end
 
   def current_city
-    return session[:current_city] if session[:current_city].present?
+    return session_coordinates if session_coordinates.present?
 
     if has_coordinates?
       results = Geocoder.search(session_coordinates).first

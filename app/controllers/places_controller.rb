@@ -1,12 +1,8 @@
 class PlacesController < ApplicationController
 
-  def index
-    if !!session_coordinates
-      coordinates = session_coordinates.split(',')
-      @lat = coordinates[0]
-      @long = coordinates[1]
-    end
+  before_action :get_current_location, only: :index
 
+  def index
     @places = Place.all
     @hash = Gmaps4rails.build_markers(@places) do |place, marker|
       marker.lat place.latitude
@@ -21,9 +17,9 @@ class PlacesController < ApplicationController
 
   def create
     place = Place.new(place_params)
-    current_coordinates = session_coordinates.split(',')
-    place.latitude = current_coordinates[0]
-    place.longitude = current_coordinates[1]
+    current_coordinates = CoordinatesConverter.new(session_coordinates)
+    place.latitude = current_coordinates.latitude
+    place.longitude = current_coordinates.longitude
     place.user = current_user
 
     if place.save
@@ -39,5 +35,13 @@ class PlacesController < ApplicationController
 
   def place_params
     params.require(:place).permit(:title)
+  end
+
+  def get_current_location
+    return unless session_coordinates.present?
+
+    coordinates = CoordinatesConverter.new(session_coordinates)
+    @lat = coordinates.latitude
+    @long = coordinates.longitude
   end
 end
