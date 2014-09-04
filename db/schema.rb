@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140902234607) do
+ActiveRecord::Schema.define(version: 20140904234911) do
 
   create_table "places", force: true do |t|
     t.string   "title"
@@ -25,6 +25,8 @@ ActiveRecord::Schema.define(version: 20140902234607) do
     t.string   "state"
     t.string   "country"
   end
+
+  add_index "places", ["latitude", "longitude"], name: "index_places_on_latitude_and_longitude"
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
