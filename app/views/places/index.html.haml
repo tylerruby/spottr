@@ -27,19 +27,17 @@
               %button.btn.btn-default.fa.fa-cutlery
               %button.btn.btn-default.fa.fa-beer
               %button.btn.btn-default.fa.fa-music
-            .col-md-3.col-md-offset-3
-              .range.range-primary
-                %input{:max => "50", :min => "1", :name => "range", :onchange => "range.value=value", :type => "range", :value => "10"}
-                  %output#range 10 miles
-        %table.table.table-striped.striped{:style => ""}
+      .panel.panel-default
+        %table.table
           %tbody
-            - @places.each do |place|
+            - @places.each_with_index do |place,i|
               %tr
                 %td
+                  %strong= (i+1)
                   %span.btn.btn-sm.btn-default.glyphicon.glyphicon-chevron-up
                     10
                   %span{:style => "font-size:16px;margin-left:5px;margin-top:5px;"}
-                    %strong= place.title
+                    = link_to place.title, place, :class => "place"
                 %td $4.50
 
 - content_for :scripts do
