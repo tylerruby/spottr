@@ -5,3 +5,22 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+
+User.where(email: "test@test.com").delete_all
+user = User.create(email: "test@test.com", password: "password")
+
+# Creating couple of lat longs for testing around Belarus
+lat, lng = 50, 25
+lat_max, lng_max = 55, 30
+
+n = 0
+begin
+  lat += 0.1 * rand(10)
+  begin
+    lng += 0.1 * rand(10)
+    n += 1
+    Place.create!(user: user, latitude: lat,
+                 longitude: lng, title: "test #{n}")
+  end while lng < lng_max
+end while lat < lat_max
