@@ -49,7 +49,7 @@ $ ->
     url = "#{PLACES_URL}?#{$.param(params)}"
     $.getJSON url, (data) =>
       updateMarkers(data.places)
-      # updateList(data.places)
+      updateTableRows(data.places)
 
 
   ######################################
@@ -79,7 +79,6 @@ $ ->
 
     console.log(markers)
 
-  # Actual addMarker logic
   addMarker = (place) ->
     existingIds = _.keys markers
     unless _.contains(existingIds, place.id)
@@ -89,3 +88,52 @@ $ ->
         infowindow: "<a href='/places/#{place.id}'>#{place.title}</a>"
       marker = handler.addMarker(data)
       markers[place.id] = marker
+
+  ######################################
+  # TABLE LOGIC
+  ######################################
+
+  updateTableRows = (places) ->
+    $table = $('#places-table')
+
+    placeIds = _.map places, (p) -> p.id
+
+    # step one: remove invisible rows
+    $table.find('tr').each ->
+      unless _.include placeIds, +$(@).attr('data-id')
+        $(@).remove()
+
+    # step two add row
+    _.each places, (p) -> addTableRow(p)
+
+    # step three: fix numbers for table rows
+    fixTableRowNumbers()
+
+  rowTemplate = """
+    <tr data-id="<%=id%>" id="place-<%=id%>">
+      <td>
+        <strong class="count">
+        </strong>
+        <span class="btn btn-sm btn-default glyphicon glyphicon-chevron-up">
+          10
+        </span>
+        <span style="font-size:16px;margin-left:5px;margin-top:5px;">
+          <a href="/places/<%=id%>" class="place">
+            <%= title %>
+          </a>
+        </span>
+      </td>
+      <td>$4.50</td>
+    </tr>
+  """
+  compiledRowTemplate = _.template(rowTemplate)
+
+  addTableRow = (p) ->
+    if $("#place-#{p.id}").length == 0
+      $table = $('#places-table')
+      rowTemplate = compiledRowTemplate(p)
+      $(rowTemplate).appendTo($table)
+
+  fixTableRowNumbers = ->
+      $('#places-table tr').each (i) ->
+        $(@).find('.count').text(i+1)

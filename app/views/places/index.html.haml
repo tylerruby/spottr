@@ -28,17 +28,7 @@
               %button.btn.btn-default.fa.fa-beer
               %button.btn.btn-default.fa.fa-music
       .panel.panel-default
-        %table.table
-          %tbody
-            - @places.each_with_index do |place,i|
-              %tr
-                %td
-                  %strong= (i+1)
-                  %span.btn.btn-sm.btn-default.glyphicon.glyphicon-chevron-up
-                    10
-                  %span{:style => "font-size:16px;margin-left:5px;margin-top:5px;"}
-                    = link_to place.title, place, :class => "place"
-                %td $4.50
+        %table.table#places-table
 
 - content_for :scripts do
   :javascript
