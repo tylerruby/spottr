@@ -10,6 +10,10 @@ Rails.application.routes.draw do
    post 'session_coordinates' => 'session_coordinates#create'
    resources :places, only: [:create, :index, :show]
 
+   namespace :api do
+     resources :places
+   end
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
