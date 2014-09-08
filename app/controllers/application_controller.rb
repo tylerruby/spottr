@@ -6,6 +6,6 @@ class ApplicationController < ActionController::Base
   helper_method :session_coordinates
 
   def session_coordinates
-    @session_coordinates ||= session[:coordinates]
+    session[:coordinates]
   end
 end
