@@ -10,7 +10,7 @@ $ ->
       "infowindow": "Current Location"
     handler.map.centerOn(marker)
     # handler.addMarkers(#{raw @hash.to_json});
-    handler.getMap().setZoom(14)
+    handler.getMap().setZoom(12)
     bindEvents()
 
   ######################################
@@ -112,11 +112,15 @@ $ ->
   rowTemplate = """
     <tr data-id="<%=id%>" id="place-<%=id%>">
       <td>
-        <strong class="count">
+        <strong class="count" style="font-size:18px;">
         </strong>
+      </td>
+      <td>
         <span class="btn btn-sm btn-default glyphicon glyphicon-chevron-up">
           10
         </span>
+      </td>
+      <td>
         <span style="font-size:16px;margin-left:5px;margin-top:5px;">
           <a href="/places/<%=id%>" class="place">
             <%= title %>
@@ -124,6 +128,9 @@ $ ->
         </span>
       </td>
       <td>$4.50</td>
+      <td>
+      <span class="btn btn-sm btn-default fa fa-car pull-right"></span>
+      </td>
     </tr>
   """
   compiledRowTemplate = _.template(rowTemplate)

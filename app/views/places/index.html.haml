@@ -3,32 +3,32 @@
     .col-md-8.col-md-offset-2
       .panel.panel-default
         .panel-body.test
-          .panel-title{:style => "font-size:22px; margin-top:5px; margin-left:10px;"}
+          .panel-title{:style => "font-size:22px; padding-bottom:-1px; margin-left:10px;"}
+            %img{:src => "https://cdn2.iconfinder.com/data/icons/antto-basic-1/423/Current-Location-512.png", :style => "width:25px;"}
             = current_city
         %div{:style => "width: 100%"}
           #map{:style => "width: 100%; height: 327px;"}
         .panel-heading{:style => "background:#fff;"}
           .row
-            .col-md-5
+            .col-md-6
               .btn-group
-                %button.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown", :type => "button"}
-                  Now
+                %button.btn.btn-info.btn-outline.dropdown-toggle{"data-toggle" => "dropdown", :type => "button"}
+                  This Month
                   %span.caret
                 %ul.dropdown-menu{:role => "menu"}
+                  %li
+                    %a{:href => "#"} Now
                   %li
                     %a{:href => "#"} Today
                   %li
                     %a{:href => "#"} Week
-                  %li
-                    %a{:href => "#"} Month
                   %li.divider
                   %li
                     %a{:href => "#"} All
-              %button.btn.btn-default.fa.fa-cutlery
-              %button.btn.btn-default.fa.fa-beer
-              %button.btn.btn-default.fa.fa-music
-      .panel.panel-default
-        %table.table#places-table
+              %button.btn.btn-warning.btn-outline.fa.fa-cutlery
+              %button.btn.btn-danger.btn-outline.fa.fa-beer
+              %button.btn.btn-primary.btn-outline.fa.fa-music
+        %table.table.table-condensed#places-table
 
 - content_for :scripts do
   :javascript

@@ -12,4 +12,7 @@ class Place < ActiveRecord::Base
   belongs_to :user
 
   validates_presence_of :user_id
+
+  acts_as_votable
+  
 end
