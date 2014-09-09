@@ -113,12 +113,8 @@ $ ->
   updateTableRows = (places, total) ->
     $table = $('#places-table')
 
-    placeIds = _.map places, (p) -> p.id
-
-    # step one: remove invisible rows
-    $table.find('tr').each ->
-      unless _.include placeIds, +$(@).attr('data-id')
-        $(@).remove()
+    # step one - clear table
+    $table.html('')
 
     # step two add row
     _.each places, (p) -> addTableRow(p)
