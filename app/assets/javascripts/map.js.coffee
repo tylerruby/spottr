@@ -91,6 +91,7 @@ $ ->
     # step two: add some markers to the map
     _.each places, (p) -> addMarker(p)
 
+  activeInfoWindow = null
   addMarker = (place) ->
     map = handler.getMap()
     existingIds = _.keys markers
@@ -104,7 +105,9 @@ $ ->
         map: map
       markers[place.id] = marker
       google.maps.event.addListener marker, 'click', ->
+        activeInfoWindow.close() if activeInfoWindow
         infoWindow.open(map,marker)
+        activeInfoWindow = infoWindow
 
   ######################################
   # TABLE LOGIC
