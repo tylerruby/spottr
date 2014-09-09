@@ -14,5 +14,12 @@ class Place < ActiveRecord::Base
   validates_presence_of :user_id
 
   acts_as_votable
-  
+
+  def votes_count
+    votes_for.size
+  end
+
+  def as_json(options)
+    super(options.merge(methods: [:votes_count]))
+  end
 end
