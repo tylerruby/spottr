@@ -33,9 +33,9 @@
               %button.btn.btn-default.btn-outline.fa.fa-beer.pull-right
               %button.btn.btn-info.btn-outline.fa.fa-music.pull-right
         %table.table.table-condensed#places-table
+        %a.btn.btn-default.js-more-places.hidden Load More
 
 - content_for :scripts do
   :javascript
     window.latitude = #{@lat};
     window.longitude = #{@long};
-    console.log(#{raw @hash.to_json});

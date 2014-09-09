@@ -13,6 +13,10 @@ $ ->
     handler.getMap().setZoom(12)
     bindEvents()
 
+  # SOME CONFIG VARIABLES
+  DEFAULT_PLACES_LIMIT = 20
+  fetchPlacesLimit = DEFAULT_PLACES_LIMIT
+
   ######################################
   # EVENTS HANDLING
   ######################################
@@ -37,19 +41,30 @@ $ ->
         swlng: southWest.lng(),
         nelat: northEast.lat(),
         nelng: northEast.lng()
+      fetchPlacesLimit = DEFAULT_PLACES_LIMIT
       fetchPlaces(params)
 
   ######################################
   # API CALLS
   ######################################
 
-  # fetch the points from server
   PLACES_URL = '/api/places.json'
+  cachedFetchParams = {}
+
   fetchPlaces = (params) ->
+    # cache params in order to be able
+    # to call fetchPlaces w/o arguments
+    if params
+      cachedFetchParams = params
+    else
+      params = cachedFetchParams
+
+    params = _.extend(params, limit: fetchPlacesLimit)
+
     url = "#{PLACES_URL}?#{$.param(params)}"
     $.getJSON url, (data) =>
       updateMarkers(data.places)
-      updateTableRows(data.places)
+      updateTableRows(data.places, data.total)
 
 
   ######################################
@@ -77,8 +92,6 @@ $ ->
     # step two: add some markers to the map
     _.each places, (p) -> addMarker(p)
 
-    console.log(markers)
-
   addMarker = (place) ->
     existingIds = _.keys markers
     unless _.contains(existingIds, place.id)
@@ -93,7 +106,7 @@ $ ->
   # TABLE LOGIC
   ######################################
 
-  updateTableRows = (places) ->
+  updateTableRows = (places, total) ->
     $table = $('#places-table')
 
     placeIds = _.map places, (p) -> p.id
@@ -111,6 +124,9 @@ $ ->
 
     # step four: fix spaces in js-upvotes
     fixUpvotesSpacing()
+
+    # step five: show/hide show more button
+    processShowMoreBtn(places.length, total)
 
   rowTemplate = """
     <tr data-id="<%=id%>" id="place-<%=id%>">
@@ -153,6 +169,12 @@ $ ->
     $('#places-table .js-upvote').each ->
       ($ @).text(($ @).text().trim())
 
+  processShowMoreBtn = (placesCount, total) ->
+    if placesCount < total
+      $('.js-more-places').removeClass('hidden')
+    else
+      $('.js-more-places').addClass('hidden')
+
   ######################################
   # TABLE BUTTONS EVENT HANDLING
   ######################################
@@ -167,4 +189,10 @@ $ ->
         $this.text(data.votes_count)
     false
 
+  onLoadMoreClick = ->
+    fetchPlacesLimit += DEFAULT_PLACES_LIMIT
+    fetchPlaces()
+    false
+
   $('#places-table').on('click', '.js-upvote', onUpvoteClick)
+  $('.js-more-places').on('click', onLoadMoreClick)

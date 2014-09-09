@@ -7,8 +7,8 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
-User.where(email: "test@test.com").delete_all
-user = User.create(email: "test@test.com", password: "password")
+user = User.where(email: "test@test.com").first ||
+  User.create(email: "test@test.com", password: "password")
 
 # Creating couple of lat longs for testing around Belarus
 lat, lng = 50, 25
