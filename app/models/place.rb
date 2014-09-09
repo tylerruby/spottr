@@ -16,7 +16,7 @@ class Place < ActiveRecord::Base
   acts_as_votable
 
   def votes_count
-    votes_for.size
+    cached_votes_up
   end
 
   def as_json(options)

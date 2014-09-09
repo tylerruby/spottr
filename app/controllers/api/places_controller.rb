@@ -9,7 +9,7 @@ class Api::PlacesController < ApplicationController
     @places = Place.where(query,
       params[:swlat], params[:nelat],
       params[:swlng], params[:nelng]
-    ).limit(20)
+    ).order(:cached_votes_up => :desc).limit(20)
 
     render json: {
       places: @places
