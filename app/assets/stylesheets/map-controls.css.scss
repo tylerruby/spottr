@@ -1,0 +1,10 @@
+.map-control-panel {
+  .panel-heading, .panel-body {
+    background: #fff;
+  }
+
+  .panel-body {
+    max-height: 537px;
+    overflow: scroll;
+  }
+}
