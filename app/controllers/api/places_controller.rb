@@ -14,5 +14,6 @@ class Api::PlacesController < ApplicationController
     render json: {
       places: @places
     }
+
   end
 end

@@ -117,7 +117,9 @@ $ ->
       </td>
       <td>
         <span class="btn btn-sm btn-default glyphicon glyphicon-chevron-up">
-          10
+          <a href="/places/<%=id%>/up_vote" >
+            <%= 10 %>
+          </a>
         </span>
       </td>
       <td>
@@ -129,7 +131,8 @@ $ ->
       </td>
       <td>$4.50</td>
       <td>
-      <span class="btn btn-sm btn-default fa fa-car pull-right"></span>
+        <a href="https://www.google.com/maps/place/<%=address%>" target="_blank" class="btn btn-sm btn-default btn-outline fa fa-car pull-right">
+        </a>
       </td>
     </tr>
   """

@@ -31,6 +31,12 @@ class PlacesController < ApplicationController
     redirect_to root_path
   end
 
+  def up_vote
+    @place = Place.find(params[:id])
+    @place.liked_by current_user
+  
+    redirect_to :back
+  end
   private
 
   def place_params

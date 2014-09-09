@@ -8,7 +8,9 @@ Rails.application.routes.draw do
    root 'places#index'
 
    post 'session_coordinates' => 'session_coordinates#create'
-   resources :places, only: [:create, :index, :show]
+   resources :places, only: [:create, :index, :show] do
+      get :up_vote, on: :member
+    end
 
    namespace :api do
      resources :places

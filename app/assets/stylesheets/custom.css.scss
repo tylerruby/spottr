@@ -1,5 +1,12 @@
-$body-bg: #e5e5e5;
-$navbar-default-bg: #fff;
+$body-bg: #fff;
+$navbar-default-bg: #7D6FB0;
+$navbar-default-link-color: #fff;
+$navbar-default-link-hover-color: whitesmoke;
+$btn-primary-color: #7D6FB0;
+$btn-primary-border: #7D6FB0;
+$btn-primary-bg: #7D6FB0;
+$btn-default-border: #000;
+$border-radius-base: 0;
 
 
 
@@ -8,9 +15,17 @@ $navbar-default-bg: #fff;
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,300);
 @import url(http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css);
 
+
 a.place {
   color: #000;
   text-decoration: none; /* no underline */
+}
+
+a {
+	color: #7D6FB0;
+}
+a:hover {
+	text-decoration: none;
 }
 
 .test {
@@ -25,7 +40,11 @@ a.place {
 }
 
 .btn-primary.btn-outline {
-    color: #428bca;
+    color: #7D6FB0;
+}
+.btn-default.btn-outline:hover {
+    color: #fff;
+    background:#000;
 }
 
 .btn-success.btn-outline {
