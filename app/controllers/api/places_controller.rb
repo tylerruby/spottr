@@ -14,6 +14,14 @@ class Api::PlacesController < ApplicationController
     render json: {
       places: @places
     }
+  end
 
+  def up_vote
+    @place = Place.find(params[:id])
+    @place.liked_by(current_user)
+
+    render json: {
+      votes_count: @place.votes_count
+    }
   end
 end

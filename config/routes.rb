@@ -13,7 +13,11 @@ Rails.application.routes.draw do
     end
 
    namespace :api do
-     resources :places
+     resources :places do
+       member do
+         post :up_vote
+       end
+     end
    end
 
   # Example of regular route:

@@ -109,6 +109,9 @@ $ ->
     # step three: fix numbers for table rows
     fixTableRowNumbers()
 
+    # step four: fix spaces in js-upvotes
+    fixUpvotesSpacing()
+
   rowTemplate = """
     <tr data-id="<%=id%>" id="place-<%=id%>">
       <td>
@@ -116,10 +119,8 @@ $ ->
         </strong>
       </td>
       <td>
-        <span class="btn btn-sm btn-default glyphicon glyphicon-chevron-up">
-          <a href="/places/<%=id%>/up_vote" >
-            <%= 10 %>
-          </a>
+        <a class="js-upvote btn btn-sm btn-default glyphicon glyphicon-chevron-up" href="/api/places/<%=id%>/up_vote">
+          <%=votes_count%>
         </span>
       </td>
       <td>
@@ -145,5 +146,25 @@ $ ->
       $(rowTemplate).appendTo($table)
 
   fixTableRowNumbers = ->
-      $('#places-table tr').each (i) ->
-        $(@).find('.count').text(i+1)
+    $('#places-table tr').each (i) ->
+      $(@).find('.count').text(i+1)
+
+  fixUpvotesSpacing = ->
+    $('#places-table .js-upvote').each ->
+      ($ @).text(($ @).text().trim())
+
+  ######################################
+  # TABLE BUTTONS EVENT HANDLING
+  ######################################
+
+  onUpvoteClick = ->
+    $this = $(@)
+    href = $this.attr('href')
+    $.ajax
+      url: href
+      type: "POST"
+      success: (data) ->
+        $this.text(data.votes_count)
+    false
+
+  $('#places-table').on('click', '.js-upvote', onUpvoteClick)
