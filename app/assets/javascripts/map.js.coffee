@@ -9,7 +9,6 @@ $ ->
       "lng":  window.longitude,
       "infowindow": "Current Location"
     handler.map.centerOn(marker)
-    # handler.addMarkers(#{raw @hash.to_json});
     handler.getMap().setZoom(12)
     bindEvents()
 
@@ -84,7 +83,7 @@ $ ->
 
     markersToRemove = _.pick markers, idsToRemove
     _.each markersToRemove, (marker) ->
-      handler.removeMarker(marker)
+      marker.setMap(null)
 
     _.each markers, (val, key) ->
       delete markers[key] if _.contains(markersToRemove, key)
@@ -93,14 +92,19 @@ $ ->
     _.each places, (p) -> addMarker(p)
 
   addMarker = (place) ->
+    map = handler.getMap()
     existingIds = _.keys markers
     unless _.contains(existingIds, place.id)
-      data =
-        lat: place.latitude,
-        lng: place.longitude,
-        infowindow: "<a href='/places/#{place.id}'>#{place.title}</a>"
-      marker = handler.addMarker(data)
+      position = new google.maps.LatLng(place.latitude, place.longitude)
+      infoWindow = new google.maps.InfoWindow
+        content: "<a href='/places/#{place.id}'>#{place.title}</a>"
+        disableAutoPan: true
+      marker = new google.maps.Marker
+        position: position
+        map: map
       markers[place.id] = marker
+      google.maps.event.addListener marker, 'click', ->
+        infoWindow.open(map,marker)
 
   ######################################
   # TABLE LOGIC
