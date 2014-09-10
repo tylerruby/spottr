@@ -7,7 +7,7 @@
             %img{:src => "http://i.imgur.com/rDLxYAO.png", :style => "width:30px;"}
             = current_city
           %div{:style => "width: 100%"}
-            #map{:style => "width: 100%; height: 550px;"}
+            #map
     .col-md-5
       .panel.panel-default.map-control-panel
         .panel-heading
@@ -15,22 +15,24 @@
             .col-md-12
               .btn-group
                 %button.btn.btn-primary.btn-outline.dropdown-toggle{"data-toggle" => "dropdown", :type => "button"}
-                  This Month
+                  Month
                   %span.caret
                 %ul.dropdown-menu{:role => "menu"}
-                  %li
-                    %a{:href => "#"} Now
                   %li
                     %a{:href => "#"} Today
                   %li
                     %a{:href => "#"} Week
+                  %li
+                    %a{:href => "#"} Month
+                  %li
+                    %a{:href => "#"} Year
                   %li.divider
                   %li
                     %a{:href => "#"} All
-              %button.btn.btn-danger.btn-outline Now
+              %button.btn.btn-default.btn-outline New
               %button.btn.btn-success.btn-outline Open
-              %button.btn.btn-warning.btn-outline.fa.fa-cutlery.pull-right
-              %button.btn.btn-default.btn-outline.fa.fa-beer.pull-right
+              %button.btn.btn-danger.btn-outline.fa.fa-cutlery.pull-right
+              %button.btn.btn-warning.btn-outline.fa.fa-beer.pull-right
               %button.btn.btn-info.btn-outline.fa.fa-music.pull-right
         .panel-body
           %table.table.table-condensed#places-table

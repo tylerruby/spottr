@@ -138,7 +138,7 @@ $ ->
         </strong>
       </td>
       <td>
-        <a class="js-upvote btn btn-sm btn-default glyphicon glyphicon-chevron-up" href="/api/places/<%=id%>/up_vote">
+        <a class="js-upvote btn btn-sm btn-default glyphicon glyphicon-chevron-up" href="/api/places/<%=id%>/up_vote" style="font-size:14px;border:none;background:whitesmoke;">
           <%=votes_count%>
         </span>
       </td>

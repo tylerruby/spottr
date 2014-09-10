@@ -11,8 +11,8 @@ user = User.where(email: "test@test.com").first ||
   User.create(email: "test@test.com", password: "password")
 
 # Creating couple of lat longs for testing around Belarus
-lat, lng = 50, 25
-lat_max, lng_max = 55, 30
+lat, lng = 30, -90
+lat_max, lng_max = 35, -85
 
 n = 0
 begin
