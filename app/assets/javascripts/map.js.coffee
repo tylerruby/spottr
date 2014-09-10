@@ -219,11 +219,13 @@ $ ->
     id = ($ @).attr('data-id')
     marker = markers[id]
     marker.set("icon", mkMarkerIcon(marker.rank, "purple"))
+    $(@).addClass('highlight')
 
   onRowMouseLeave = ->
     id = ($ @).attr('data-id')
     marker = markers[id]
     marker.set("icon", mkMarkerIcon(marker.rank, "red"))
+    $(@).removeClass('highlight')
 
   onLoadMoreClick = ->
     fetchPlacesLimit += DEFAULT_PLACES_LIMIT
