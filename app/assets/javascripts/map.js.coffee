@@ -91,6 +91,11 @@ $ ->
     # step two: add some markers to the map
     _.each places, (p) -> addMarker(p)
 
+    # step three: enumerate markers
+    _.each places, (place, index) ->
+      markers[place.id].styleIcon.set("text", "" + (index + 1))
+
+  DEFAULT_MARKER_COLOR = "ff0000"
   activeInfoWindow = null
   addMarker = (place) ->
     map = handler.getMap()
@@ -100,12 +105,15 @@ $ ->
       infoWindow = new google.maps.InfoWindow
         content: "<a href='/places/#{place.id}'>#{place.title}</a>"
         disableAutoPan: true
-      marker = new google.maps.Marker
+      styleIcon = new StyledIcon(StyledIconTypes.MARKER,{color: DEFAULT_MARKER_COLOR,text:"1"})
+      marker = new StyledMarker
+        styleIcon: styleIcon
         position: position
         map: map
       markers[place.id] = marker
       google.maps.event.addListener marker, 'click', ->
         activeInfoWindow.close() if activeInfoWindow
+        console.log(marker)
         infoWindow.open(map,marker)
         activeInfoWindow = infoWindow
 
