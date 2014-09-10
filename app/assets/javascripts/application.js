@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require vendor/jquery.scrollTo
 //= require bootstrap-sprockets
 //= require underscore
 //= require gmaps/google

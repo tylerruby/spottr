@@ -126,7 +126,9 @@ $ ->
 
       google.maps.event.addListener marker, 'mouseover', ->
         marker.set("icon", mkMarkerIcon(marker.rank, "purple"))
-        $("#place-#{place.id}").addClass("highlight")
+        selector = "#place-#{place.id}"
+        $(selector).addClass("highlight")
+        $('#places-table').parent().scrollTo(selector)
 
       google.maps.event.addListener marker, 'mouseout', ->
         marker.set("icon", mkMarkerIcon(marker.rank, "red"))
