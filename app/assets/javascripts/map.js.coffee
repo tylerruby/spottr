@@ -70,6 +70,10 @@ $ ->
   # MARKERS LOGIC
   ######################################
 
+  # create marker icon
+  mkMarkerIcon = (number, color) ->
+    "images/mapicons/#{color}/number_#{number}.png"
+
   # Some storage for drawing places algorithm
   markers = {} # place.id: marker format
 
@@ -93,7 +97,9 @@ $ ->
 
     # step three: enumerate markers
     _.each places, (place, index) ->
-      markers[place.id].styleIcon.set("text", "" + (index + 1))
+      rank = index + 1
+      markers[place.id].rank = rank
+      markers[place.id].set "icon", mkMarkerIcon(rank, "red")
 
   DEFAULT_MARKER_COLOR = "ff0000"
   activeInfoWindow = null
@@ -105,17 +111,26 @@ $ ->
       infoWindow = new google.maps.InfoWindow
         content: "<a href='/places/#{place.id}'>#{place.title}</a>"
         disableAutoPan: true
-      styleIcon = new StyledIcon(StyledIconTypes.MARKER,{color: DEFAULT_MARKER_COLOR,text:"1"})
-      marker = new StyledMarker
-        styleIcon: styleIcon
+      marker = new google.maps.Marker
+        icon: mkMarkerIcon(0, "red")
         position: position
-        map: map
+        map: map,
+        placeId: place.id
+
       markers[place.id] = marker
       google.maps.event.addListener marker, 'click', ->
         activeInfoWindow.close() if activeInfoWindow
         console.log(marker)
         infoWindow.open(map,marker)
         activeInfoWindow = infoWindow
+
+      google.maps.event.addListener marker, 'mouseover', ->
+        marker.set("icon", mkMarkerIcon(marker.rank, "purple"))
+        $("#place-#{place.id}").addClass("highlight")
+
+      google.maps.event.addListener marker, 'mouseout', ->
+        marker.set("icon", mkMarkerIcon(marker.rank, "red"))
+        $("#place-#{place.id}").removeClass("highlight")
 
   ######################################
   # TABLE LOGIC
@@ -200,10 +215,22 @@ $ ->
         $this.text(data.votes_count)
     false
 
+  onRowMouseEnter = ->
+    id = ($ @).attr('data-id')
+    marker = markers[id]
+    marker.set("icon", mkMarkerIcon(marker.rank, "purple"))
+
+  onRowMouseLeave = ->
+    id = ($ @).attr('data-id')
+    marker = markers[id]
+    marker.set("icon", mkMarkerIcon(marker.rank, "red"))
+
   onLoadMoreClick = ->
     fetchPlacesLimit += DEFAULT_PLACES_LIMIT
     fetchPlaces()
     false
 
   $('#places-table').on('click', '.js-upvote', onUpvoteClick)
+  $('#places-table').on('mouseenter', 'tr', onRowMouseEnter)
+  $('#places-table').on('mouseleave', 'tr', onRowMouseLeave)
   $('.js-more-places').on('click', onLoadMoreClick)
