@@ -34,13 +34,12 @@ class PlacesController < ApplicationController
   def up_vote
     @place = Place.find(params[:id])
     @place.liked_by current_user
-  
     redirect_to :back
   end
   private
 
   def place_params
-    params.require(:place).permit(:title)
+    params.require(:place).permit(:title, :kind)
   end
 
   def get_current_location

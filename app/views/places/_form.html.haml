@@ -2,4 +2,5 @@
   html: { id: 'location-form', class: 'hide navbar-form navbar-left' } do |f|
   .form-group
     = f.text_field :title, class: 'form-control', placeholder: 'Add a place'
+    = f.select :kind, Place::KINDS, class: 'form-control'
     = f.submit 'Save', class: 'btn btn-default'

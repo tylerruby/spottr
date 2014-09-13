@@ -14,6 +14,7 @@ class Place < ActiveRecord::Base
   belongs_to :user
 
   validates_presence_of :user_id
+  validates :kind, inclusion: {in: KINDS}
 
   scope :with_vote_counts, ->(time_back) {
     join_query = <<-EOQ
