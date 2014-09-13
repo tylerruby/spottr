@@ -1,12 +1,12 @@
 .container
   .row
-    .col-md-8.col-md-offset-2
+    .col-md-6.col-md-offset-3
       .panel.panel-default
         .panel-body.test
-          .row
-            .col-md-4
-              %img.img-thumbnail{:src => "http://cdn.cstatic.net/images/gridfs/5329cc3bf92ea12af4008089/EATER%20Scenes%20-%20Antico%20-%2016.jpg", :style => "width:250px;"}
-            .col-md-8
-              %span{:class => "label label-success pull-right"} Open
-              %h3
-                = @place.title
+          %img.img-rounded{:src => "http://i.imgur.com/EwuuJiN.jpg", :style => "width:100%;"}
+          %h3
+            = @place.title.classify
+            %span{:class => "label label-success pull-right"} Open
+          %h4 Average Price: $10.00
+          = @place.address
+          %img{:src => "http://i.imgur.com/7qZJl0k.png", :style => "width:100%; height:250px;"}
