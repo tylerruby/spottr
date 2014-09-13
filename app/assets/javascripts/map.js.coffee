@@ -253,5 +253,5 @@ $ ->
     fetchPlaces()
     $dateModeSelect
       .find('.dropdown-toggle .text').text($this.text())
-    $dateModeSelect.find('.dropdown-toggle').dropdown('close')
+    $dateModeSelect.find('.dropdown-toggle').dropdown('toggle')
     false
