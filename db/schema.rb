@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140909205023) do
+ActiveRecord::Schema.define(version: 20140913182416) do
 
   create_table "places", force: true do |t|
     t.string   "title"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20140909205023) do
     t.integer  "cached_weighted_score",   default: 0
     t.integer  "cached_weighted_total",   default: 0
     t.float    "cached_weighted_average", default: 0.0
+    t.string   "kind",                    default: "food", null: false
   end
 
   add_index "places", ["cached_votes_down"], name: "index_places_on_cached_votes_down"

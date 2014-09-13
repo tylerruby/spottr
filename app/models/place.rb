@@ -1,4 +1,6 @@
 class Place < ActiveRecord::Base
+  KINDS = ["food", "club", "bar"]
+
   reverse_geocoded_by :latitude, :longitude do |obj,results|
     if geo = results.first
       obj.city = geo.city

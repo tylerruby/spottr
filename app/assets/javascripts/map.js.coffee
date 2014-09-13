@@ -16,6 +16,9 @@ $ ->
   DEFAULT_PLACES_LIMIT = 20
   fetchPlacesLimit = DEFAULT_PLACES_LIMIT
   timeMode = "month"
+  foodKindEnabled = true
+  barKindEnabled = true
+  clubKindEnabled = true
 
   ######################################
   # EVENTS HANDLING
@@ -61,7 +64,10 @@ $ ->
 
     params = _.extend(params,
       limit: fetchPlacesLimit,
-      time_mode: timeMode
+      time_mode: timeMode,
+      food: foodKindEnabled
+      bar: barKindEnabled,
+      club: clubKindEnabled,
     )
 
     url = "#{PLACES_URL}?#{$.param(params)}"
@@ -255,3 +261,16 @@ $ ->
       .find('.dropdown-toggle .text').text($this.text())
     $dateModeSelect.find('.dropdown-toggle').dropdown('toggle')
     false
+
+  $('#kind-toggles .btn').on 'click', ->
+    setTimeout setKindsAndFetch, 500
+
+  setKindsAndFetch = ->
+    foodKindEnabled = $('#food-toggle').hasClass('active')
+    barKindEnabled = $('#bar-toggle').hasClass('active')
+    clubKindEnabled = $('#club-toggle').hasClass('active')
+    if !(foodKindEnabled || barKindEnabled || clubKindEnabled)
+      foodKindEnabled = barKindEnabled = clubKindEnabled = true
+    fetchPlaces()
+
+    console.log(foodKindEnabled, barKindEnabled, clubKindEnabled)

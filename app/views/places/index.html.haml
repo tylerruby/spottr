@@ -32,9 +32,10 @@
                     %a{data: {mode: 'all'}} All
               %button.btn.btn-default.btn-outline New
               %button.btn.btn-success.btn-outline Open
-              %button.btn.btn-danger.btn-outline.fa.fa-cutlery.pull-right
-              %button.btn.btn-warning.btn-outline.fa.fa-beer.pull-right
-              %button.btn.btn-info.btn-outline.fa.fa-music.pull-right
+              #kind-toggles.btn-group.pull-right{data: {toggle: :buttons}}
+                %button#food-toggle.btn.btn-danger.btn-outline.fa.fa-cutlery
+                %button#bar-toggle.btn.btn-warning.btn-outline.fa.fa-beer
+                %button#club-toggle.btn.btn-info.btn-outline.fa.fa-music
         .panel-body
           %table.table.table-condensed#places-table
           %a.btn.btn-default.js-more-places.hidden Load More

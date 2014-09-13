@@ -88,7 +88,8 @@ a:hover {
 .btn-primary.btn-outline {
     color: #7D6FB0;
 }
-.btn-default.btn-outline:hover {
+.btn-default.btn-outline:hover,
+.btn-default.btb-outline.active {
     color: #fff;
     background:#000;
 }
