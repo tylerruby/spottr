@@ -8,11 +8,11 @@ class Api::PlacesController < ApplicationController
       latitude > ? AND latitude <= ? AND
       longitude > ? AND longitude < ?
     EOQ
+
     @places = Place.where(query,
       params[:swlat], params[:nelat],
       params[:swlng], params[:nelng]
     )
-
     total_places_count = @places.count
 
     @places = @places

@@ -13,7 +13,21 @@ class Place < ActiveRecord::Base
 
   validates_presence_of :user_id
 
+  scope :with_vote_counts, ->(time_back) {
+    joins(<<-EOQ
+      LEFT OUTER JOIN votes
+      ON votes.votable_id = places.id
+      AND votes.votable_type = 'Place'
+      EOQ
+    )
+    .where('votes.created_at > ?', Time.now - time_back)
+    .group('places.id')
+    .select('places.*, COUNT(votes.id) as votes_cnt')
+    .order('votes_cnt DESC')
+  }
+
   acts_as_votable
+  has_many :votes, class_name: "ActsAsVotable::Vote", as: :votable
 
   def votes_count
     cached_votes_up
