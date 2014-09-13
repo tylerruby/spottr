@@ -14,16 +14,17 @@ class Place < ActiveRecord::Base
   validates_presence_of :user_id
 
   scope :with_vote_counts, ->(time_back) {
-    joins(<<-EOQ
+    join_query = <<-EOQ
       LEFT OUTER JOIN votes
       ON votes.votable_id = places.id
       AND votes.votable_type = 'Place'
-      EOQ
-    )
-    .where('votes.created_at > ?', Time.now - time_back)
-    .group('places.id')
-    .select('places.*, COUNT(votes.id) as votes_count')
-    .order('votes_count DESC')
+      AND votes.created_at > "#{(DateTime.now - time_back).to_s(:db)}"
+    EOQ
+
+    joins(join_query)
+      .group('places.id')
+      .select('places.*, COUNT(votes.id) as votes_count')
+      .order('votes_count DESC')
   }
 
   acts_as_votable
