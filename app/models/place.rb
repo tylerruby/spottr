@@ -22,18 +22,11 @@ class Place < ActiveRecord::Base
     )
     .where('votes.created_at > ?', Time.now - time_back)
     .group('places.id')
-    .select('places.*, COUNT(votes.id) as votes_cnt')
-    .order('votes_cnt DESC')
+    .select('places.*, COUNT(votes.id) as votes_count')
+    .order('votes_count DESC')
   }
 
   acts_as_votable
   has_many :votes, class_name: "ActsAsVotable::Vote", as: :votable
 
-  def votes_count
-    cached_votes_up
-  end
-
-  def as_json(options)
-    super(options.merge(methods: [:votes_count]))
-  end
 end

@@ -14,22 +14,22 @@
         .panel-heading
           .row
             .col-md-12
-              .btn-group
+              .btn-group.date-mode-select
                 %button.btn.btn-primary.btn-outline.dropdown-toggle{"data-toggle" => "dropdown", :type => "button"}
-                  Month
+                  %span.text Month
                   %span.caret
                 %ul.dropdown-menu{:role => "menu"}
                   %li
-                    %a{:href => "#"} Today
+                    %a{data: {mode: 'day'}} Today
                   %li
-                    %a{:href => "#"} Week
+                    %a{data: {mode: 'week'}} Week
                   %li
-                    %a{:href => "#"} Month
+                    %a{data: {mode: 'month'}} Month
                   %li
-                    %a{:href => "#"} Year
+                    %a{data: {mode: 'year'}} Year
                   %li.divider
                   %li
-                    %a{:href => "#"} All
+                    %a{data: {mode: 'all'}} All
               %button.btn.btn-default.btn-outline New
               %button.btn.btn-success.btn-outline Open
               %button.btn.btn-danger.btn-outline.fa.fa-cutlery.pull-right

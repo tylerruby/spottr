@@ -15,6 +15,7 @@ $ ->
   # SOME CONFIG VARIABLES
   DEFAULT_PLACES_LIMIT = 20
   fetchPlacesLimit = DEFAULT_PLACES_LIMIT
+  timeMode = "month"
 
   ######################################
   # EVENTS HANDLING
@@ -58,7 +59,10 @@ $ ->
     else
       params = cachedFetchParams
 
-    params = _.extend(params, limit: fetchPlacesLimit)
+    params = _.extend(params,
+      limit: fetchPlacesLimit,
+      time_mode: timeMode
+    )
 
     url = "#{PLACES_URL}?#{$.param(params)}"
     $.getJSON url, (data) =>
@@ -238,3 +242,16 @@ $ ->
   $('#places-table').on('mouseenter', 'tr', onRowMouseEnter)
   $('#places-table').on('mouseleave', 'tr', onRowMouseLeave)
   $('.js-more-places').on('click', onLoadMoreClick)
+
+  ######################################
+  # TABLE TOP CONTROLS LOGIC
+  ######################################
+  $dateModeSelect = $('.date-mode-select')
+  $dateModeSelect.find('.dropdown-menu a').on 'click', ->
+    $this = $(@)
+    timeMode = $(@).attr('data-mode')
+    fetchPlaces()
+    $dateModeSelect
+      .find('.dropdown-toggle .text').text($this.text())
+    $dateModeSelect.find('.dropdown-toggle').dropdown('close')
+    false
