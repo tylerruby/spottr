@@ -1,10 +1,10 @@
-$body-bg: #fff;
-$navbar-default-bg: #7D6FB0;
+$body-bg: whitesmoke;
+$navbar-default-bg: #228cda;
 $navbar-default-link-color: #fff;
 $navbar-default-link-hover-color: whitesmoke;
-$btn-primary-color: #7D6FB0;
-$btn-primary-border: #7D6FB0;
-$btn-primary-bg: #7D6FB0;
+$btn-primary-color: #228cda;
+$btn-primary-border: #228cda;
+$btn-primary-bg: #228cda;
 $btn-default-border: #000;
 $border-radius-base: 0;
 
@@ -86,7 +86,7 @@ a:hover {
 }
 
 .btn-primary.btn-outline {
-    color: #7D6FB0;
+    color: #228cda;
 }
 .btn-default.btn-outline:hover,
 .btn-default.btb-outline.active {
@@ -119,5 +119,5 @@ a:hover {
 }
 
 tr.highlight td {
-  background-color: #f5f2f8;
+  background-color: #d0e7f8;
 }

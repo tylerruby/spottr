@@ -1,12 +1,38 @@
-.container
+.container-fluid
   .row
-    .col-md-6.col-md-offset-3
+    .col-md-4.col-md-offset-1
       .panel.panel-default
-        .panel-body.test
-          %img.img-rounded{:src => "http://i.imgur.com/EwuuJiN.jpg", :style => "width:100%;"}
-          %h3
-            = @place.title.classify
-            %span{:class => "label label-success pull-right"} Open
-          %h4 Average Price: $10.00
-          = @place.address
-          %img{:src => "http://i.imgur.com/7qZJl0k.png", :style => "width:100%; height:250px;"}
+        .panel-body
+          .row
+            .col-md-6
+              %img.img-responsive{:src => "https://lh5.googleusercontent.com/-OsG7ouwp8xY/U1U4k59MXvI/AAAAAAADg1s/N6lNYeR62YU/s203/83583_105975_4_14_0_642817.jpg"}/
+            .col-md-5
+              %h4
+                = @place.title.classify
+              %h5 1424 Braxford Trace, Lawrenceville, GA 30044
+              %strong Type:
+              %a{:href => "http://www.airbnb.com"} Food
+      .panel.panel-default
+        .panel-body
+          .row
+            .col-md-12
+              %img.img-responsive{:src => "http://i.imgur.com/zmQPrLb.png"}
+    .col-md-6
+      .panel.panel-default
+        .panel-body
+          %img.img-responsive{:src => "http://i.imgur.com/X3HEx8T.jpg"}
+    .col-md-6
+      .panel.panel-default
+        .panel-body
+          %strong Tyler Ruby
+          Test
+        .panel-heading
+          %strong Tyler Ruby
+          Test
+        .panel-body
+          %strong Tyler Ruby
+          Test
+        .panel-heading
+          %strong Tyler Ruby
+          Test
+
