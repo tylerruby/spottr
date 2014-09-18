@@ -2,37 +2,75 @@
   .row
     .col-md-4.col-md-offset-1
       .panel.panel-default
-        .panel-body
+        .panel-body{:style => "padding:0;"}
           .row
             .col-md-6
-              %img.img-responsive{:src => "https://lh5.googleusercontent.com/-OsG7ouwp8xY/U1U4k59MXvI/AAAAAAADg1s/N6lNYeR62YU/s203/83583_105975_4_14_0_642817.jpg"}/
+              %img.img-responsive{ :src => "https://lh5.googleusercontent.com/-OsG7ouwp8xY/U1U4k59MXvI/AAAAAAADg1s/N6lNYeR62YU/s203/83583_105975_4_14_0_642817.jpg"}
             .col-md-5
               %h4
+                %span.label.label-success.pull-right Open
                 = @place.title.classify
-              %h5 1424 Braxford Trace, Lawrenceville, GA 30044
-              %strong Type:
-              %a{:href => "http://www.airbnb.com"} Food
+              %h5 1424 Braxford Trace, Lawrenceville, GA 3004
+              %h4
+                %a.btn.btn-sm.btn-default.btn-outline.fa.fa-car.pull-right{:href=> "http://www.google.com", :target => "_blank"}
+                Type:
+                %a{:href => "http://www.google.com"} Food
       .panel.panel-default
-        .panel-body
+        .panel-body{:style => "padding:0;"}
           .row
             .col-md-12
               %img.img-responsive{:src => "http://i.imgur.com/zmQPrLb.png"}
-    .col-md-6
       .panel.panel-default
+        .panel-heading
+          %h3.panel-title People that like this place
         .panel-body
+          %img{:src => "http://i.imgur.com/TFwKwId.png", :style => "width:50px; height:50px;"}/
+          %img{:src => "http://i.imgur.com/x3GGS4h.png", :style => "width:50px; height:50px;"}/
+    .col-md-5
+      .panel.panel-default
+        .panel-body{:style => "padding:0;"}
           %img.img-responsive{:src => "http://i.imgur.com/X3HEx8T.jpg"}
-    .col-md-6
-      .panel.panel-default
-        .panel-body
-          %strong Tyler Ruby
-          Test
+        .panel-body{:style => "padding:5px;"}
+          %img{:src => "http://placehold.it/70x70"}
+          %img{:src => "http://placehold.it/70x70"}
+          %img{:src => "http://placehold.it/70x70"}
+          %img{:src => "http://placehold.it/70x70"}
+    .col-md-5
+      .panel.panel-default.map-control-panel
         .panel-heading
-          %strong Tyler Ruby
-          Test
-        .panel-body
-          %strong Tyler Ruby
-          Test
-        .panel-heading
-          %strong Tyler Ruby
-          Test
-
+          .row
+            .col-md-12
+              .btn-group.date-mode-select
+                %button.btn.btn-primary.btn-outline.dropdown-toggle{"data-toggle" => "dropdown", :type => "button"}
+                  %span.text Month
+                  %span.caret
+                %ul.dropdown-menu{:role => "menu"}
+                  %li
+                    %a{data: {mode: 'day'}} Today
+                  %li
+                    %a{data: {mode: 'week'}} Week
+                  %li
+                    %a{data: {mode: 'month'}} Month
+                  %li
+                    %a{data: {mode: 'year'}} Year
+                  %li.divider
+                  %li
+                    %a{data: {mode: 'all'}} All
+              %button.btn.btn-default.btn-outline New
+        %table.table
+          %tbody
+            %tr
+              %td{:style => "border-top:none;"} 1
+              %td{:style => "border-top:none;"}
+                %strong Tyler
+              %td{:style => "border-top:none;"} Test comments comments comments
+            %tr
+              %td 1
+              %td
+                %strong Tyler
+              %td I really like this placeI really like this placeI really like this placeI really like this placeI really like this placeI really like this placeI really like this placeI really like this place
+            %tr
+              %td 1
+              %td
+                %strong Tyler
+              %td Another random comment right here}

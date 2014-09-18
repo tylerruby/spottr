@@ -15,6 +15,10 @@ $border-radius-base: 0;
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,300);
 @import url(http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css);
 
+td {
+    border-top:none !important;
+    border-bottom: 1px solid #dddddd;
+}
 .navbar-default {
 border:none;
 }
