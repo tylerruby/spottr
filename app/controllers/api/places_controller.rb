@@ -36,7 +36,7 @@ class Api::PlacesController < ApplicationController
     @place.liked_by(current_user)
 
     render json: {
-      votes_count: @place.votes_count
+      votes_count: @place.votes.count
     }
   end
 

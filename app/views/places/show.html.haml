@@ -29,7 +29,7 @@
     .col-md-5
       .panel.panel-default
         .panel-body{:style => "padding:0;"}
-          %img.img-responsive{:src => "http://i.imgur.com/X3HEx8T.jpg"}
+          = image_tag @place.image.url(:medium), class: 'img-responsive'
         .panel-body{:style => "padding:5px;"}
           %img{:src => "http://placehold.it/70x70"}
           %img{:src => "http://placehold.it/70x70"}

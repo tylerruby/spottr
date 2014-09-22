@@ -36,6 +36,7 @@ class PlacesController < ApplicationController
     @place.liked_by current_user
     redirect_to :back
   end
+
   private
 
   def place_params
