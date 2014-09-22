@@ -76,20 +76,18 @@
                   %li
                     %a{data: {mode: 'all'}} All
               %button.btn.btn-default.btn-outline New
-        %table.table
-          %tbody
-            %tr
-              %td{:style => "border-top:none;"} 1
-              %td{:style => "border-top:none;"}
-                %strong Tyler
-              %td{:style => "border-top:none;"} Test comments comments comments
-            %tr
-              %td 1
-              %td
-                %strong Tyler
-              %td I really like this placeI really like this placeI really like this placeI really like this placeI really like this placeI really like this placeI really like this placeI really like this place
-            %tr
-              %td 1
-              %td
-                %strong Tyler
-              %td Another random comment right here
+        .panel-body
+          %table.table
+            %tbody
+              - @place.comments.each do |comment|
+                %tr
+                  %td{:style => "border-top:none;"} 1
+                  %td{:style => "border-top:none;"}
+                    %strong= comment.user.email
+                  %td{:style => "border-top:none;"}= comment.comment
+        .panel-footer
+          = form_for [@place, Comment.new], html: {class: 'form'} do |f|
+            .form-group
+              = f.text_area :comment, class: 'form-control'
+            .form-group
+              = f.submit "Comment", class: 'btn btn-primary'

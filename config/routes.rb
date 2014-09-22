@@ -11,8 +11,8 @@ Rails.application.routes.draw do
 
    post 'session_coordinates' => 'session_coordinates#create'
    resources :places, only: [:create, :index, :show] do
-      get :up_vote, on: :member
-    end
+     resources :comments
+   end
 
    namespace :api do
      resources :places do

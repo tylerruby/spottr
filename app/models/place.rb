@@ -1,6 +1,8 @@
 class Place < ActiveRecord::Base
   KINDS = ["food", "club", "bar"]
 
+  acts_as_commentable
+
   has_attached_file :image, :styles => { :thumb => "200x140#", :medium => "501x270#" }
   validates_attachment_content_type :image,
     :content_type => /\Aimage\/.*\Z/
