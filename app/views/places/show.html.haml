@@ -12,7 +12,8 @@
                 = @place.title.classify
               %h5= @place.address
               %h4
-                %a.btn.btn-sm.btn-default.btn-outline.fa.fa-car.pull-right{:href=> "http://www.google.com", :target => "_blank"}
+                - href = "http://maps.google.com/?saddr=#{@lat},#{@long}&daddr=#{@place.latitude},#{@place.longitude}"
+                %a.btn.btn-sm.btn-default.btn-outline.fa.fa-car.pull-right{:href=> href, :target => "_blank"}
                 Type:
                 %a{:href => "http://www.google.com"}
                   = @place.kind.titleize
@@ -23,6 +24,7 @@
               #place-map{style: "height: 400px;"}
               :javascript
                 function init() {
+                  var currentLatLng = new google.maps.LatLng(#{@lat}, #{@long});
                   var latLng = new google.maps.LatLng(#{@place.latitude}, #{@place.longitude});
                   var mapOptions = {
                     center: latLng,

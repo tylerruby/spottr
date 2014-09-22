@@ -1,6 +1,6 @@
 class PlacesController < ApplicationController
 
-  before_action :get_current_location, only: :index
+  before_action :get_current_location, only: [:index, :show]
 
   def index
     @places = Place.all
