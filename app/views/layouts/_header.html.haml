@@ -10,17 +10,11 @@
       = link_to image_tag("http://i.imgur.com/XPYErN4.gif", size: "70x50"), root_path, class: "navbar-brand", style: "padding-top:0px;"     
     #bs-example-navbar-collapse-1.collapse.navbar-collapse
       %ul.nav.navbar-nav
-      = render 'places/form'
       %ul.nav.navbar-nav.navbar-right
         - if user_signed_in?
-          %li= link_to 'New Spot', '#', id: 'add-location'
+          %li
+            %a{style: "cursor: pointer;", data: {toggle: "modal", target: "#add-place-modal"}} New Spot
           %li= link_to('Logout', destroy_user_session_path, :method => :delete)
         - else
           %li= link_to "Login", new_user_session_path
 
-
-:javascript
-  $('#add-location').on('click', function(e){
-    e.preventDefault();
-    $('#location-form').toggleClass('hide');
-  });

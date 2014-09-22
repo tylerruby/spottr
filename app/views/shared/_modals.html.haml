@@ -1,0 +1,15 @@
+.modal.fade#add-place-modal
+  = form_for Place.new, html: {class: "modal-dialog"} do |f|
+    .modal-content
+      .modal-header
+        %button.close{:type => 'button', 'data-dismiss' => 'modal'}
+          %span{'aria-hidden' => true} &times;
+          %span.sr-only Close
+        %h4.modal-title Add a place
+      .modal-body
+        .form-group
+          = f.text_field :title, class: 'form-control', placeholder: 'Place Title'
+        .form-group
+          = f.select :kind, Place::KINDS, class: 'form-control'
+      .modal-footer
+        = f.submit 'Add Place', class: 'btn btn-default'
