@@ -12,6 +12,10 @@ $ ->
     handler.getMap().setZoom(12)
     bindEvents()
 
+  # search input
+  searchInput = document.getElementById('place-search')
+  searchBox = new google.maps.places.SearchBox(searchInput)
+
   # SOME CONFIG VARIABLES
   DEFAULT_PLACES_LIMIT = 20
   fetchPlacesLimit = DEFAULT_PLACES_LIMIT
@@ -26,6 +30,8 @@ $ ->
   bindEvents = ->
     google.maps.event.addListener handler.getMap(),
       'bounds_changed', onBoundsChange
+    google.maps.event.addListener searchBox,
+      'places_changed', onPlacesSearch
 
   boundsLock = false
   onBoundsChange = ->
@@ -46,6 +52,13 @@ $ ->
         nelng: northEast.lng()
       fetchPlacesLimit = DEFAULT_PLACES_LIMIT
       fetchPlaces(params)
+
+   onPlacesSearch = ->
+     places = searchBox.getPlaces()
+     return if places.length == 0
+     place = places[0]
+     handler.getMap().setCenter(place.geometry.location)
+
 
   ######################################
   # API CALLS
