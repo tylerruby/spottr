@@ -197,7 +197,7 @@ $ ->
           </a>
         </span>
       </td>
-      <td>$4.50</td>
+      <td><%=distance%></td>
       <td>
         <a href="https://www.google.com/maps/place/<%=address%>" target="_blank" class="btn btn-sm btn-default btn-outline fa fa-car pull-right">
         </a>
@@ -207,6 +207,11 @@ $ ->
   compiledRowTemplate = _.template(rowTemplate)
 
   addTableRow = (p) ->
+    currentLatLng = new google.maps.LatLng(window.latitude, window.longitude)
+    placeLatLng = new google.maps.LatLng(p.latitude, p.longitude)
+    distance = util.getDistance(currentLatLng, placeLatLng)
+    distanceMiles = util.toMiles(distance / 1000)
+    p.distance = "#{util.formatDec(distanceMiles)} miles"
     if $("#place-#{p.id}").length == 0
       $table = $('#places-table')
       rowTemplate = compiledRowTemplate(p)
