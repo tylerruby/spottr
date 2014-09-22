@@ -10,16 +10,33 @@
               %h4
                 %span.label.label-success.pull-right Open
                 = @place.title.classify
-              %h5 1424 Braxford Trace, Lawrenceville, GA 3004
+              %h5= @place.address
               %h4
                 %a.btn.btn-sm.btn-default.btn-outline.fa.fa-car.pull-right{:href=> "http://www.google.com", :target => "_blank"}
                 Type:
-                %a{:href => "http://www.google.com"} Food
+                %a{:href => "http://www.google.com"}
+                  = @place.kind.titleize
       .panel.panel-default
         .panel-body{:style => "padding:0;"}
           .row
             .col-md-12
-              %img.img-responsive{:src => "http://i.imgur.com/zmQPrLb.png"}
+              #place-map{style: "height: 400px;"}
+              :javascript
+                function init() {
+                  var latLng = new google.maps.LatLng(#{@place.latitude}, #{@place.longitude});
+                  var mapOptions = {
+                    center: latLng,
+                    zoom: 14
+                  }
+                  var map = new google.maps.Map(document.getElementById('place-map'),
+                    mapOptions);
+                  var marker = new google.maps.Marker({
+                    position: latLng,
+                    map: map,
+                    title: "#{@place.title}"
+                  });
+                }
+                google.maps.event.addDomListener(window, 'load', init);
       .panel.panel-default
         .panel-heading
           %h3.panel-title People that like this place
