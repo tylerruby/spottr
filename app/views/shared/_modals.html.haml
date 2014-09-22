@@ -1,5 +1,5 @@
 .modal.fade#add-place-modal
-  = form_for Place.new, html: {class: "modal-dialog"} do |f|
+  = form_for Place.new, html: {class: "modal-dialog", multipart: true} do |f|
     .modal-content
       .modal-header
         %button.close{:type => 'button', 'data-dismiss' => 'modal'}
@@ -11,5 +11,8 @@
           = f.text_field :title, class: 'form-control', placeholder: 'Place Title'
         .form-group
           = f.select :kind, Place::KINDS, class: 'form-control'
+        .form-group
+          %span Place Image:
+          = f.file_field :image
       .modal-footer
         = f.submit 'Add Place', class: 'btn btn-default'

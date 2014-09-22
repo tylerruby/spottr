@@ -1,6 +1,10 @@
 class Place < ActiveRecord::Base
   KINDS = ["food", "club", "bar"]
 
+  has_attached_file :image, :styles => { :thumb => "200x140#" }
+  validates_attachment_content_type :image,
+    :content_type => /\Aimage\/.*\Z/
+
   reverse_geocoded_by :latitude, :longitude do |obj,results|
     if geo = results.first
       obj.city = geo.city

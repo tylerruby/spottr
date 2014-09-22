@@ -39,7 +39,7 @@ class PlacesController < ApplicationController
   private
 
   def place_params
-    params.require(:place).permit(:title, :kind)
+    params.require(:place).permit(:title, :kind, :image)
   end
 
   def get_current_location
