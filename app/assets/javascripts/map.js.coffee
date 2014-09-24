@@ -237,7 +237,7 @@ $ ->
 
   onUpvoteClick = ->
     $this = $(@)
-    href = $this.attr('href')
+    href = $this.attr('href') + "?time_mode=#{timeMode}"
     $.ajax
       url: href
       type: "POST"

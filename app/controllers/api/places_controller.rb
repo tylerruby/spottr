@@ -1,7 +1,7 @@
 class Api::PlacesController < ApplicationController
   respond_to :json
 
-  before_action :set_time_back, only: [:index]
+  before_action :set_time_back, only: [:index, :up_vote]
   before_action :set_limit, only: [:index]
   before_action :set_allowed_kinds, only: [:index]
 
@@ -36,7 +36,9 @@ class Api::PlacesController < ApplicationController
     @place.liked_by(current_user)
 
     render json: {
-      votes_count: @place.votes.count
+      votes_count: Place.
+        where(id: @place.id).with_vote_counts(@time_back).
+        first.votes_count
     }
   end
 
