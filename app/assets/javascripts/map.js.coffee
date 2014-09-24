@@ -186,7 +186,7 @@ $ ->
         </strong>
       </td>
       <td>
-        <a class="js-upvote btn btn-sm btn-default glyphicon glyphicon-chevron-up" href="/api/places/<%=id%>/up_vote" style="font-size:14px;border:none;background:whitesmoke;">
+        <a class="js-upvote btn btn-sm btn-default glyphicon glyphicon-chevron-up <%=upvoted_class%>" href="/api/places/<%=id%>/up_vote" style="font-size:14px;border:none;background:whitesmoke;">
           <%=votes_count%>
         </span>
       </td>
@@ -207,11 +207,15 @@ $ ->
   compiledRowTemplate = _.template(rowTemplate)
 
   addTableRow = (p) ->
+    # Computing the distance proterty
     currentLatLng = new google.maps.LatLng(window.latitude, window.longitude)
     placeLatLng = new google.maps.LatLng(p.latitude, p.longitude)
     distance = util.getDistance(currentLatLng, placeLatLng)
     distanceMiles = util.toMiles(distance / 1000)
     p.distance = "#{util.formatDec(distanceMiles)} miles"
+
+    p.upvoted_class = if p.upvoted_by_user then "upvoted" else ""
+
     if $("#place-#{p.id}").length == 0
       $table = $('#places-table')
       rowTemplate = compiledRowTemplate(p)
@@ -237,12 +241,14 @@ $ ->
 
   onUpvoteClick = ->
     $this = $(@)
-    href = $this.attr('href') + "?time_mode=#{timeMode}"
-    $.ajax
-      url: href
-      type: "POST"
-      success: (data) ->
-        $this.text(data.votes_count)
+    unless $this.is('.upvoted')
+      href = $this.attr('href') + "?time_mode=#{timeMode}"
+      $.ajax
+        url: href
+        type: "POST"
+        success: (data) ->
+          $this.text(data.votes_count)
+          $this.addClass('upvoted')
     false
 
   onRowMouseEnter = ->

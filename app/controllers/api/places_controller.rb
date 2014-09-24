@@ -24,6 +24,12 @@ class Api::PlacesController < ApplicationController
 
     @places = @places.with_vote_counts(@time_back)
     @places = @places.limit(@limit)
+    # Preparing the json
+    @places = @places.map {|p|
+      p.as_json.merge({
+        upvoted_by_user: p.voted_by?(current_user)
+      })
+    }
 
     render json: {
       places: @places,

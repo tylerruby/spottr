@@ -22,6 +22,10 @@ class Place < ActiveRecord::Base
   validates_presence_of :user_id
   validates :kind, inclusion: {in: KINDS}
 
+  def voted_by?(user)
+    votes.where(voter: user).count > 0
+  end
+
   scope :with_vote_counts, ->(time_back) {
     join_query = <<-EOQ
       LEFT OUTER JOIN votes
