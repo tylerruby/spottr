@@ -79,6 +79,10 @@
         .panel-body
           %table.table
             %tbody
+              - if @place.comments.count == 0
+                %tr
+                  %td{colspan: 3}
+                    %em.text-grey No comments yet
               - @place.comments.each do |comment|
                 %tr
                   %td{:style => "border-top:none;"} 1
