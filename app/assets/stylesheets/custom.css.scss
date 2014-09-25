@@ -19,8 +19,12 @@ td {
     border-top:none !important;
     border-bottom: 1px solid #dddddd;
 }
+
+
+
 .navbar-default {
 border:none;
+margin-bottom:0px;
 }
 
 .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle {
@@ -61,7 +65,7 @@ background-color: whitesmoke;
 @media(min-width:1200px){
   #map {
     width: 100%; 
-    height: 550px;
+    height: 610px;
   }
 }
 
@@ -168,5 +172,6 @@ tr.highlight td {
 }
 
 .upvoted {
-  background-color: #cfc !important;
+  background-color: #1EB85E !important;
+  color: #fff !important;
 }

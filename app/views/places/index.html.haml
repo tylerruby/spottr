@@ -1,14 +1,11 @@
 = render 'preload_images'
 .container-fluid
   .row
-    .col-sm-6
+    .col-sm-6{:style => "padding-left:0px;padding-right:0px;"}
       .panel.panel-default
-        .panel-body.test
-          .panel-title{:style => "font-size:22px; padding-bottom:-1px; margin-left:10px;"}
-            = current_city
         %div{:style => "width: 100%"}
           #map
-    .col-sm-6
+    .col-sm-6{:style => "padding-left:0px;padding-right:0px;"}
       .panel.panel-default.map-control-panel
         .panel-heading
           .row
@@ -30,12 +27,11 @@
                   %li
                     %a{data: {mode: 'all'}} All
               %button.btn.btn-default.btn-outline New
-              %button.btn.btn-success.btn-outline Open
               #kind-toggles.btn-group.pull-right{data: {toggle: :buttons}}
                 %button#food-toggle.btn.btn-danger.btn-outline.fa.fa-cutlery
                 %button#bar-toggle.btn.btn-warning.btn-outline.fa.fa-beer
                 %button#club-toggle.btn.btn-info.btn-outline.fa.fa-music
-        .panel-body{:style => "padding-top:0px;"}
+        .panel-body{:style => "padding:0px;"}
           %table.table.table-condensed#places-table
           %a.btn.btn-default.js-more-places.hidden Load More
 
