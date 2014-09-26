@@ -1,4 +1,22 @@
 $ ->
+  mapZoom = 12
+  mapLatitude = window.latitude
+  mapLongitude = window.longitude
+
+  # localstorage thing
+  checkLocalStorage = ->
+    try
+      window['localStorage'] != null
+    catch e
+      return false
+  localStorageSupported = checkLocalStorage()
+
+  if localStorageSupported
+    mapLatitude = +localStorage.getItem('latitude') || mapLatitude
+    mapLongitude = +localStorage.getItem('longitude') || mapLongitude
+    mapZoom = +localStorage.getItem('zoom') || mapZoom
+
+  # map initialization
   handler = Gmaps.build('Google')
   handler.buildMap {
     provider: {},
@@ -8,8 +26,10 @@ $ ->
       "lat":  window.latitude,
       "lng":  window.longitude,
       "infowindow": "Current Location"
-    handler.map.centerOn(marker)
-    handler.getMap().setZoom(12)
+
+    latLng = new google.maps.LatLng(mapLatitude, mapLongitude)
+    handler.map.centerOn(latLng)
+    handler.getMap().setZoom(mapZoom)
     bindEvents()
 
   # search input
@@ -40,6 +60,17 @@ $ ->
       boundsLock = true
       setTimeout (->
         boundsLock = false), 100
+
+      # saving variables in localStorage
+      if localStorageSupported
+        latLng = handler.getMap().getCenter()
+        latitude = latLng.lat()
+        longitude = latLng.lng()
+        zoom = handler.getMap().getZoom()
+
+        localStorage.setItem('latitude', latitude)
+        localStorage.setItem('longitude', longitude)
+        localStorage.setItem('zoom', zoom)
 
       # getting bounds and changing places
       newBounds = handler.getMap().getBounds()
