@@ -18,3 +18,4 @@
 /public/system/*
 
 .DS_Store
+/config/application.yml

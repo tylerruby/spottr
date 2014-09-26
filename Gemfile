@@ -43,3 +43,4 @@ gem 'bootstrap-sass'
 # gem 'capistrano-rails', group: :development
 
 gem 'pry-rails', group: [:development, :test]
+gem 'figaro'

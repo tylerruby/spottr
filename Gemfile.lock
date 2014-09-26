@@ -54,6 +54,8 @@ GEM
       warden (~> 1.2.3)
     erubis (2.7.0)
     execjs (2.2.1)
+    figaro (1.0.0)
+      thor (~> 0.14)
     geocoder (1.2.4)
     gmaps4rails (2.1.2)
     haml (4.0.5)
@@ -151,6 +153,7 @@ DEPENDENCIES
   bootstrap-sass
   coffee-rails (~> 4.0.0)
   devise
+  figaro
   geocoder
   gmaps4rails
   haml
