@@ -1,8 +1,8 @@
-%nav.navbar.navbar-default{:role => "navigation"}
+%nav.navbar.navbar-default.fixed-top{:role => "navigation"}
   .container-fluid
     / Brand and toggle get grouped for better mobile display
     .navbar-header
-      %button.navbar-toggle.collapsed{"data-target" => "#bs-example-navbar-collapse-1", "data-toggle" => "collapse", :type => "button"}
+      %button.navbar-toggle.collapsed{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", :type => "button"}
         %span.sr-only Toggle navigation
         %span.icon-bar
         %span.icon-bar
@@ -12,7 +12,7 @@
       .form-group
         %input#place-search.form-control{type: "text", placeholder: "City or Neighborhood"}
 
-    #bs-example-navbar-collapse-1.collapse.navbar-collapse
+    .collapse.navbar-collapse
       %ul.nav.navbar-nav
       %ul.nav.navbar-nav.navbar-right
         - if user_signed_in?
@@ -21,4 +21,3 @@
           %li= link_to('Logout', destroy_user_session_path, :method => :delete)
         - else
           %li= link_to "Login", new_user_session_path
-

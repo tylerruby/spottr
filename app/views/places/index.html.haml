@@ -1,11 +1,11 @@
 = render 'preload_images'
 .container-fluid
   .row
-    .col-sm-6{:style => "padding-left:0px;padding-right:0px;"}
+    .col-sm-7{:style => "padding-left:0px;padding-right:0px;"}
       .panel.panel-default
         %div{:style => "width: 100%"}
           #map
-    .col-sm-6{:style => "padding-left:0px;padding-right:0px;"}
+    .col-sm-5{:style => "padding-left:0px;padding-right:0px;"}
       .panel.panel-default.map-control-panel
         .panel-heading
           .row
@@ -33,7 +33,7 @@
                 %button#club-toggle.btn.btn-info.btn-outline.fa.fa-music
         .panel-body{:style => "padding:0px;"}
           %table.table.table-condensed#places-table
-          %a.btn.btn-default.js-more-places.hidden Load More
+          %a.btn.btn-default.js-more-places.hidden{:style => "margin-left:10px;margin-bottom:10px;"} Load More
 
 - content_for :scripts do
   :javascript
