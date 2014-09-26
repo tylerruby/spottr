@@ -23,6 +23,7 @@ gem 'gmaps4rails'
 gem 'underscore-rails'
 gem 'quiet_assets', group: :development
 gem 'devise'
+gem 'omniauth-facebook'
 gem 'rb-readline'
 gem 'acts_as_votable'
 gem 'acts_as_commentable'
