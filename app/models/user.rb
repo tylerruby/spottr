@@ -16,11 +16,11 @@ class User < ActiveRecord::Base
   acts_as_voter
 
   def first_name
-    name.split(" ").first
+    (name || "").split(" ").first
   end
 
   def last_name
-    name.split(" ").last
+    (name || "").split(" ").last
   end
 
   def self.from_omniauth(auth)
