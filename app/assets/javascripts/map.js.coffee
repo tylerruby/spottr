@@ -204,9 +204,6 @@ $ ->
     # step three: fix numbers for table rows
     fixTableRowNumbers()
 
-    # step four: fix spaces in js-upvotes
-    fixUpvotesSpacing()
-
     # step five: show/hide show more button
     processShowMoreBtn(places.length, total)
 
@@ -229,9 +226,6 @@ $ ->
     $('#places-table tr').each (i) ->
       $(@).find('.count').text(i+1)
 
-  fixUpvotesSpacing = ->
-    $('#places-table .js-upvote').each ->
-      ($ @).text(($ @).text().trim())
 
   processShowMoreBtn = (placesCount, total) ->
     if placesCount < total
