@@ -1,0 +1,16 @@
+.btn-group.date-mode-select{data: {mode: params[:time_mode] || "month"}}
+  %button.btn.btn-primary.btn-outline.dropdown-toggle{"data-toggle" => "dropdown", :type => "button"}
+    %span.text Month
+    %span.caret
+  %ul.dropdown-menu{:role => "menu"}
+    %li
+      %a{data: {mode: 'day'}} Today
+    %li
+      %a{data: {mode: 'week'}} Week
+    %li
+      %a{data: {mode: 'month'}} Month
+    %li
+      %a{data: {mode: 'year'}} Year
+    %li.divider
+    %li
+      %a{data: {mode: 'all'}} All

@@ -8,4 +8,23 @@ class ApplicationController < ActionController::Base
   def session_coordinates
     session[:coordinates]
   end
+
+  protected
+
+  def set_time_back
+    @time_back = case params[:time_mode]
+    when "all"
+      100.years
+    when "year"
+      1.year
+    when "month"
+      1.month
+    when "week"
+      1.week
+    when "day"
+      1.day
+    else
+      1.month
+    end
+  end
 end
