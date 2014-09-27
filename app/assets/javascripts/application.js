@@ -16,5 +16,6 @@
 //= require bootstrap-sprockets
 //= require underscore
 //= require gmaps/google
+//= require time_mode
 //= require map
 //= require util

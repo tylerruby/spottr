@@ -39,7 +39,6 @@ $ ->
   # SOME CONFIG VARIABLES
   DEFAULT_PLACES_LIMIT = 20
   fetchPlacesLimit = DEFAULT_PLACES_LIMIT
-  timeMode = "month"
   foodKindEnabled = true
   barKindEnabled = true
   clubKindEnabled = true
@@ -108,7 +107,7 @@ $ ->
 
     params = _.extend(params,
       limit: fetchPlacesLimit,
-      time_mode: timeMode,
+      time_mode: $('.date-mode-select').attr('data-mode'),
       food: foodKindEnabled
       bar: barKindEnabled,
       club: clubKindEnabled,
@@ -273,7 +272,7 @@ $ ->
   onUpvoteClick = ->
     $this = $(@)
     unless $this.is('.upvoted')
-      href = $this.attr('href') + "?time_mode=#{timeMode}"
+      href = $this.attr('href') + "?time_mode=#{$('.date-mode-select').attr('data-mode')}"
       $.ajax
         url: href
         type: "POST"
@@ -307,15 +306,8 @@ $ ->
   ######################################
   # TABLE TOP CONTROLS LOGIC
   ######################################
-  $dateModeSelect = $('.date-mode-select')
-  $dateModeSelect.find('.dropdown-menu a').on 'click', ->
-    $this = $(@)
-    timeMode = $(@).attr('data-mode')
-    fetchPlaces()
-    $dateModeSelect
-      .find('.dropdown-toggle .text').text($this.text())
-    $dateModeSelect.find('.dropdown-toggle').dropdown('toggle')
-    false
+  $('.date-mode-select').on 'change', ->
+    setTimeout fetchPlaces, 50
 
   $('#kind-toggles .btn').on 'click', ->
     setTimeout setKindsAndFetch, 500
