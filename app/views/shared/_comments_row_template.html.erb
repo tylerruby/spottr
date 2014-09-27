@@ -1,0 +1,13 @@
+<script type="text/html" id="comment-row-template">
+  <tr>
+    <td style="border-top:none;">
+      <a class="btn btn-default btn-sm glyphicon glyphicon-chevron-up js-upvote <%%=upvoted_class%>" href="http://local.spottr.com:3000/api/places/<%%=commentable_id%>/comments/<%%=id%>/up_vote">
+        <%%=votes_count%>
+      </a>
+    </td>
+    <td style="border-top:none;">
+      <a href="/users/<%%=user_id%>"><%%=user_email%></a>
+    </td>
+    <td style="border-top:none;"><%%=comment%></td>
+  </tr>
+</script>

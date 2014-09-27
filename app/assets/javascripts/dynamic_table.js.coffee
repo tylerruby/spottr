@@ -13,7 +13,7 @@
 
       if options.setData
         @$el.html('')
-        _.each options.setData, (p) ->
+        _.each options.setData, (p) =>
           html = @$el.data('compiledRowTemplate')(opts.prepareRow(p))
           $(html).appendTo(@$el)
     else

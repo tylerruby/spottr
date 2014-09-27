@@ -4,6 +4,7 @@ class Comment < ActiveRecord::Base
   include Concerns::Votable
 
   belongs_to :commentable, :polymorphic => true
+  delegate :email, to: :user, prefix: true
 
   default_scope -> { order('created_at ASC') }
 
@@ -13,4 +14,10 @@ class Comment < ActiveRecord::Base
 
   # NOTE: Comments belong to a user
   belongs_to :user
+
+  def as_json(options={})
+    json = super(options)
+    json["user_email"] = self.user_email
+    json
+  end
 end

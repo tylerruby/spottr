@@ -23,6 +23,11 @@ Rails.application.routes.draw do
        member do
          post :up_vote
        end
+       resources :comments do
+         member do
+           post :up_vote
+         end
+       end
      end
    end
 

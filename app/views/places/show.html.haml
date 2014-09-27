@@ -1,3 +1,5 @@
+:javascript
+  window.place_id = #{@place.id};
 .container-fluid
   .row{:style => "margin-top:20px;"}
     .col-md-4.col-md-offset-1.col-sm-5.col-xs-12
@@ -56,21 +58,12 @@
               = render 'shared/controls/time_mode_select'
               %button.btn.btn-default.btn-outline New
         .panel-body{:style => "padding-top:0px;"}
-          %table.table.js-dynamic-table
+          %table.table.js-dynamic-table#comments-table
             %tbody
               - if @place.comments.count == 0
                 %tr
                   %td{colspan: 3}
                     %em.text-grey No comments yet
-              - @place.comments.each do |comment|
-                %tr
-                  %td{:style => "border-top:none;"}
-                    - upvoted_class = comment.voted_by?(current_user) ? "upvoted" : ""
-                    %a.js-upvote.btn.btn-sm.btn-default.glyphicon.glyphicon-chevron-up{href: up_vote_place_comment_url(@place, comment), class: upvoted_class}
-                      = comment.votes.count
-                  %td{:style => "border-top:none;"}
-                    %strong= comment.user.email
-                  %td{:style => "border-top:none;"}= comment.comment
         - if user_signed_in?
           = form_for [@place, Comment.new], html: {class: 'form'} do |f|
             .form-group.col-md-10.col-md-offset-1
@@ -78,3 +71,5 @@
             .form-group
               = f.submit "Comment", class: 'btn btn-primary btn-outline col-md-offset-9 col-sm-offset-7'
             .clearfix
+
+= render 'shared/comments_row_template'

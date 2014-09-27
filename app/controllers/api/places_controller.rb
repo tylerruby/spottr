@@ -22,7 +22,6 @@ class Api::PlacesController < ApplicationController
 
     total_places_count = @places.count
 
-
     render json: {
       places: process_votables(@places),
       total: total_places_count
