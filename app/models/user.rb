@@ -7,16 +7,31 @@ class User < ActiveRecord::Base
 
   has_many :places
 
+  has_attached_file :image,
+    styles: {small: "50x50#", medium: "100x100#"},
+    :default_url => "/images/:style/missing.png"
+  validates_attachment_content_type :image,
+    :content_type => /\Aimage\/.*\Z/
+
   acts_as_voter
+
+  def first_name
+    name.split(" ").first
+  end
+
+  def last_name
+    name.split(" ").last
+  end
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email || random_email
       user.password = Devise.friendly_token[0,20]
-      user.name = auth.info.name   # assuming the user model has a name
-      user.image = auth.info.image # assuming the user model has an image
+      user.name = auth.info.name
+      user.image = "#{auth.info.image}?type=large"
     end
   end
+
 
   protected
 
