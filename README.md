@@ -19,5 +19,7 @@
    http://spottr.com)
 2. Go to Settings > Advanced, find "Valid OAuth redirect URIs" and add `http://spottr.com/users/auth/facebook/callback` to it
 3. Grab `your_app_id` and `your_app_secret` and set up heroku config variables:
+
 `heroku config:set FACEBOOK_APP_ID=your_app_id`
+
 `heroku config:set FACEBOOK_APP_SECRET=your_app_secret`
