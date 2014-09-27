@@ -27,4 +27,19 @@ class ApplicationController < ActionController::Base
       1.month
     end
   end
+
+  def process_votables(votables)
+    votables = votables.with_vote_counts(@time_back)
+    votables = votables.limit(@limit)
+    # Preparing the json
+    votables.map {|p|
+      p.as_json.merge({
+        upvoted_by_user: p.voted_by?(current_user)
+      })
+    }
+  end
+
+  def set_limit
+    @limit = params[:limit] || 20
+  end
 end

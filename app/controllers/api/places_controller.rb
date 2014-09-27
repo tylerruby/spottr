@@ -22,17 +22,9 @@ class Api::PlacesController < ApplicationController
 
     total_places_count = @places.count
 
-    @places = @places.with_vote_counts(@time_back)
-    @places = @places.limit(@limit)
-    # Preparing the json
-    @places = @places.map {|p|
-      p.as_json.merge({
-        upvoted_by_user: p.voted_by?(current_user)
-      })
-    }
 
     render json: {
-      places: @places,
+      places: process_votables(@places),
       total: total_places_count
     }
   end
@@ -50,10 +42,6 @@ class Api::PlacesController < ApplicationController
 
   protected
 
-
-  def set_limit
-    @limit = params[:limit] || 20
-  end
 
   def set_allowed_kinds
     @allowed_kinds = []
