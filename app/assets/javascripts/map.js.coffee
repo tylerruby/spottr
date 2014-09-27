@@ -269,18 +269,6 @@ $ ->
   # TABLE BUTTONS EVENT HANDLING
   ######################################
 
-  onUpvoteClick = ->
-    $this = $(@)
-    unless $this.is('.upvoted')
-      href = $this.attr('href') + "?time_mode=#{$('.date-mode-select').attr('data-mode')}"
-      $.ajax
-        url: href
-        type: "POST"
-        success: (data) ->
-          $this.text(data.votes_count)
-          $this.addClass('upvoted')
-    false
-
   onRowMouseEnter = ->
     id = ($ @).attr('data-id')
     marker = markers[id]
@@ -298,7 +286,6 @@ $ ->
     fetchPlaces()
     false
 
-  $('#places-table').on('click', '.js-upvote', onUpvoteClick)
   $('#places-table').on('mouseenter', 'tr', onRowMouseEnter)
   $('#places-table').on('mouseleave', 'tr', onRowMouseLeave)
   $('.js-more-places').on('click', onLoadMoreClick)

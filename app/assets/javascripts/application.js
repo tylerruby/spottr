@@ -17,5 +17,6 @@
 //= require underscore
 //= require gmaps/google
 //= require time_mode
+//= require upvotes
 //= require map
 //= require util
