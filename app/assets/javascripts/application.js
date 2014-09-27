@@ -16,7 +16,9 @@
 //= require bootstrap-sprockets
 //= require underscore
 //= require gmaps/google
+//= require dynamic_table
 //= require time_mode
+//= require comments
 //= require upvotes
 //= require map
 //= require util

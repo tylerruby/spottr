@@ -1,0 +1,25 @@
+<script type="text/html" id="place-row-template">
+  <tr data-id="<%%=id%>" id="place-<%%=id%>">
+    <td>
+      <strong class="count" style="font-size:18px;">
+      </strong>
+    </td>
+    <td>
+      <a class="js-upvote btn btn-sm btn-default glyphicon glyphicon-chevron-up <%%=upvoted_class%>" href="/api/places/<%%=id%>/up_vote" style="font-size:14px;border:none;background:whitesmoke;">
+        <%%=votes_count%>
+      </span>
+    </td>
+    <td>
+      <span style="font-size:16px;margin-left:5px;margin-top:5px;">
+        <a href="/places/<%%=id%>" class="place">
+          <%%= title %>
+        </a>
+      </span>
+    </td>
+    <td><%%=distance%></td>
+    <td>
+      <a href="https://www.google.com/maps/place/<%%=address%>" target="_blank" class="btn btn-sm btn-default btn-outline fa fa-car pull-right">
+      </a>
+    </td>
+  </tr>
+</script>

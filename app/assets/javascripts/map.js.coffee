@@ -16,6 +16,7 @@ $ ->
     mapLongitude = +localStorage.getItem('longitude') || mapLongitude
     mapZoom = +localStorage.getItem('zoom') || mapZoom
 
+
   # map initialization
   handler = Gmaps.build('Google')
   handler.buildMap {
@@ -209,47 +210,20 @@ $ ->
     # step five: show/hide show more button
     processShowMoreBtn(places.length, total)
 
-  rowTemplate = """
-    <tr data-id="<%=id%>" id="place-<%=id%>">
-      <td>
-        <strong class="count" style="font-size:18px;">
-        </strong>
-      </td>
-      <td>
-        <a class="js-upvote btn btn-sm btn-default glyphicon glyphicon-chevron-up <%=upvoted_class%>" href="/api/places/<%=id%>/up_vote" style="font-size:14px;border:none;background:whitesmoke;">
-          <%=votes_count%>
-        </span>
-      </td>
-      <td>
-        <span style="font-size:16px;margin-left:5px;margin-top:5px;">
-          <a href="/places/<%=id%>" class="place">
-            <%= title %>
-          </a>
-        </span>
-      </td>
-      <td><%=distance%></td>
-      <td>
-        <a href="https://www.google.com/maps/place/<%=address%>" target="_blank" class="btn btn-sm btn-default btn-outline fa fa-car pull-right">
-        </a>
-      </td>
-    </tr>
-  """
-  compiledRowTemplate = _.template(rowTemplate)
-
-  addTableRow = (p) ->
+  # preparing row data
+  prepareRowData = (p) ->
     # Computing the distance proterty
     currentLatLng = new google.maps.LatLng(window.latitude, window.longitude)
     placeLatLng = new google.maps.LatLng(p.latitude, p.longitude)
     distance = util.getDistance(currentLatLng, placeLatLng)
     distanceMiles = util.toMiles(distance / 1000)
     p.distance = "#{util.formatDec(distanceMiles)} miles"
-
     p.upvoted_class = if p.upvoted_by_user then "upvoted" else ""
+    return p
 
+  addTableRow = (p) ->
     if $("#place-#{p.id}").length == 0
-      $table = $('#places-table')
-      rowTemplate = compiledRowTemplate(p)
-      $(rowTemplate).appendTo($table)
+      $table.dynamicTable(addRow: p)
 
   fixTableRowNumbers = ->
     $('#places-table tr').each (i) ->
@@ -264,6 +238,10 @@ $ ->
       $('.js-more-places').removeClass('hidden')
     else
       $('.js-more-places').addClass('hidden')
+
+  # table initialization
+  $table = $('#places-table')
+  $table.dynamicTable(rowTemplate: "#place-row-template", prepareRow: prepareRowData)
 
   ######################################
   # TABLE BUTTONS EVENT HANDLING

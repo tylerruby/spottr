@@ -44,50 +44,19 @@
         .panel-heading
           .row
             .col-md-12
-              .btn-group.date-mode-select
-                %button.btn.btn-primary.btn-outline.dropdown-toggle{"data-toggle" => "dropdown", :type => "button"}
-                  %span.text Month
-                  %span.caret
-                %ul.dropdown-menu{:role => "menu"}
-                  %li
-                    %a{data: {mode: 'day'}} Today
-                  %li
-                    %a{data: {mode: 'week'}} Week
-                  %li
-                    %a{data: {mode: 'month'}} Month
-                  %li
-                    %a{data: {mode: 'year'}} Year
-                  %li.divider
-                  %li
-                    %a{data: {mode: 'all'}} All
-              %button.btn.btn-default.btn-outline New
+              = render 'shared/controls/time_mode_select'
         .panel-body
           %table.table
             %tbody
     .col-md-6.col-sm-7.col-xs-12
-      .panel.panel-default.map-control-panel
+      .panel.panel-default.map-control-panel#comments-panel
         .panel-heading
           .row
             .col-md-12
-              .btn-group.date-mode-select
-                %button.btn.btn-primary.btn-outline.dropdown-toggle{"data-toggle" => "dropdown", :type => "button"}
-                  %span.text Month
-                  %span.caret
-                %ul.dropdown-menu{:role => "menu"}
-                  %li
-                    %a{data: {mode: 'day'}} Today
-                  %li
-                    %a{data: {mode: 'week'}} Week
-                  %li
-                    %a{data: {mode: 'month'}} Month
-                  %li
-                    %a{data: {mode: 'year'}} Year
-                  %li.divider
-                  %li
-                    %a{data: {mode: 'all'}} All
+              = render 'shared/controls/time_mode_select'
               %button.btn.btn-default.btn-outline New
         .panel-body{:style => "padding-top:0px;"}
-          %table.table
+          %table.table.js-dynamic-table
             %tbody
               - if @place.comments.count == 0
                 %tr
@@ -95,7 +64,10 @@
                     %em.text-grey No comments yet
               - @place.comments.each do |comment|
                 %tr
-                  %td{:style => "border-top:none;"} 1
+                  %td{:style => "border-top:none;"}
+                    - upvoted_class = comment.voted_by?(current_user) ? "upvoted" : ""
+                    %a.js-upvote.btn.btn-sm.btn-default.glyphicon.glyphicon-chevron-up{href: up_vote_place_comment_url(@place, comment), class: upvoted_class}
+                      = comment.votes.count
                   %td{:style => "border-top:none;"}
                     %strong= comment.user.email
                   %td{:style => "border-top:none;"}= comment.comment
