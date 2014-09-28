@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140927001747) do
+ActiveRecord::Schema.define(version: 20140928044001) do
 
   create_table "comments", force: true do |t|
     t.string   "title",            limit: 50, default: ""
@@ -27,6 +27,22 @@ ActiveRecord::Schema.define(version: 20140927001747) do
   add_index "comments", ["commentable_id"], name: "index_comments_on_commentable_id"
   add_index "comments", ["commentable_type"], name: "index_comments_on_commentable_type"
   add_index "comments", ["user_id"], name: "index_comments_on_user_id"
+
+  create_table "menu_items", force: true do |t|
+    t.integer  "place_id"
+    t.integer  "user_id"
+    t.string   "name"
+    t.decimal  "price"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+  end
+
+  add_index "menu_items", ["place_id"], name: "index_menu_items_on_place_id"
+  add_index "menu_items", ["user_id"], name: "index_menu_items_on_user_id"
 
   create_table "places", force: true do |t|
     t.string   "title"

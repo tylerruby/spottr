@@ -1,12 +1,10 @@
 class CommentsController < ApplicationController
   before_action :set_commentable
-  before_action :set_time_back, only: [:up_vote]
 
   def create
     @comment = @commentable.comments.create(comment_params)
     redirect_to @commentable
   end
-
 
   protected
 

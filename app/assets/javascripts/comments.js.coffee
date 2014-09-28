@@ -1,6 +1,6 @@
 $ ->
   $table = $('#comments-table')
-  if $table.size != 0
+  if $table.length != 0
     BASE_URL = "/api/places/#{window.place_id}/comments.json"
     timeMode = "month"
 

@@ -19,6 +19,7 @@
 //= require dynamic_table
 //= require time_mode
 //= require comments
+//= require menu_items
 //= require upvotes
 //= require map
 //= require search_box

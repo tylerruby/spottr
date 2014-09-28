@@ -7,10 +7,9 @@
   .panel-body{:style => "padding-top:0px;"}
     %table.table.js-dynamic-table#comments-table
       %tbody
-        - if @place.comments.count == 0
-          %tr
-            %td{colspan: 3}
-              %em.text-grey No comments yet
+        %tr
+          %td{colspan: 3}
+            %em.text-grey No comments yet
   - if user_signed_in?
     = form_for [@place, Comment.new], html: {class: 'form comments-form', style: "display: none;"} do |f|
       .form-group.col-md-10.col-md-offset-1
@@ -18,3 +17,4 @@
       .form-group
         = f.submit "Comment", class: 'btn btn-primary btn-outline col-md-offset-9 col-sm-offset-7'
       .clearfix
+= render 'shared/comments_row_template'

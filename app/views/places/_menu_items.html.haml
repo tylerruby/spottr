@@ -1,0 +1,25 @@
+.panel.panel-default.map-control-panel#menu-items-panel
+  .panel-heading
+    .row
+      .col-md-12
+        = render 'shared/controls/time_mode_select'
+        %button.btn.btn-default.btn-outline#new-menu-item New
+  .panel-body
+    %table.table.js-dynamic-table#menu-items-table
+      %tbody
+
+    - if user_signed_in?
+      = form_for [@place, MenuItem.new], html: {class: 'form menu-items-form', style: 'display:none;'} do |f|
+        .form-group.col-md-10.col-md-offset-1
+          %label.control-label Name
+          = f.text_field :name, placeholder: 'Name', class: 'form-control'
+        .form-group.col-md-10.col-md-offset-1
+          %label.control-label Price
+          = f.text_field :price, placeholder: '10.00', class: 'form-control'
+        .form-group.col-md-10.col-md-offset-1
+          %label.control-label Image
+          = f.file_field :image
+        .form-group
+          = f.submit "Add Line Item", class: 'btn btn-primary btn-outline col-md-offset-9 col-sm-offset-7'
+        .clearfix
+= render 'shared/menu_items_row_template'

@@ -12,7 +12,7 @@ module Concerns
 
       scope :with_vote_counts, ->(time_back) {
         class_name = self.to_s
-        table_name = class_name.downcase.pluralize
+        table_name = class_name.underscore.pluralize
         join_query = <<-EOQ
           LEFT OUTER JOIN votes
           ON votes.votable_id = #{table_name}.id

@@ -20,6 +20,7 @@ class Place < ActiveRecord::Base
   after_validation :reverse_geocode  # auto-fetch address
 
   belongs_to :user
+  has_many :menu_items
 
   validates_presence_of :user_id
   validates :kind, inclusion: {in: KINDS}
