@@ -4,6 +4,11 @@ $ ->
     BASE_URL = "/api/places/#{window.place_id}/comments.json"
     timeMode = "month"
 
+    # new comment button handle
+    $('#new-comment').click ->
+      $('.comments-form').slideDown ->
+        $('#comment_comment').focus()
+
     # prepare row for comments table
     prepareRow = (p) ->
       p.upvoted_class = if p.upvoted_by_user then "upvoted" else ""
