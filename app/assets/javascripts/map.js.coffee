@@ -3,6 +3,9 @@ $ ->
   mapLatitude = window.latitude
   mapLongitude = window.longitude
 
+  onMapPage = $('#map').length > 0
+  return unless onMapPage
+
   # localstorage thing
   checkLocalStorage = ->
     try
@@ -15,7 +18,6 @@ $ ->
     mapLatitude = +localStorage.getItem('latitude') || mapLatitude
     mapLongitude = +localStorage.getItem('longitude') || mapLongitude
     mapZoom = +localStorage.getItem('zoom') || mapZoom
-
 
   # map initialization
   handler = Gmaps.build('Google')
@@ -88,7 +90,11 @@ $ ->
      places = searchBox.getPlaces()
      return if places.length == 0
      place = places[0]
-     handler.getMap().setCenter(place.geometry.location)
+     if onMapPage
+       handleFoundPlace(place)
+
+   handleFoundPlace = (place) ->
+      handler.getMap().setCenter(place.geometry.location)
 
 
   ######################################

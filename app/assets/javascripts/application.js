@@ -21,4 +21,5 @@
 //= require comments
 //= require upvotes
 //= require map
+//= require search_box
 //= require util
