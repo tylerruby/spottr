@@ -36,11 +36,9 @@
                   });
                 }
                 google.maps.event.addDomListener(window, 'load', init);
-      .panel.panel-default
-        .panel-body{:style => "padding:4px;"}
-          - @place.votes.includes(:voter).order("created_at DESC").limit(21).each do |p|
-            = link_to p.voter do
-              = image_tag p.voter.image.url(:small), style: "margin-top: 5px"
+      - @place.votes.includes(:voter).order("created_at DESC").limit(21).each do |p|
+        = link_to p.voter do
+          = image_tag p.voter.image.url(:small), style: "margin-top: 5px"
     .col-md-6.col-sm-7.col-xs-12
       = render 'menu_items'
     .col-md-6.col-sm-7.col-xs-12

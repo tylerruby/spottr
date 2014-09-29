@@ -1,5 +1,5 @@
 .modal.fade#add-place-modal
-  = form_for Place.new, html: {class: "modal-dialog", multipart: true} do |f|
+  = form_for Place.new, html: {class: "modal-dialog modal-sm", multipart: true} do |f|
     .modal-content
       .modal-header
         %button.close{:type => 'button', 'data-dismiss' => 'modal'}
@@ -8,11 +8,11 @@
         %h4.modal-title Add a Restaurant
       .modal-body
         .form-group
-          = f.text_field :title, class: 'form-control', placeholder: 'Place Title'
+          = f.text_field :title, class: 'form-control', placeholder: 'Restaurant Name'
         .form-group
           = f.select :kind, Place::KINDS, class: 'form-control'
         .form-group
           %span Place Image:
           = f.file_field :image
       .modal-footer
-        = f.submit 'Add Place', class: 'btn btn-default'
+        = f.submit 'Add Restaurant', class: 'btn btn-primary btn-outline'
