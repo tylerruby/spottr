@@ -3,7 +3,6 @@
     .row
       .col-md-12
         = render 'shared/controls/time_mode_select'
-        %button.btn.btn-default.btn-outline#new-comment New
   .panel-body{:style => "padding-top:0px;"}
     %table.table.js-dynamic-table#comments-table
       %tbody
@@ -11,7 +10,7 @@
           %td{colspan: 3}
             %em.text-grey No comments yet
   - if user_signed_in?
-    = form_for [@place, Comment.new], html: {class: 'form comments-form', style: "display: none;"} do |f|
+    = form_for [@place, Comment.new], html: {class: 'form comments-form'} do |f|
       .form-group.col-md-10.col-md-offset-1
         = f.text_area :comment, placeholder: "Type comment here", class: 'form-control'
       .form-group
