@@ -222,6 +222,7 @@ $ ->
     distanceMiles = util.toMiles(distance / 1000)
     p.distance = "#{util.formatDec(distanceMiles)} miles"
     p.upvoted_class = if p.upvoted_by_user then "upvoted" else ""
+    p.direction_link = "http://maps.google.com/?saddr=#{window.latitude},#{window.longitude}&daddr=#{p.latitude},#{p.longitude}"
     return p
 
   addTableRow = (p) ->
@@ -284,5 +285,3 @@ $ ->
     if !(foodKindEnabled || barKindEnabled || clubKindEnabled)
       foodKindEnabled = barKindEnabled = clubKindEnabled = true
     fetchPlaces()
-
-    console.log(foodKindEnabled, barKindEnabled, clubKindEnabled)
