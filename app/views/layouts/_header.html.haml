@@ -7,7 +7,7 @@
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
-      = link_to image_tag("http://i.imgur.com/XPYErN4.gif", size: "70x50"), root_path, class: "navbar-brand", style: "padding-top:0px;"
+      = link_to image_tag("http://i.imgur.com/8tVVls8.png", size: "189x50"), root_path, class: "navbar-brand", style: "padding-top:0px;"
     .div.navbar-form.navbar-left
       .form-group
         %input#place-search.form-control{type: "text", placeholder: "City or Neighborhood"}
@@ -15,9 +15,9 @@
     .collapse.navbar-collapse
       %ul.nav.navbar-nav
       %ul.nav.navbar-nav.navbar-right
+        %li
+          %a{style: "cursor: pointer;", data: {toggle: "modal", target: "#add-place-modal"}} Add Restaurant
         - if user_signed_in?
-          %li
-            %a{style: "cursor: pointer;", data: {toggle: "modal", target: "#add-place-modal"}} New Spot
           %li= link_to('Logout', destroy_user_session_path, :method => :delete)
         - else
           %li= link_to "Login", new_user_session_path

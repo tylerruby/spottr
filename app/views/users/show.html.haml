@@ -35,8 +35,6 @@
                 %h3.panel-title
                   = "#{@user.first_name}'s"
                   Favorites
-                .pull-right
-                  %span.clickable.filter{"data-container" => "body", "data-toggle" => "tooltip", :title => "Toggle table filter"}
               %table#task-table.table.table-hover
                 %thead
                   %tr
@@ -75,3 +73,5 @@
                     %td Issues in IE7
                     %td Jane Doe
                     %td failed qa
+
+

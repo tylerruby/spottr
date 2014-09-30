@@ -1,10 +1,10 @@
 $body-bg: whitesmoke;
-$navbar-default-bg: #228cda;
+$navbar-default-bg: #2e6be5;
 $navbar-default-link-color: #fff;
 $navbar-default-link-hover-color: whitesmoke;
-$btn-primary-color: #228cda;
-$btn-primary-border: #228cda;
-$btn-primary-bg: #228cda;
+$btn-primary-color: #2e6be5;
+$btn-primary-border: #2e6be5;
+$btn-primary-bg: #2e6be5;
 $btn-default-border: #000;
 $border-radius-base: 0;
 
@@ -19,7 +19,6 @@ td {
     border-top:none !important;
     border-bottom: 1px solid #dddddd;
 }
-
 
 .navbar-default {
 border:none;
@@ -68,7 +67,6 @@ background-color: whitesmoke;
   }
 }
 
-
 a.place {
   color: #000;
   text-decoration: none; /* no underline */
@@ -85,7 +83,6 @@ a:hover {
 	padding:5px;
 }
 
-
 .btn-outline {
     background-color: transparent;
     color: inherit;
@@ -93,7 +90,7 @@ a:hover {
 }
 
 .btn-primary.btn-outline {
-    color: #228cda;
+    color: #2e6be5;
 }
 .btn-default.btn-outline:hover,
 .btn-default.btb-outline.active {
@@ -173,4 +170,26 @@ tr.highlight td {
 .upvoted {
   background-color: #1e7abd !important;
   color: #fff !important;
+}
+
+.sign_up {
+  background: url("https://gp1.wac.edgecastcdn.net/806614/photos/photos.500px.net/82111139/0cbc0c84b650f8d4167ecb93662dc3a791358d89/2048.jpg") no-repeat center center fixed;
+  -webkit-background-size: 100% auto;
+  -moz-background-size: 100% auto;
+  -o-background-size: 100% auto;
+   background-size: 100% auto;
+}
+.login {
+  background: url("http://livelovefruit.com/wp-content/uploads/2014/05/shutterstock_138732125.jpg") no-repeat center center fixed;
+  -webkit-background-size: 100% auto;
+  -moz-background-size: 100% auto;
+  -o-background-size: 100% auto;
+   background-size: 100% auto;
+}
+.forgot {
+  background: url("http://1.bp.blogspot.com/-O_S6ltgI9q8/Tb7Cfze8qfI/AAAAAAAAEHM/2W-1ZihlQJU/s1600/IMG_2984.JPG") no-repeat center center fixed;
+  -webkit-background-size: 100% auto;
+  -moz-background-size: 100% auto;
+  -o-background-size: 100% auto;
+   background-size: 100% auto;
 }
