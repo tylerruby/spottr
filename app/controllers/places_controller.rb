@@ -40,7 +40,7 @@ class PlacesController < ApplicationController
   private
 
   def place_params
-    params.require(:place).permit(:title, :kind, :image)
+    params.require(:place).permit(:title, :cuisine_type, :image).merge(user_id: current_user.id)
   end
 
   def get_current_location

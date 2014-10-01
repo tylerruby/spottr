@@ -1,14 +1,14 @@
-# Time mode select shit
+# Mode select shit (aka dropdown)
 
 $ ->
-  $('.date-mode-select').each ->
-    $dateModeSelect = $(@)
-    $dateModeSelect.find('.dropdown-menu a').on 'click', ->
+  $('.mode-select').each ->
+    $modeSelect = $(@)
+    $modeSelect.find('.dropdown-menu a').on 'click', ->
       $this = $(@)
       timeMode = $(@).attr('data-mode')
-      $dateModeSelect.attr('data-mode', timeMode)
-      $dateModeSelect
+      $modeSelect.attr('data-mode', timeMode)
+      $modeSelect
         .find('.dropdown-toggle .text').text($this.text())
-      $dateModeSelect.find('.dropdown-toggle').dropdown('toggle')
-      $dateModeSelect.trigger('change')
+      $modeSelect.find('.dropdown-toggle').dropdown('toggle')
+      $modeSelect.trigger('change')
       false

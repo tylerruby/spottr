@@ -3,6 +3,8 @@ class Place < ActiveRecord::Base
 
   acts_as_commentable
 
+  CUISINE_TYPES = ['mexican', 'american', 'italian', 'asian', 'seafood', 'other']
+
   has_attached_file :image, :styles => { :thumb => "200x140#", :medium => "501x270#" }
   validates_attachment_content_type :image,
     :content_type => /\Aimage\/.*\Z/
@@ -21,4 +23,5 @@ class Place < ActiveRecord::Base
   has_many :menu_items
 
   validates_presence_of :user_id
+  validates_inclusion_of :cuisine_type, in: CUISINE_TYPES
 end

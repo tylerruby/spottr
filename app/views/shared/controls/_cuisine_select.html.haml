@@ -1,0 +1,13 @@
+.btn-group.mode-select.cuisine-select{data: {mode: params[:quisine] || "all"}}
+  %button.btn.btn-primary.btn-outline.dropdown-toggle{"data-toggle" => "dropdown", :type => "button"}
+    %span.text All
+    %span.caret
+  %ul.dropdown-menu{:role => "menu"}
+    %li
+      %a{data: {mode: 'all'}} All
+    %li.divider
+      - Place::CUISINE_TYPES.each do |ct|
+        - if ct == "other"
+          %li.divider
+        %li
+          %a{data: {mode: ct}}= ct.titleize

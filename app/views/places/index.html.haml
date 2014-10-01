@@ -11,10 +11,8 @@
           .row
             .col-md-12
               = render 'shared/controls/time_mode_select'
-              #kind-toggles.btn-group.pull-right{data: {toggle: :buttons}}
-                %button#food-toggle.btn.btn-danger.btn-outline.fa.fa-cutlery
-                %button#bar-toggle.btn.btn-warning.btn-outline.fa.fa-beer
-                %button#club-toggle.btn.btn-info.btn-outline.fa.fa-music
+              .pull-right
+                = render 'shared/controls/cuisine_select'
         .panel-body{:style => "padding:0px;"}
           %table.table.table-condensed.js-dynamic-table#places-table
           %a.btn.btn-default.js-more-places.hidden{:style => "margin-left:10px;margin-bottom:10px;"} Load More

@@ -111,7 +111,8 @@ $ ->
 
     params = _.extend(params,
       limit: fetchPlacesLimit,
-      time_mode: $('.date-mode-select').attr('data-mode')
+      time_mode: $('.date-mode-select').attr('data-mode'),
+      cuisine_type: $('.cuisine-select').attr('data-mode'),
     )
 
     url = "#{PLACES_URL}?#{$.param(params)}"
@@ -267,4 +268,7 @@ $ ->
   # TABLE TOP CONTROLS LOGIC
   ######################################
   $('.date-mode-select').on 'change', ->
+    setTimeout fetchPlaces, 50
+
+  $('.cuisine-select').on 'change', ->
     setTimeout fetchPlaces, 50

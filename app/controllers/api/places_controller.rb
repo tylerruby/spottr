@@ -11,11 +11,17 @@ class Api::PlacesController < ApplicationController
       places.longitude > ? AND places.longitude < ?
     EOQ
 
-    @places = Place
-      .where(query,
-        params[:swlat], params[:nelat],
-        params[:swlng], params[:nelng]
-      )
+    query_params = [
+      params[:swlat], params[:nelat],
+      params[:swlng], params[:nelng]
+    ]
+
+    if params[:cuisine_type] && params[:cuisine_type] != "all"
+      query += " AND cuisine_type = ?"
+      query_params.push(params[:cuisine_type].strip)
+    end
+
+    @places = Place.where(query, *query_params)
 
     total_places_count = @places.count
 
