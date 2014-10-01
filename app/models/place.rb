@@ -1,8 +1,6 @@
 class Place < ActiveRecord::Base
   include Concerns::Votable
 
-  KINDS = ["food", "club", "bar"]
-
   acts_as_commentable
 
   has_attached_file :image, :styles => { :thumb => "200x140#", :medium => "501x270#" }
@@ -23,5 +21,4 @@ class Place < ActiveRecord::Base
   has_many :menu_items
 
   validates_presence_of :user_id
-  validates :kind, inclusion: {in: KINDS}
 end

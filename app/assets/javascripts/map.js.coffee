@@ -42,9 +42,6 @@ $ ->
   # SOME CONFIG VARIABLES
   DEFAULT_PLACES_LIMIT = 20
   fetchPlacesLimit = DEFAULT_PLACES_LIMIT
-  foodKindEnabled = true
-  barKindEnabled = true
-  clubKindEnabled = true
 
   ######################################
   # EVENTS HANDLING
@@ -114,10 +111,7 @@ $ ->
 
     params = _.extend(params,
       limit: fetchPlacesLimit,
-      time_mode: $('.date-mode-select').attr('data-mode'),
-      food: foodKindEnabled
-      bar: barKindEnabled,
-      club: clubKindEnabled,
+      time_mode: $('.date-mode-select').attr('data-mode')
     )
 
     url = "#{PLACES_URL}?#{$.param(params)}"
@@ -274,14 +268,3 @@ $ ->
   ######################################
   $('.date-mode-select').on 'change', ->
     setTimeout fetchPlaces, 50
-
-  $('#kind-toggles .btn').on 'click', ->
-    setTimeout setKindsAndFetch, 500
-
-  setKindsAndFetch = ->
-    foodKindEnabled = $('#food-toggle').hasClass('active')
-    barKindEnabled = $('#bar-toggle').hasClass('active')
-    clubKindEnabled = $('#club-toggle').hasClass('active')
-    if !(foodKindEnabled || barKindEnabled || clubKindEnabled)
-      foodKindEnabled = barKindEnabled = clubKindEnabled = true
-    fetchPlaces()

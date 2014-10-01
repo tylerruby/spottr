@@ -10,8 +10,6 @@
         .form-group
           = f.text_field :title, class: 'form-control', placeholder: 'Restaurant Name'
         .form-group
-          = f.select :kind, Place::KINDS, class: 'form-control'
-        .form-group
           %span Place Image:
           = f.file_field :image
       .modal-footer
