@@ -39,6 +39,12 @@ $ ->
   searchInput = document.getElementById('place-search')
   searchBox = new google.maps.places.SearchBox(searchInput)
 
+  # go home button
+  $('#current-location').click ->
+    latLng = new google.maps.LatLng(window.latitude, window.longitude)
+    handler.map.centerOn(latLng)
+    handler.getMap().setZoom(12)
+
   # SOME CONFIG VARIABLES
   DEFAULT_PLACES_LIMIT = 20
   fetchPlacesLimit = DEFAULT_PLACES_LIMIT

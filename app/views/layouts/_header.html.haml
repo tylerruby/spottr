@@ -11,6 +11,8 @@
     .div.navbar-form.navbar-left
       .form-group
         %input#place-search.form-control{type: "text", placeholder: "City or Neighborhood"}
+        - if params[:controller] == "places" and params[:action] == "index"
+          .btn.btn-success#current-location Go to current location
 
     .collapse.navbar-collapse
       %ul.nav.navbar-nav
