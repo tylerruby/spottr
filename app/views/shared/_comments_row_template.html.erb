@@ -6,8 +6,17 @@
       </a>
     </td>
     <td style="border-top:none;">
-      <a href="/users/<%%=user_id%>"><%%=user_name%></a>
+      <div class="media">
+        <a class="pull-left" href="/users/<%%=user_id%>">
+          <img class="media-object" src="<%%=user_image%>" />
+        </a>
+        <div class="media-body">
+          <h5 class="media-heading">
+            <a href="/users/<%%=user_id%>"><%%=user_name%></a>
+          </h5>
+          <%%=comment%>
+        </div>
+      </div>
     </td>
-    <td style="border-top:none;"><%%=comment%></td>
   </tr>
 </script>

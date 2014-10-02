@@ -20,6 +20,7 @@ class Comment < ActiveRecord::Base
     json = super(options)
     json["user_email"] = self.user_email
     json["user_name"] = self.user_name
+    json["user_image"] = self.user.image.url(:small)
     json
   end
 end
