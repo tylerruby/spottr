@@ -10,6 +10,11 @@
     = csrf_meta_tags
   %body
     = render 'layouts/header'
+    - if flash[:alert]
+      .alert.alert-danger.alert-dismissable
+        %button{type: :button, class: :close, data: {dismiss: :alert}}
+          %span{"aria-hidden" => true} &times;
+        = raw flash[:alert]
     = yield
     - unless has_coordinates?
       :javascript

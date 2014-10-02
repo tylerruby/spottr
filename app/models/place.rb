@@ -25,4 +25,14 @@ class Place < ActiveRecord::Base
 
   validates_presence_of :user_id
   validates_inclusion_of :cuisine_type, in: CUISINE_TYPES
+  
+  validate :uniqueness_of_place
+
+  protected
+
+  def uniqueness_of_place
+    if Place.where(latitude: latitude, longitude: longitude).count >= 1 
+      errors[:address] << "is already used by another restaraunt"
+    end
+  end
 end

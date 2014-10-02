@@ -25,7 +25,7 @@ class PlacesController < ApplicationController
     if place.save
       flash[:notice] = 'Place created'
     else
-      flash[:alert] = 'Error creating the place'
+      flash[:alert] = "<strong>Error creating the place:</strong> #{place.errors.keys.first.to_s.titleize} #{place.errors.first[1]}"
     end
 
     redirect_to root_path
