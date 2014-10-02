@@ -9,7 +9,6 @@ $ ->
     places = searchBox.getPlaces()
     return if places.length == 0
     place = places[0]
-    console.log(place)
     if localStorage
       localStorage.
         setItem('latitude', place.geometry.location.lat())

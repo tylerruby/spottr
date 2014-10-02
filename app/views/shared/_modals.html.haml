@@ -8,12 +8,38 @@
         %h4.modal-title Add a Restaurant
       .modal-body
         .form-group
+          %label.control-label Location
+          %input.form-control#place-location{type: 'text', value: 'Current location'}
+          %input#place-latitude{type: :hidden, name: "place[latitude]", value: @lat}
+          %input#place-longitude{type: :hidden, name: "place[longitude]", value: @long}
+        .form-group
+          %label.control-label Name
           = f.text_field :title, class: 'form-control', placeholder: 'Restaurant Name'
         .form-group
           %label.control-label Cuisine Type:
           = f.select :cuisine_type, Place::CUISINE_TYPES, class: 'form-control'
         .form-group
-          %span Place Image:
+          %label.control-label Place Image:
           = f.file_field :image
       .modal-footer
         = f.submit 'Add Restaurant', class: 'btn btn-primary btn-outline'
+
+:javascript
+  $(function() {
+    $('#place-location').focus(function() {
+      if ($(this).val() == "Current location") {
+        $(this).val('');
+      }
+      return false;
+    });
+
+    var searchInput = document.getElementById('place-location');
+    var searchBox = new google.maps.places.SearchBox(searchInput);
+    google.maps.event.addListener(searchBox, 'places_changed', function() {
+      var places = searchBox.getPlaces();
+      if (places.length == 0) { return; }
+      var place = places[0];
+      $('#place-latitude').val(place.geometry.location.lat());
+      $('#place-longitude').val(place.geometry.location.lng());
+    });
+  });

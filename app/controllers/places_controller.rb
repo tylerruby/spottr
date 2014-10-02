@@ -18,8 +18,8 @@ class PlacesController < ApplicationController
   def create
     place = Place.new(place_params)
     current_coordinates = CoordinatesConverter.new(session_coordinates)
-    place.latitude = current_coordinates.latitude
-    place.longitude = current_coordinates.longitude
+    place.latitude ||= current_coordinates.latitude
+    place.longitude ||= current_coordinates.longitude
     place.user = current_user
 
     if place.save
@@ -40,7 +40,9 @@ class PlacesController < ApplicationController
   private
 
   def place_params
-    params.require(:place).permit(:title, :cuisine_type, :image).merge(user_id: current_user.id)
+    params.require(:place).
+      permit(:title, :cuisine_type, :image, :latitude, :longitude).
+      merge(user_id: current_user.id)
   end
 
   def get_current_location
