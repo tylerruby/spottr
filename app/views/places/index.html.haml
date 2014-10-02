@@ -15,7 +15,7 @@
                 = render 'shared/controls/cuisine_select'
         .panel-body{:style => "padding:0px;"}
           %table.table.table-condensed.js-dynamic-table#places-table
-          %a.btn.btn-default.js-more-places.hidden{:style => "margin-left:10px;margin-bottom:10px;"} Load More
+          %a.btn.btn-default.btn-block.js-more-places.hidden{:style => "margin-left:10px;margin-bottom:10px;"} Load More
 
 = render 'shared/places_row_template'
 - content_for :scripts do

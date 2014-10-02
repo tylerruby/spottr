@@ -10,7 +10,7 @@
         .form-group
           = f.text_field :title, class: 'form-control', placeholder: 'Restaurant Name'
         .form-group
-          %label.control-label Cuisine Type
+          %label.control-label Cuisine Type:
           = f.select :cuisine_type, Place::CUISINE_TYPES, class: 'form-control'
         .form-group
           %span Place Image:
