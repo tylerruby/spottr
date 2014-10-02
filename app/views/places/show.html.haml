@@ -7,7 +7,7 @@
         .panel-body{:style => "padding:0;"}
           .row
             .col-md-6.col-xs-6
-              = image_tag @place.image.url(:thumb), class: 'img-responsive'
+              = image_tag @place.image.url(:small), class: 'img-responsive'
             .col-md-5
               %h4
                 - href = "http://maps.google.com/?saddr=#{@lat},#{@long}&daddr=#{@place.latitude},#{@place.longitude}"

@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   devise :omniauthable, :omniauth_providers => [:facebook]
 
   has_many :places
+  has_many :menu_items
 
   has_attached_file :image,
     styles: {small: "50x50#", medium: "100x100#"},

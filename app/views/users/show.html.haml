@@ -9,23 +9,24 @@
             .col-md-6
               %h3= @user.name
               %h4
-                = @user.places.count
+                = @user.menu_items.count
                 Places
               %h4 23 Dishes
       .panel.panel-default
         .panel-heading
           %h3.panel-title Places
         .panel-body
-          %img{:src => "http://i.imgur.com/sZIk3WC.png", :style => "width:70px; height:70px;"}
-          %img{:src => "http://i.imgur.com/YzNZwDW.png", :style => "width:70px; height:70px;"}
-          %img{:src => "http://i.imgur.com/aQCbd2d.png", :style => "width:70px; height:70px;"}
+          - @user.places.each do |place|
+            = link_to place do
+              = image_tag place.image.url(:thumb)
       .panel.panel-default
         .panel-heading
           %h3.panel-title Dishes
         .panel-body
-          %img{:src => "http://i.imgur.com/T4tBexb.png", :style => "width:70px; height:70px;"}
-          %img{:src => "http://i.imgur.com/iFgk6h2.png", :style => "width:70px; height:70px;"}
-          %img{:src => "http://i.imgur.com/2SgglPE.png", :style => "width:70px; height:70px;"}
+          - @user.menu_items.each do |mi|
+            - place = mi.place
+            = link_to place do
+              = image_tag mi.image.url(:thumb)
     .col-md-6
       .panel.panel-default{:style => "height:390px;"}
         .panel-body

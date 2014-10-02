@@ -5,7 +5,7 @@ class Place < ActiveRecord::Base
 
   CUISINE_TYPES = ['mexican', 'american', 'italian', 'asian', 'seafood', 'other']
 
-  has_attached_file :image, :styles => { :thumb => "200x140#", :medium => "501x270#" }
+  has_attached_file :image, :styles => { :thumb => "70x70#", :small => "200x140#", :medium => "501x270#" }
   validates_attachment_content_type :image,
     :content_type => /\Aimage\/.*\Z/
   validates_presence_of :image
