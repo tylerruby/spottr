@@ -8,6 +8,7 @@ class Place < ActiveRecord::Base
   has_attached_file :image, :styles => { :thumb => "200x140#", :medium => "501x270#" }
   validates_attachment_content_type :image,
     :content_type => /\Aimage\/.*\Z/
+  validates_presence_of :image
 
   reverse_geocoded_by :latitude, :longitude do |obj,results|
     if geo = results.first
