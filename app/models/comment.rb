@@ -5,6 +5,7 @@ class Comment < ActiveRecord::Base
 
   belongs_to :commentable, :polymorphic => true
   delegate :email, to: :user, prefix: true
+  delegate :name, to: :user, prefix: true
 
   default_scope -> { order('created_at ASC') }
 
@@ -18,6 +19,7 @@ class Comment < ActiveRecord::Base
   def as_json(options={})
     json = super(options)
     json["user_email"] = self.user_email
+    json["user_name"] = self.user_name
     json
   end
 end
