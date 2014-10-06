@@ -7,12 +7,13 @@
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
-      = link_to image_tag("http://i.imgur.com/8tVVls8.png", size: "180x45"), root_path, class: "navbar-brand", style: "padding-top:0px;"
+      = link_to "Plattr", root_path, class: "navbar-brand"
     .div.navbar-form.navbar-left
       .form-group
-        %input#place-search.form-control{type: "text", placeholder: "City or Neighborhood"}
-        - if params[:controller] == "places" and params[:action] == "index"
-          .btn.btn-success#current-location Go to current location
+        .input-group
+          - if params[:controller] == "places" and params[:action] == "index"
+            .btn.btn.input-group-addon#current-location.fa.fa-location-arrow
+            %input#place-search.form-control{type: "text", placeholder: "City or Neighborhood"}
 
     .collapse.navbar-collapse
       %ul.nav.navbar-nav
@@ -22,4 +23,4 @@
         - if user_signed_in?
           %li= link_to('Logout', destroy_user_session_path, :method => :delete)
         - else
-          %li= link_to "Login", new_user_session_path
+          %li= button_to "Log in", new_user_session_path, style: "margin-right:3px;", class: "btn btn-success navbar-btn btn-sm", :method => :get

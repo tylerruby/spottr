@@ -3,7 +3,7 @@
     .row
       .col-md-12
         = render 'shared/controls/time_mode_select'
-        %button.btn.btn-default.btn-outline#new-menu-item New
+        %button.btn.btn-sm.btn-default.btn-outline.pull-right#new-menu-item New Item
   .panel-body
     %table.table.js-dynamic-table#menu-items-table
       %tbody
@@ -15,11 +15,11 @@
           = f.text_field :name, placeholder: 'Name', class: 'form-control'
         .form-group.col-md-10.col-md-offset-1
           %label.control-label Price
-          = f.text_field :price, placeholder: '10.00', class: 'form-control'
+          = f.text_field :price, placeholder: 'Ex: 10.50', class: 'form-control'
         .form-group.col-md-10.col-md-offset-1
           %label.control-label Image
           = f.file_field :image
         .form-group
-          = f.submit "Add Menu Item", class: 'btn btn-primary btn-outline col-md-offset-9 col-sm-offset-7'
+          = f.submit "Add Menu Item", class: 'btn btn-sm btn-primary btn-outline col-md-offset-9 col-sm-offset-7'
         .clearfix
 = render 'shared/menu_items_row_template'

@@ -9,7 +9,7 @@
       .modal-body
         .form-group
           %label.control-label Location
-          %input.form-control#place-location{type: 'text', value: 'Current location'}
+          %input.form-control#place-location{type: 'text', value: 'Type in address'}
           %input#place-latitude{type: :hidden, name: "place[latitude]", value: @lat}
           %input#place-longitude{type: :hidden, name: "place[longitude]", value: @long}
         .form-group
@@ -22,12 +22,12 @@
           %label.control-label Place Image:
           = f.file_field :image
       .modal-footer
-        = f.submit 'Add Restaurant', class: 'btn btn-primary btn-outline'
+        = f.submit 'Add Restaurant', class: 'btn btn-sm btn-primary btn-outline'
 
 :javascript
   $(function() {
     $('#place-location').focus(function() {
-      if ($(this).val() == "Current location") {
+      if ($(this).val() == "Type in address") {
         $(this).val('');
       }
       return false;
