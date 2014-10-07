@@ -41,7 +41,7 @@ class PlacesController < ApplicationController
 
   def place_params
     params.require(:place).
-      permit(:title, :cuisine_type, :image, :latitude, :longitude).
+      permit(:title, :cuisine_type, :image, :phone_number, :website, :latitude, :longitude).
       merge(user_id: current_user.id)
   end
 
