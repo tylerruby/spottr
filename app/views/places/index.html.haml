@@ -31,7 +31,8 @@
 = render 'shared/places_row_template'
 = render 'shared/menu_items_row_template'
 
-- content_for :scripts do
-  :javascript
-    window.latitude = #{@lat};
-    window.longitude = #{@long};
+- if @lat && @long
+  - content_for :scripts do
+    :javascript
+      window.latitude = #{@lat};
+      window.longitude = #{@long};

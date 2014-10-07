@@ -41,7 +41,14 @@ $ ->
 
   # go home button
   $('#current-location').click ->
-    latLng = new google.maps.LatLng(window.latitude, window.longitude)
+    if window.navigator.geolocation
+      navigator.geolocation.getCurrentPosition (position) ->
+        moveToLocation(position.coords.latitude, position.coords.longitude)
+    else
+      moveToLocation(window.latitude, window.longitude)
+
+  moveToLocation = (lat, lng) ->
+    latLng = new google.maps.LatLng(lat, lng)
     handler.map.centerOn(latLng)
     handler.getMap().setZoom(12)
 
@@ -173,7 +180,6 @@ $ ->
   DEFAULT_MARKER_COLOR = "ff0000"
   activeInfoWindow = null
   addMarker = (place) ->
-    console.log(place)
     map = handler.getMap()
     existingIds = _.keys markers
     unless _.contains(existingIds, place.id)
