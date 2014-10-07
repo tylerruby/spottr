@@ -21,6 +21,8 @@
 //= require comments
 //= require menu_items
 //= require upvotes
+//= require places_table
+//= require dishes_table
 //= require map
 //= require search_box
 //= require util

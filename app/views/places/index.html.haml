@@ -13,11 +13,24 @@
               = render 'shared/controls/time_mode_select'
               .pull-right
                 = render 'shared/controls/cuisine_select'
+              .clearfix{style: "height: 10px;"}
+              %ul.nav.nav-tabs{role: :tablist}
+                %li.active
+                  %a{href: '#places-pane', role: :tab, data: {toggle: :tab}} Places
+                %li
+                  %a{href: '#dishes-pane', role: :tab, data: {toggle: :tab}} Dishes
         .panel-body{:style => "padding:0px;"}
-          %table.table.table-condensed.js-dynamic-table#places-table
-          %a.btn.btn-sm.btn-default.btn-block.js-more-places.hidden{:style => "margin-left:10px;margin-bottom:10px;"} Load More
+          .tab-content
+            #places-pane.tab-pane.active
+              %table.table.table-condensed.js-dynamic-table#places-table
+              %a.btn.btn-sm.btn-default.btn-block.js-more-places.hidden{:style => "margin-left:10px;margin-bottom:10px;"} Load More
+            #dishes-pane.tab-pane
+              %table.table.table-condensed.js-dynamic-table#dishes-table
+              %a.btn.btn-default.btn-block.js-more-dishes.hidden{:style => "margin-left:10px;margin-bottom:10px;"} Load More
 
 = render 'shared/places_row_template'
+= render 'shared/menu_items_row_template'
+
 - content_for :scripts do
   :javascript
     window.latitude = #{@lat};

@@ -19,6 +19,7 @@ Rails.application.routes.draw do
    end
 
    namespace :api do
+     get '/menu_items' => 'menu_items#list'
      resources :places do
        member do
          post :up_vote
