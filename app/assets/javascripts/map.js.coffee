@@ -173,12 +173,16 @@ $ ->
   DEFAULT_MARKER_COLOR = "ff0000"
   activeInfoWindow = null
   addMarker = (place) ->
+    console.log(place)
     map = handler.getMap()
     existingIds = _.keys markers
     unless _.contains(existingIds, place.id)
       position = new google.maps.LatLng(place.latitude, place.longitude)
       infoWindow = new google.maps.InfoWindow
-        content: "<a href='/places/#{place.id}'>#{place.title}</a>"
+        content: """
+          <h5>#{place.title}</h5>
+          <img src="#{place.image_url}">
+        """
         disableAutoPan: true
       marker = new google.maps.Marker
         icon: mkMarkerIcon(0, "red")
@@ -188,18 +192,19 @@ $ ->
 
       markers[place.id] = marker
       google.maps.event.addListener marker, 'click', ->
-        activeInfoWindow.close() if activeInfoWindow
-        console.log(marker)
-        infoWindow.open(map,marker)
-        activeInfoWindow = infoWindow
+        window.location.href = "/places/#{place.id}"
 
       google.maps.event.addListener marker, 'mouseover', ->
+        activeInfoWindow.close() if activeInfoWindow
+        infoWindow.open(map,marker)
+        activeInfoWindow = infoWindow
         marker.set("icon", mkMarkerIcon(marker.rank, "purple"))
         selector = "#place-#{place.id}"
         $(selector).addClass("highlight")
         $('#places-table').parent().scrollTo(selector)
 
       google.maps.event.addListener marker, 'mouseout', ->
+        activeInfoWindow.close() if activeInfoWindow
         marker.set("icon", mkMarkerIcon(marker.rank, "red"))
         $("#place-#{place.id}").removeClass("highlight")
 
