@@ -3,7 +3,8 @@
     .row
       .col-md-12
         = render 'shared/controls/time_mode_select'
-        %button.btn.btn-sm.btn-default.btn-outline.pull-right#new-menu-item New Item
+        - if user_signed_in?
+          %button.btn.btn-sm.btn-default.btn-outline.pull-right#new-menu-item New Item
   .panel-body
     %table.table.js-dynamic-table#menu-items-table
       %tbody
