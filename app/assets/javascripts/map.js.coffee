@@ -48,6 +48,8 @@ $ ->
   # SOME CONFIG VARIABLES
   DEFAULT_PLACES_LIMIT = 20
   fetchPlacesLimit = DEFAULT_PLACES_LIMIT
+  DEFAULT_DISHES_LIMIT = 20
+  fetchDishesLimit = DEFAULT_DISHES_LIMIT
 
   ######################################
   # EVENTS HANDLING
@@ -87,6 +89,7 @@ $ ->
         nelat: northEast.lat(),
         nelng: northEast.lng()
       fetchPlacesLimit = DEFAULT_PLACES_LIMIT
+      fetchDishesLimit = DEFAULT_DISHES_LIMIT
       fetchPlaces(params)
 
    onPlacesSearch = ->
@@ -127,6 +130,7 @@ $ ->
       updateMarkers(data.places)
       window.updatePlaceTableRows(data.places, data.total)
 
+    params = _.extend(params, limit: fetchDishesLimit)
     url = "#{DISHES_URL}?#{$.param(params)}"
     $.getJSON url, (data) =>
       window.updateDishTableRows(data.menu_items, data.total)
@@ -204,26 +208,46 @@ $ ->
   # TABLE BUTTONS EVENT HANDLING
   ######################################
 
-  onRowMouseEnter = ->
+  onPlacesRowMouseEnter = ->
     id = ($ @).attr('data-id')
     marker = markers[id]
     marker.set("icon", mkMarkerIcon(marker.rank, "purple"))
     $(@).addClass('highlight')
 
-  onRowMouseLeave = ->
+  onPlacesRowMouseLeave = ->
     id = ($ @).attr('data-id')
     marker = markers[id]
     marker.set("icon", mkMarkerIcon(marker.rank, "red"))
     $(@).removeClass('highlight')
 
-  onLoadMoreClick = ->
+  onLoadMorePlacesClick = ->
     fetchPlacesLimit += DEFAULT_PLACES_LIMIT
     fetchPlaces()
     false
 
-  $('#places-table').on('mouseenter', 'tr', onRowMouseEnter)
-  $('#places-table').on('mouseleave', 'tr', onRowMouseLeave)
-  $('.js-more-places').on('click', onLoadMoreClick)
+  onDishesRowMouseEnter = ->
+    id = ($ @).attr('data-place-id')
+    marker = markers[id]
+    marker.set("icon", mkMarkerIcon(marker.rank, "purple"))
+    $(@).addClass('highlight')
+
+  onDishesRowMouseLeave = ->
+    id = ($ @).attr('data-place-id')
+    marker = markers[id]
+    marker.set("icon", mkMarkerIcon(marker.rank, "red"))
+    $(@).removeClass('highlight')
+
+  onLoadMoreDishesClick = ->
+    fetchDishesLimit += DEFAULT_DISHES_LIMIT
+    fetchPlaces()
+    false
+
+  $('#places-table').on('mouseenter', 'tr', onPlacesRowMouseEnter)
+  $('#places-table').on('mouseleave', 'tr', onPlacesRowMouseLeave)
+  $('.js-more-places').on('click', onLoadMorePlacesClick)
+  $('#dishes-table').on('mouseenter', 'tr', onDishesRowMouseEnter)
+  $('#dishes-table').on('mouseleave', 'tr', onDishesRowMouseLeave)
+  $('.js-more-dishes').on('click', onLoadMoreDishesClick)
 
   ######################################
   # TABLE TOP CONTROLS LOGIC
