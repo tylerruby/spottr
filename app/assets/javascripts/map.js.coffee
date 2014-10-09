@@ -41,13 +41,22 @@ $ ->
 
   # go home button
   $('#current-location').click ->
-    latLng = new google.maps.LatLng(window.latitude, window.longitude)
+    if window.navigator.geolocation
+      navigator.geolocation.getCurrentPosition (position) ->
+        moveToLocation(position.coords.latitude, position.coords.longitude)
+    else
+      moveToLocation(window.latitude, window.longitude)
+
+  moveToLocation = (lat, lng) ->
+    latLng = new google.maps.LatLng(lat, lng)
     handler.map.centerOn(latLng)
     handler.getMap().setZoom(12)
 
   # SOME CONFIG VARIABLES
   DEFAULT_PLACES_LIMIT = 20
   fetchPlacesLimit = DEFAULT_PLACES_LIMIT
+  DEFAULT_DISHES_LIMIT = 20
+  fetchDishesLimit = DEFAULT_DISHES_LIMIT
 
   ######################################
   # EVENTS HANDLING
@@ -87,6 +96,7 @@ $ ->
         nelat: northEast.lat(),
         nelng: northEast.lng()
       fetchPlacesLimit = DEFAULT_PLACES_LIMIT
+      fetchDishesLimit = DEFAULT_DISHES_LIMIT
       fetchPlaces(params)
 
    onPlacesSearch = ->
@@ -105,6 +115,7 @@ $ ->
   ######################################
 
   PLACES_URL = '/api/places.json'
+  DISHES_URL = '/api/menu_items.json'
   cachedFetchParams = {}
 
   fetchPlaces = (params) ->
@@ -124,8 +135,12 @@ $ ->
     url = "#{PLACES_URL}?#{$.param(params)}"
     $.getJSON url, (data) =>
       updateMarkers(data.places)
-      updateTableRows(data.places, data.total)
+      window.updatePlaceTableRows(data.places, data.total)
 
+    params = _.extend(params, limit: fetchDishesLimit)
+    url = "#{DISHES_URL}?#{$.param(params)}"
+    $.getJSON url, (data) =>
+      window.updateDishTableRows(data.menu_items, data.total)
 
   ######################################
   # MARKERS LOGIC
@@ -170,7 +185,10 @@ $ ->
     unless _.contains(existingIds, place.id)
       position = new google.maps.LatLng(place.latitude, place.longitude)
       infoWindow = new google.maps.InfoWindow
-        content: "<a href='/places/#{place.id}'>#{place.title}</a>"
+        content: """
+          <h5>#{place.title}</h5>
+          <img src="#{place.image_url}">
+        """
         disableAutoPan: true
       marker = new google.maps.Marker
         icon: mkMarkerIcon(0, "red")
@@ -180,95 +198,67 @@ $ ->
 
       markers[place.id] = marker
       google.maps.event.addListener marker, 'click', ->
-        activeInfoWindow.close() if activeInfoWindow
-        console.log(marker)
-        infoWindow.open(map,marker)
-        activeInfoWindow = infoWindow
+        window.location.href = "/places/#{place.id}"
 
       google.maps.event.addListener marker, 'mouseover', ->
+        activeInfoWindow.close() if activeInfoWindow
+        infoWindow.open(map,marker)
+        activeInfoWindow = infoWindow
         marker.set("icon", mkMarkerIcon(marker.rank, "purple"))
         selector = "#place-#{place.id}"
         $(selector).addClass("highlight")
         $('#places-table').parent().scrollTo(selector)
 
       google.maps.event.addListener marker, 'mouseout', ->
+        activeInfoWindow.close() if activeInfoWindow
         marker.set("icon", mkMarkerIcon(marker.rank, "red"))
         $("#place-#{place.id}").removeClass("highlight")
 
-  ######################################
-  # TABLE LOGIC
-  ######################################
-
-  updateTableRows = (places, total) ->
-    $table = $('#places-table')
-
-    # step one - clear table
-    $table.html('')
-
-    # step two add row
-    _.each places, (p) -> addTableRow(p)
-
-    # step three: fix numbers for table rows
-    fixTableRowNumbers()
-
-    # step five: show/hide show more button
-    processShowMoreBtn(places.length, total)
-
-  # preparing row data
-  prepareRowData = (p) ->
-    # Computing the distance proterty
-    currentLatLng = new google.maps.LatLng(window.latitude, window.longitude)
-    placeLatLng = new google.maps.LatLng(p.latitude, p.longitude)
-    distance = util.getDistance(currentLatLng, placeLatLng)
-    distanceMiles = util.toMiles(distance / 1000)
-    p.distance = "#{util.formatDec(distanceMiles)} miles"
-    p.upvoted_class = if p.upvoted_by_user then "upvoted" else ""
-    p.direction_link = "http://maps.google.com/?saddr=#{window.latitude},#{window.longitude}&daddr=#{p.latitude},#{p.longitude}"
-    return p
-
-  addTableRow = (p) ->
-    if $("#place-#{p.id}").length == 0
-      $table.dynamicTable(addRow: p)
-
-  fixTableRowNumbers = ->
-    $('#places-table tr').each (i) ->
-      $(@).find('.count').text(i+1)
-
-
-  processShowMoreBtn = (placesCount, total) ->
-    if placesCount < total
-      $('.js-more-places').removeClass('hidden')
-    else
-      $('.js-more-places').addClass('hidden')
-
-  # table initialization
-  $table = $('#places-table')
-  $table.dynamicTable(rowTemplate: "#place-row-template", prepareRow: prepareRowData)
 
   ######################################
   # TABLE BUTTONS EVENT HANDLING
   ######################################
 
-  onRowMouseEnter = ->
+  onPlacesRowMouseEnter = ->
     id = ($ @).attr('data-id')
     marker = markers[id]
     marker.set("icon", mkMarkerIcon(marker.rank, "purple"))
     $(@).addClass('highlight')
 
-  onRowMouseLeave = ->
+  onPlacesRowMouseLeave = ->
     id = ($ @).attr('data-id')
     marker = markers[id]
     marker.set("icon", mkMarkerIcon(marker.rank, "red"))
     $(@).removeClass('highlight')
 
-  onLoadMoreClick = ->
+  onLoadMorePlacesClick = ->
     fetchPlacesLimit += DEFAULT_PLACES_LIMIT
     fetchPlaces()
     false
 
-  $('#places-table').on('mouseenter', 'tr', onRowMouseEnter)
-  $('#places-table').on('mouseleave', 'tr', onRowMouseLeave)
-  $('.js-more-places').on('click', onLoadMoreClick)
+  onDishesRowMouseEnter = ->
+    id = ($ @).attr('data-place-id')
+    marker = markers[id]
+    marker.set("icon", mkMarkerIcon(marker.rank, "purple"))
+    $(@).addClass('highlight')
+
+  onDishesRowMouseLeave = ->
+    id = ($ @).attr('data-place-id')
+    marker = markers[id]
+    marker.set("icon", mkMarkerIcon(marker.rank, "red"))
+    $(@).removeClass('highlight')
+
+  onLoadMoreDishesClick = ->
+    fetchDishesLimit += DEFAULT_DISHES_LIMIT
+    fetchPlaces()
+    false
+
+  $('#places-table').on('mouseenter', 'tr', onPlacesRowMouseEnter)
+  $('#places-table').on('mouseleave', 'tr', onPlacesRowMouseLeave)
+  $('.js-more-places').on('click', onLoadMorePlacesClick)
+  $('#dishes-table').on('mouseenter', 'tr', onDishesRowMouseEnter)
+  $('#dishes-table').on('mouseleave', 'tr', onDishesRowMouseLeave)
+  $('.js-more-dishes').on('click', onLoadMoreDishesClick)
 
   ######################################
   # TABLE TOP CONTROLS LOGIC

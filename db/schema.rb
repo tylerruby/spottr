@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141001010222) do
+ActiveRecord::Schema.define(version: 20141007112301) do
 
   create_table "comments", force: true do |t|
     t.string   "title",            limit: 50, default: ""
@@ -67,6 +67,8 @@ ActiveRecord::Schema.define(version: 20141001010222) do
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
     t.string   "cuisine_type"
+    t.string   "website"
+    t.string   "phone_number"
   end
 
   add_index "places", ["cached_votes_down"], name: "index_places_on_cached_votes_down"

@@ -28,6 +28,12 @@ class Place < ActiveRecord::Base
   
   validate :uniqueness_of_place
 
+  def as_json(options={})
+    json = super(options)
+    json["image_url"] = self.image.url(:thumb)
+    json
+  end
+
   protected
 
   def uniqueness_of_place

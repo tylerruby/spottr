@@ -10,6 +10,12 @@
     = csrf_meta_tags
   %body
     = render 'layouts/header'
+    :javascript
+      window.user_logged_in = #{!!current_user};
+    #sign-in-alert.alert.alert-warning.hidden
+      You need to
+      = link_to "Sign in", new_user_session_path
+      in order to do that
     - if flash[:alert]
       .alert.alert-danger.alert-dismissable
         %button{type: :button, class: :close, data: {dismiss: :alert}}

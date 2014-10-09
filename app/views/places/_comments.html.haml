@@ -14,6 +14,17 @@
       .form-group.col-md-10.col-md-offset-1
         = f.text_area :comment, placeholder: "Type comment here", class: 'form-control'
       .form-group
+        %span.js-symbols-remaining 140
         = f.submit "Comment", class: 'btn btn-sm btn-primary btn-outline col-md-offset-9 col-sm-offset-7'
       .clearfix
+
+:javascript
+  $(function() {
+    var maxLength = 140;
+    $('#comment_comment').on('keyup', function() {
+      var comment = $('#comment_comment').val().substr(0, maxLength);
+      $('#comment_comment').val(comment);
+      $('.js-symbols-remaining').text(maxLength - comment.length);
+    });
+  });
 = render 'shared/comments_row_template'

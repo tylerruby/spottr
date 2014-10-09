@@ -16,6 +16,12 @@
           %label.control-label Name
           = f.text_field :title, class: 'form-control', placeholder: 'Restaurant Name'
         .form-group
+          %label.control-label Website
+          = f.text_field :website, class: 'form-control', placeholder: 'http://restaurant.com'
+        .form-group
+          %label.control-label Phone number
+          = f.text_field :phone_number, class: 'form-control', placeholder: '7709782046'
+        .form-group
           %label.control-label Cuisine Type:
           = f.select :cuisine_type, Place::CUISINE_TYPES, class: 'form-control'
         .form-group
@@ -37,7 +43,7 @@
     var searchBox = new google.maps.places.SearchBox(searchInput);
     google.maps.event.addListener(searchBox, 'places_changed', function() {
       var places = searchBox.getPlaces();
-      if (places.length == 0) { return; }
+      if (places.length === 0) { return false; }
       var place = places[0];
       $('#place-latitude').val(place.geometry.location.lat());
       $('#place-longitude').val(place.geometry.location.lng());

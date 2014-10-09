@@ -17,7 +17,7 @@ class Api::PlacesController < ApplicationController
     ]
 
     if params[:cuisine_type] && params[:cuisine_type] != "all"
-      query += " AND cuisine_type = ?"
+      query += " AND places.cuisine_type = ?"
       query_params.push(params[:cuisine_type].strip)
     end
 
