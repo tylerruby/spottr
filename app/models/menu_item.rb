@@ -10,6 +10,9 @@ class MenuItem < ActiveRecord::Base
   validates_attachment_content_type :image,
     :content_type => /\Aimage\/.*\Z/
 
+  validates_presence_of :price
+  validates :price, inclusion: { in: 0..10000 }
+
   def as_json(options={})
     json = super(options)
     json["image_url"] = self.image.url(:thumb)

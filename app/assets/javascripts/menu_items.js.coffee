@@ -5,8 +5,11 @@ $ ->
     timeMode = "month"
 
     $('#new-menu-item').click ->
-      $('.menu-items-form').slideDown ->
-        $('#menu_item_name').focus()
+      if $('.menu-items-form').is(':visible')
+        $('.menu-items-form').slideUp()
+      else
+        $('.menu-items-form').slideDown ->
+          $('#menu_item_name').focus()
 
     # prepare row for comments table
     prepareRow = (p) ->
