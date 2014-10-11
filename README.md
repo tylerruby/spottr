@@ -3,6 +3,8 @@
 
 ## Development:
 
+0. copy `config/database.yml.example to config/database.yml`
+
 1. edit `/etc/hosts` file and add the following line to it:
 ```
 127.0.0.1  local.spottr.com
