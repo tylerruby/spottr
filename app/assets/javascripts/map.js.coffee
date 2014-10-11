@@ -2,6 +2,7 @@ $ ->
   mapZoom = 12
   mapLatitude = window.latitude
   mapLongitude = window.longitude
+  currentMarker = null
 
   onMapPage = $('#map').length > 0
   return unless onMapPage
@@ -30,6 +31,8 @@ $ ->
       "lng":  window.longitude,
       "infowindow": "Current Location"
 
+    currentMarker = marker.getServiceObject()
+
     latLng = new google.maps.LatLng(mapLatitude, mapLongitude)
     handler.map.centerOn(latLng)
     handler.getMap().setZoom(mapZoom)
@@ -49,6 +52,7 @@ $ ->
 
   moveToLocation = (lat, lng) ->
     latLng = new google.maps.LatLng(lat, lng)
+    currentMarker.setPosition(latLng)
     handler.map.centerOn(latLng)
     handler.getMap().setZoom(12)
 
