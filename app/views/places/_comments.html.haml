@@ -21,10 +21,13 @@
 :javascript
   $(function() {
     var maxLength = 140;
-    $('#comment_comment').on('keyup', function() {
+    $('#comment_comment').on('keydown', function() {
+      var comment = $('#comment_comment').val().substr(0, maxLength);
+      $('.js-symbols-remaining').text(maxLength - comment.length);
+    });
+    $('#comment_comment').on('keydown', function() {
       var comment = $('#comment_comment').val().substr(0, maxLength);
       $('#comment_comment').val(comment);
-      $('.js-symbols-remaining').text(maxLength - comment.length);
     });
   });
 = render 'shared/comments_row_template'
