@@ -112,6 +112,7 @@ $ ->
 
    handleFoundPlace = (place) ->
       handler.getMap().setCenter(place.geometry.location)
+      handler.getMap().setZoom(12)
 
 
   ######################################
