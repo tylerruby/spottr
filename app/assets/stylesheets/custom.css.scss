@@ -125,13 +125,13 @@ a:hover {
 }
 
 tr.highlight td {
-  background-color: #1155cc;
-  color:#fff;
+  background-color: #fcfcfc;
+  color:#000;
   a.place {
-    color:#fff;
+    color:#000;
   }
   a.fa-car {
-    border-color: #fff;
+    border-color: #000;
   }
 }
 
@@ -177,8 +177,9 @@ tr.highlight td {
 }
 
 .upvoted {
-  background-color: #1155cc !important;
-  color: #fff !important;
+  background-color: #fff !important;
+  color: #1155cc !important;
+  border-color: #1155cc !important;
 }
 
 .sign_up {
@@ -209,3 +210,8 @@ tr.highlight td {
 }
 
 .pac-container { z-index: 100000 !important }
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .btn-primary.dropdown-toggle {
+color: #fff;
+
+}
