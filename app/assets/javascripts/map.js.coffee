@@ -184,6 +184,7 @@ $ ->
 
   DEFAULT_MARKER_COLOR = "ff0000"
   activeInfoWindow = null
+  openInfoWindow = (marker) ->
   addMarker = (place) ->
     map = handler.getMap()
     existingIds = _.keys markers
@@ -200,6 +201,7 @@ $ ->
         position: position
         map: map,
         placeId: place.id
+        infoWindow: infoWindow
 
       markers[place.id] = marker
       google.maps.event.addListener marker, 'click', ->
@@ -227,13 +229,13 @@ $ ->
   onPlacesRowMouseEnter = ->
     id = ($ @).attr('data-id')
     marker = markers[id]
-    marker.set("icon", mkMarkerIcon(marker.rank, "purple"))
+    google.maps.event.trigger marker, 'mouseover'
     $(@).addClass('highlight')
 
   onPlacesRowMouseLeave = ->
     id = ($ @).attr('data-id')
     marker = markers[id]
-    marker.set("icon", mkMarkerIcon(marker.rank, "red"))
+    google.maps.event.trigger marker, 'mouseout'
     $(@).removeClass('highlight')
 
   onLoadMorePlacesClick = ->
@@ -244,13 +246,13 @@ $ ->
   onDishesRowMouseEnter = ->
     id = ($ @).attr('data-place-id')
     marker = markers[id]
-    marker.set("icon", mkMarkerIcon(marker.rank, "purple"))
+    google.maps.event.trigger marker, 'mouseover'
     $(@).addClass('highlight')
 
   onDishesRowMouseLeave = ->
     id = ($ @).attr('data-place-id')
     marker = markers[id]
-    marker.set("icon", mkMarkerIcon(marker.rank, "red"))
+    google.maps.event.trigger marker, 'mouseout'
     $(@).removeClass('highlight')
 
   onLoadMoreDishesClick = ->
