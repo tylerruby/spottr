@@ -6,6 +6,8 @@
     = javascript_include_tag 'application'
     %script{:src => "http://maps.google.com/maps/api/js?v=3.13&libraries=geometry,places", :type => "text/javascript"}
     %script{:src => "//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js", :type => "text/javascript"}
+    %link{rel:"stylesheet", href:"//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/css/bootstrapValidator.min.css"}
+    %script{type:"text/javascript", src:"//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/js/bootstrapValidator.min.js"}
     %script{:src => "//google-maps-utility-library-v3.googlecode.com/svn/trunk/styledmarker/src/StyledMarker.js", :type => "text/javascript"}
     %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}
     = csrf_meta_tags

@@ -23,4 +23,32 @@
         .form-group
           = f.submit "Add Menu Item", class: 'btn btn-sm btn-primary btn-outline col-md-offset-9 col-sm-offset-7'
         .clearfix
+:javascript
+  $(document).ready(function() {
+    $('.menu-items-form').bootstrapValidator({
+      fields: {
+        "menu_item[price]": {
+          message: "Menu Item Price is not valid",
+          validators: {
+            between: {
+              min: 0.1,
+              max: 10000.0,
+              message: "price is not in range"
+            },
+            notEmpty: {
+              message: "please enter price"
+            }
+          }
+        },
+        "menu_item[name]": {
+          message: "Menu Item Name is not valid",
+          validators: {
+            notEmpty: {
+              message: "please enter name"
+            }
+          }
+        }
+      }
+    });
+  });
 = render 'shared/menu_items_row_template'
