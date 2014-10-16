@@ -1,0 +1,25 @@
+<script type="text/html" id="menu-item-row-template-map">
+  <tr data-id="<%%=id%>" data-place-id="<%%=place_id%>" id="dish-<%%=id%>">
+    <td style="border-top:none;">
+      <a class="btn btn-default btn-sm glyphicon glyphicon-chevron-up js-upvote <%%=upvoted_class%>" href="/api/places/<%%=place_id%>/menu_items/<%%=id%>/up_vote" style="font-size:14px;border-color:#e8e8e8;background:#fff;">
+        <%%=votes_count%>
+      </a>
+    </td>
+    <td>
+      <span style="font-size:16px;margin-left:5px;margin-top:5px;">
+        <a href="/places/<%%=place_id%>" class="place">
+          <%%= place_title %>
+        </a>
+      </span>
+    </td>
+    <td style="border-top:none;"><%%=name%></td>
+    <td style="border-top:none;">$<%%=price%></td>
+    <td style="border-top:none;">
+      <img class="pull-right" src="<%%=image_url%>">
+    </td>
+    <td>
+      <a href="<%%=direction_link%>" target="_blank" class="btn btn-sm btn-default btn-outline fa fa-car pull-right">
+      </a>
+    </td>
+  </tr>
+</script>

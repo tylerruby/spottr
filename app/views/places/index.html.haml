@@ -29,7 +29,7 @@
               %a.btn.btn-outline.btn-primary.btn-block.js-more-dishes.hidden{:style => "margin-left:10px;margin-bottom:10px;"} Load More
 
 = render 'shared/places_row_template'
-= render 'shared/menu_items_row_template'
+= render 'shared/menu_items_row_template_map'
 
 - if @lat && @long
   - content_for :scripts do
