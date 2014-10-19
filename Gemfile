@@ -27,6 +27,7 @@ gem 'rb-readline'
 gem 'acts_as_votable'
 gem 'acts_as_commentable'
 gem "paperclip", "~> 4.2"
+gem 'aws-sdk'
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 gem 'spring',        group: :development
