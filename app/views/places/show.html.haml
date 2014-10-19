@@ -15,9 +15,11 @@
                 = @place.title.classify
               = @place.address
               - if @place.website && @place.website.present?
-                = link_to @place.website, @place.website
+                %strong
+                  = link_to @place.website, @place.website
               - if @place.phone_number && @place.phone_number.present?
-                = @place.phone_number
+                %span.glyphicon.glyphicon-earphone
+                  = @place.phone_number
         .panel-body
           - @place.votes.includes(:voter).order("created_at DESC").limit(21).each do |p|
             = link_to p.voter do
