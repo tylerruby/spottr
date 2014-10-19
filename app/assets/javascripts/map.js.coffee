@@ -196,6 +196,11 @@ $ ->
           <img src="#{place.image_url}">
         """
         disableAutoPan: true
+
+      # hide [x] in infowindow
+      google.maps.event.addListener infoWindow, 'domready', ->
+        $(".gm-style-iw").next("div").hide()
+
       marker = new google.maps.Marker
         icon: mkMarkerIcon(0, "red")
         position: position
