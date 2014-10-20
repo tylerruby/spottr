@@ -1,5 +1,6 @@
 $ ->
   mapZoom = 12
+  mapMode = "places"
   mapLatitude = window.latitude
   mapLongitude = window.longitude
   currentMarker = null
@@ -101,7 +102,7 @@ $ ->
         nelng: northEast.lng()
       fetchPlacesLimit = DEFAULT_PLACES_LIMIT
       fetchDishesLimit = DEFAULT_DISHES_LIMIT
-      fetchPlaces(params)
+      doFetch(params)
 
    onPlacesSearch = ->
      places = searchBox.getPlaces()
@@ -123,9 +124,10 @@ $ ->
   DISHES_URL = '/api/menu_items.json'
   cachedFetchParams = {}
 
-  fetchPlaces = (params) ->
+  tableMode = "places"
+  doFetch = (params) ->
     # cache params in order to be able
-    # to call fetchPlaces w/o arguments
+    # to call doFetch w/o arguments
     if params
       cachedFetchParams = params
     else
@@ -137,15 +139,17 @@ $ ->
       cuisine_type: $('.cuisine-select').attr('data-mode'),
     )
 
-    url = "#{PLACES_URL}?#{$.param(params)}"
-    $.getJSON url, (data) =>
-      updateMarkers(data.places)
-      window.updatePlaceTableRows(data.places, data.total)
-
-    params = _.extend(params, limit: fetchDishesLimit)
-    url = "#{DISHES_URL}?#{$.param(params)}"
-    $.getJSON url, (data) =>
-      window.updateDishTableRows(data.menu_items, data.total)
+    if tableMode == "places"
+      url = "#{PLACES_URL}?#{$.param(params)}"
+      $.getJSON url, (data) =>
+        updateMarkers(data.places)
+        window.updatePlaceTableRows(data.places, data.total)
+    else if tableMode == "dishes"
+      params = _.extend(params, limit: fetchDishesLimit)
+      url = "#{DISHES_URL}?#{$.param(params)}"
+      $.getJSON url, (data) =>
+        updateMarkers(data.menu_items)
+        window.updateDishTableRows(data.menu_items, data.total)
 
   ######################################
   # MARKERS LOGIC
@@ -158,13 +162,18 @@ $ ->
   # Some storage for drawing places algorithm
   markers = {} # place.id: marker format
 
-  updateMarkers = (places) ->
+  wipeMarkers = ->
+    _.each markers, (marker) ->
+      marker.setMap(null)
+    markers = {}
+
+  updateMarkers = (items) ->
     existingIds = _.keys markers
-    placeIds = _.map places, (p) -> p.id
+    itemIds = _.map items, (p) -> p.id
 
     # step one: remove invisible markers
     idsToRemove = _.filter existingIds, (id) ->
-      !_.contains(placeIds, id)
+      !_.contains(itemIds, id)
 
     markersToRemove = _.pick markers, idsToRemove
     _.each markersToRemove, (marker) ->
@@ -174,26 +183,27 @@ $ ->
       delete markers[key] if _.contains(markersToRemove, key)
 
     # step two: add some markers to the map
-    _.each places, (p) -> addMarker(p)
+    _.each items, (p) -> addMarker(p)
 
     # step three: enumerate markers
-    _.each places, (place, index) ->
+    _.each items, (item, index) ->
       rank = index + 1
-      markers[place.id].rank = rank
-      markers[place.id].set "icon", mkMarkerIcon(rank, "red")
+      markers[item.id].rank = rank
+      markers[item.id].set "icon", mkMarkerIcon(rank, "red")
 
   DEFAULT_MARKER_COLOR = "ff0000"
   activeInfoWindow = null
   openInfoWindow = (marker) ->
-  addMarker = (place) ->
+
+  addMarker = (item) ->
     map = handler.getMap()
     existingIds = _.keys markers
-    unless _.contains(existingIds, place.id)
-      position = new google.maps.LatLng(place.latitude, place.longitude)
+    unless _.contains(existingIds, item.id)
+      position = new google.maps.LatLng(item.latitude, item.longitude)
       infoWindow = new google.maps.InfoWindow
         content: """
-          <h5>#{place.title}</h5>
-          <img src="#{place.image_url}">
+          <h5>#{item.title}</h5>
+          <img src="#{item.image_url}">
         """
         disableAutoPan: true
 
@@ -204,27 +214,37 @@ $ ->
       marker = new google.maps.Marker
         icon: mkMarkerIcon(0, "red")
         position: position
-        map: map,
-        placeId: place.id
-        infoWindow: infoWindow
+        map: map
 
-      markers[place.id] = marker
+      markers[item.id] = marker
+
       google.maps.event.addListener marker, 'click', ->
-        window.location.href = "/places/#{place.id}"
+        if tableMode == "places"
+          window.location.href = "/places/#{item.id}"
+        else if tableMode == "dishes"
+          window.location.href = "/places/#{item.place_id}"
 
       google.maps.event.addListener marker, 'mouseover', ->
         activeInfoWindow.close() if activeInfoWindow
         infoWindow.open(map,marker)
         activeInfoWindow = infoWindow
         marker.set("icon", mkMarkerIcon(marker.rank, "purple"))
-        selector = "#place-#{place.id}"
+
+        if tableMode == "places"
+          selector = "#place-#{item.id}"
+        else if tableMode == "dishes"
+          selector = "#dish-#{item.id}"
+
         $(selector).addClass("highlight")
-        $('#places-table').parent().scrollTo(selector)
+        $("##{tableMode}-table").parent().scrollTo(selector)
 
       google.maps.event.addListener marker, 'mouseout', ->
         activeInfoWindow.close() if activeInfoWindow
         marker.set("icon", mkMarkerIcon(marker.rank, "red"))
-        $("#place-#{place.id}").removeClass("highlight")
+        if tableMode == "places"
+          $("#place-#{item.id}").removeClass("highlight")
+        else if tableMode == "dishes"
+          $("#dish-#{item.id}").removeClass("highlight")
 
 
   ######################################
@@ -245,7 +265,7 @@ $ ->
 
   onLoadMorePlacesClick = ->
     fetchPlacesLimit += DEFAULT_PLACES_LIMIT
-    fetchPlaces()
+    doFetch()
     false
 
   onDishesRowMouseEnter = ->
@@ -262,8 +282,19 @@ $ ->
 
   onLoadMoreDishesClick = ->
     fetchDishesLimit += DEFAULT_DISHES_LIMIT
-    fetchPlaces()
+    doFetch()
     false
+
+  onTabChange = (e) ->
+    href = $(e.target).attr('href')
+    if href == "#places-pane"
+      wipeMarkers()
+      tableMode = "places"
+      doFetch()
+    else if href == "#dishes-pane"
+      wipeMarkers()
+      tableMode = "dishes"
+      doFetch()
 
   $('#places-table').on('mouseenter', 'tr', onPlacesRowMouseEnter)
   $('#places-table').on('mouseleave', 'tr', onPlacesRowMouseLeave)
@@ -271,12 +302,13 @@ $ ->
   $('#dishes-table').on('mouseenter', 'tr', onDishesRowMouseEnter)
   $('#dishes-table').on('mouseleave', 'tr', onDishesRowMouseLeave)
   $('.js-more-dishes').on('click', onLoadMoreDishesClick)
+  $('a[data-toggle="tab"]').on('shown.bs.tab', onTabChange)
 
   ######################################
   # TABLE TOP CONTROLS LOGIC
   ######################################
   $('.date-mode-select').on 'change', ->
-    setTimeout fetchPlaces, 50
+    setTimeout doFetch, 50
 
   $('.cuisine-select').on 'change', ->
-    setTimeout fetchPlaces, 50
+    setTimeout doFetch, 50
