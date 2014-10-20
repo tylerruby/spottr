@@ -17,7 +17,7 @@ module Concerns
           LEFT OUTER JOIN votes
           ON votes.votable_id = #{table_name}.id
           AND votes.votable_type = '#{class_name}'
-          AND votes.created_at > "#{(DateTime.now - time_back).to_s(:db)}"
+          AND votes.created_at > '#{(DateTime.now - time_back).to_s(:db)}'
         EOQ
 
         joins(join_query)
