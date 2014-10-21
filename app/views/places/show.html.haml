@@ -6,18 +6,20 @@
       .panel.panel-default
         .panel-body{:style => "padding:0;"}
           .row
-            .col-md-6.col-xs-6
-              = image_tag @place.image.url(:medium), class: 'img-responsive'
-            .col-md-5
+            .col-md-12.col-sm-12.col-xs-6
+              = image_tag @place.image.url, class: 'img-responsive'
+            .col-md-10.col-md-offset-1.col-sm-10.col-sm-offset-1
               %h4
                 - href = "http://maps.google.com/?saddr=#{@lat},#{@long}&daddr=#{@place.latitude},#{@place.longitude}"
                 %a.btn.btn-sm.btn-default.btn-outline.fa.fa-car.pull-right{:href=> href, :target => "_blank"}
                 = @place.title.classify
               = @place.address
               - if @place.website && @place.website.present?
+                %br
                 %strong
                   = link_to @place.website, @place.website
               - if @place.phone_number && @place.phone_number.present?
+                %br
                 %span.glyphicon.glyphicon-earphone
                   = @place.phone_number
         .panel-body
