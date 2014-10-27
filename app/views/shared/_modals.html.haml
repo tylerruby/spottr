@@ -28,6 +28,10 @@
           %label.control-label Price Range ($):
           = f.select :price_range, Place::PRICE_RANGES, class: 'form-control'
         .form-group
+          %label.control-label
+            = f.check_box :is_organic
+            Is Organic:
+        .form-group
           %label.control-label Place Image:
           = f.file_field :image
       .modal-footer
