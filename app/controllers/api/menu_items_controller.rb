@@ -33,8 +33,19 @@ class Api::MenuItemsController < ApplicationController
     end
 
     if params[:price_range] && params[:price_range] != "all"
-      query += " AND places.price_range = ?"
-      query_params.push(params[:price_range].strip)
+      query += " AND menu_items.price >= ? AND menu_items.price < ?"
+      query_params += case params[:price_range]
+                      when "Under 7"
+                        [0, 7]
+                      when "7-12"
+                        [7, 12]
+                      when "12-20"
+                        [12, 20]
+                      when "20-30"
+                        [20, 30]
+                      when "Over 30"
+                        [30, 100000]
+                      end
     end
 
     @menu_items = MenuItem.joins(:place).where(query, *query_params)
