@@ -270,13 +270,13 @@ $ ->
     false
 
   onDishesRowMouseEnter = ->
-    id = ($ @).attr('data-place-id')
+    id = ($ @).attr('data-id')
     marker = markers[id]
     google.maps.event.trigger marker, 'mouseover'
     $(@).addClass('highlight')
 
   onDishesRowMouseLeave = ->
-    id = ($ @).attr('data-place-id')
+    id = ($ @).attr('data-id')
     marker = markers[id]
     google.maps.event.trigger marker, 'mouseout'
     $(@).removeClass('highlight')
