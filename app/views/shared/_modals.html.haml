@@ -46,13 +46,15 @@
       return false;
     });
 
-    var searchInput = document.getElementById('place-location');
-    var searchBox = new google.maps.places.SearchBox(searchInput);
-    google.maps.event.addListener(searchBox, 'places_changed', function() {
-      var places = searchBox.getPlaces();
-      if (places.length === 0) { return false; }
-      var place = places[0];
-      $('#place-latitude').val(place.geometry.location.lat());
-      $('#place-longitude').val(place.geometry.location.lng());
-    });
+    setTimeout(function() {
+      var searchInput = document.getElementById('place-location');
+      var searchBox = new google.maps.places.SearchBox(searchInput);
+      google.maps.event.addListener(searchBox, 'places_changed', function() {
+        var places = searchBox.getPlaces();
+        if (places.length === 0) { return false; }
+        var place = places[0];
+        $('#place-latitude').val(place.geometry.location.lat());
+        $('#place-longitude').val(place.geometry.location.lng());
+      });
+    }, 500);
   });
