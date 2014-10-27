@@ -3,7 +3,8 @@ class Place < ActiveRecord::Base
 
   acts_as_commentable
 
-  CUISINE_TYPES = ['mexican', 'american', 'italian', 'asian', 'seafood', 'other']
+  CUISINE_TYPES = ['Mexican', 'American', 'Italian', 'Asian', 'Seafood', 'Other']
+  PRICE_RANGES = ['Under 7', '7-12', '12-20', '20-30', 'Over 30']
 
   has_attached_file :image, :styles => { :thumb => "70x70#", :tiny => "150x120#", :small => "200x140#", :medium => "501x270#" }
   validates_attachment_content_type :image,
@@ -25,7 +26,8 @@ class Place < ActiveRecord::Base
 
   validates_presence_of :user_id
   validates_inclusion_of :cuisine_type, in: CUISINE_TYPES
-  
+  validates_inclusion_of :price_range, in: PRICE_RANGES
+
   validate :uniqueness_of_place
 
   def as_json(options={})

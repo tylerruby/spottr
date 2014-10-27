@@ -1,19 +1,13 @@
-.btn-group.mode-select.date-mode-select{data: {mode: params[:time_mode] || "month"}}
+.btn-group.mode-select.price-range-select{data: {mode: params[:price_range] || "all"}}
   %button.btn.btn-sm.btn-success.btn-outline.dropdown-toggle{"data-toggle" => "dropdown", :type => "button"}
     %span.text $
     %span.caret
   %ul.dropdown-menu{:role => "menu"}
     %li
-      %a{data: {mode: 'day'}} All
+      %a{data: {mode: 'all'}} All
     %li.divider
-    %li
-      %a{data: {mode: 'day'}} Under 7
-    %li
-      %a{data: {mode: 'week'}} 7-12
-    %li
-      %a{data: {mode: 'month'}} 12-20
-    %li
-      %a{data: {mode: 'year'}} 20-30
-    %li.divider
-    %li
-      %a{data: {mode: 'all'}} Over 30
+    - Place::PRICE_RANGES.each do |pr|
+      - if pr == "Over 30"
+        %li.divider
+      %li
+        %a{data: {mode: pr}}= pr

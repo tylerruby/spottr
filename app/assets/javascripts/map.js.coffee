@@ -137,6 +137,7 @@ $ ->
       limit: fetchPlacesLimit,
       time_mode: $('.date-mode-select').attr('data-mode'),
       cuisine_type: $('.cuisine-select').attr('data-mode'),
+      price_range: $('.price-range-select').attr('data-mode')
     )
 
     if tableMode == "places"
@@ -311,4 +312,7 @@ $ ->
     setTimeout doFetch, 50
 
   $('.cuisine-select').on 'change', ->
+    setTimeout doFetch, 50
+
+  $('.price-range-select').on 'change', ->
     setTimeout doFetch, 50

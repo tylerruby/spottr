@@ -21,6 +21,11 @@ class Api::PlacesController < ApplicationController
       query_params.push(params[:cuisine_type].strip)
     end
 
+    if params[:price_range] && params[:price_range] != "all"
+      query += " AND places.price_range = ?"
+      query_params.push(params[:price_range].strip)
+    end
+
     @places = Place.where(query, *query_params)
 
     total_places_count = @places.count

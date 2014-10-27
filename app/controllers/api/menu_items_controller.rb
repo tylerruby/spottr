@@ -32,6 +32,11 @@ class Api::MenuItemsController < ApplicationController
       query_params.push(params[:cuisine_type].strip)
     end
 
+    if params[:price_range] && params[:price_range] != "all"
+      query += " AND places.price_range = ?"
+      query_params.push(params[:price_range].strip)
+    end
+
     @menu_items = MenuItem.joins(:place).where(query, *query_params)
 
     total_menu_items_count = @menu_items.count

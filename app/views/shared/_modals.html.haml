@@ -25,6 +25,9 @@
           %label.control-label Cuisine Type:
           = f.select :cuisine_type, Place::CUISINE_TYPES, class: 'form-control'
         .form-group
+          %label.control-label Price Range ($):
+          = f.select :price_range, Place::PRICE_RANGES, class: 'form-control'
+        .form-group
           %label.control-label Place Image:
           = f.file_field :image
       .modal-footer

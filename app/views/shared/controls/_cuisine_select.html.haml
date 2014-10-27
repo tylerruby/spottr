@@ -6,8 +6,8 @@
     %li
       %a{data: {mode: 'all'}} All
     %li.divider
-      - Place::CUISINE_TYPES.each do |ct|
-        - if ct == "other"
-          %li.divider
-        %li
-          %a{data: {mode: ct}}= ct.titleize
+    - Place::CUISINE_TYPES.each do |ct|
+      - if ct == "other"
+        %li.divider
+      %li
+        %a{data: {mode: ct}}= ct.titleize
