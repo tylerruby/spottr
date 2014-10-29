@@ -10,9 +10,9 @@
               = image_tag @place.image.url, class: 'img-responsive'
             .col-md-8.col-md-offset-2.col-sm-10.col-sm-offset-1
               %h4
+                = @place.title.classify
                 - href = "http://maps.google.com/?saddr=#{@lat},#{@long}&daddr=#{@place.latitude},#{@place.longitude}"
                 %a.btn.btn-sm.btn-default.btn-outline.fa.fa-car.pull-right{:href=> href, :target => "_blank"}
-                = @place.title.classify
               = @place.address
               - if @place.website && @place.website.present?
                 %br
