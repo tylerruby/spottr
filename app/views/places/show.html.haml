@@ -17,11 +17,11 @@
               - if @place.website && @place.website.present?
                 %br
                 %strong
-                  = link_to @place.website, @place.website
+                  = link_to @place.website, get_url_from_model(@place.website)
               - if @place.phone_number && @place.phone_number.present?
                 %br
                 %span.glyphicon.glyphicon-earphone
-                  = @place.phone_number
+                  = number_to_phone(@place.phone_number)
         .panel-body
           - @place.votes.includes(:voter).order("created_at DESC").limit(6).each do |p|
             = link_to p.voter do

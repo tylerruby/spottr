@@ -14,4 +14,12 @@ module PlacesHelper
       'No Current City'
     end
   end
+
+  def get_url_from_model(website)
+    if website.include?('http://')
+      website 
+    else
+      'http://' + website
+    end
+  end
 end

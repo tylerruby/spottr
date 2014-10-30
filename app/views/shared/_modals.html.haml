@@ -1,5 +1,5 @@
 .modal.fade#add-place-modal
-  = form_for Place.new, html: {class: "modal-dialog modal-sm", multipart: true} do |f|
+  = form_for Place.new, html: {class: "modal-dialog", multipart: true} do |f|
     .modal-content
       .modal-header
         %button.close{:type => 'button', 'data-dismiss' => 'modal'}
@@ -17,7 +17,7 @@
           = f.text_field :title, class: 'form-control', placeholder: 'Restaurant Name'
         .form-group
           %label.control-label Website
-          = f.text_field :website, class: 'form-control', placeholder: 'http://restaurant.com'
+          = f.text_field :website, class: 'form-control', placeholder: 'restaurant.com'
         .form-group
           %label.control-label Phone number
           = f.text_field :phone_number, class: 'form-control', placeholder: '7709782046'
@@ -29,8 +29,8 @@
           = f.select :price_range, Place::PRICE_RANGES, class: 'form-control'
         .form-group
           %label.control-label
+            Organic:
             = f.check_box :is_organic
-            Is Organic:
         .form-group
           %label.control-label Place Image:
           = f.file_field :image
