@@ -19,7 +19,7 @@
         .panel-heading
           %h3.panel-title Places
         .panel-body
-          - @user.places.each do |place|
+          - @user.votes.where(votable_type: "Place") do |place|
             = link_to place do
               = image_tag place.image.url(:thumb)
       .panel.panel-default
