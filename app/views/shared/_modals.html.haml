@@ -47,6 +47,8 @@
     });
 
     setTimeout(function() {
+
+
       var searchInput = document.getElementById('place-location');
       var searchBox = new google.maps.places.SearchBox(searchInput);
       google.maps.event.addListener(searchBox, 'places_changed', function() {

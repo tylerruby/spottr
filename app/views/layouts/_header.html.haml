@@ -13,7 +13,7 @@
         .input-group
           - if params[:controller] == "places" and params[:action] == "index"
             .btn.btn.input-group-addon#current-location.fa.fa-location-arrow
-            %input#place-search.form-control{type: "text", placeholder: "City or Neighborhood"}
+            %input#place-search.form-control{type: "text", placeholder: "City or Neighborhood", style: "width:160%;"}
     .collapse.navbar-collapse
       %ul.nav.navbar-nav
       %ul.nav.navbar-nav.navbar-right
