@@ -43,6 +43,10 @@ $ ->
   searchInput = document.getElementById('place-search')
   searchBox = new google.maps.places.SearchBox(searchInput)
 
+  navigator.geolocation.getCurrentPosition (position) ->
+    window.latitude = position.coords.latitude
+    window.longitude = position.coords.longitude
+
   # go home button
   $('#current-location').click ->
     if window.navigator.geolocation
