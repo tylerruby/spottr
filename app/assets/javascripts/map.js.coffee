@@ -237,7 +237,8 @@ $ ->
           selector = "#dish-#{item.id}"
 
         $(selector).addClass("highlight")
-        $("##{tableMode}-table").parent().scrollTo(selector)
+        console.log(tableMode)
+        $("##{tableMode}-table").parent().parent().parent().scrollTo(selector)
 
       google.maps.event.addListener marker, 'mouseout', ->
         activeInfoWindow.close() if activeInfoWindow
