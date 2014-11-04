@@ -229,7 +229,7 @@ $ ->
         else if tableMode == "dishes"
           window.location.href = "/places/#{item.place_id}"
 
-      google.maps.event.addListener marker, 'mouseover', ->
+      google.maps.event.addListener marker, 'mouseover', (e) ->
         activeInfoWindow.close() if activeInfoWindow
         infoWindow.open(map,marker)
         activeInfoWindow = infoWindow
@@ -240,8 +240,9 @@ $ ->
         else if tableMode == "dishes"
           selector = "#dish-#{item.id}"
 
-        $(selector).addClass("highlight")
-        $("##{tableMode}-table").parent().parent().parent().scrollTo(selector)
+        unless e.noscroll
+          $(selector).addClass("highlight")
+          $("##{tableMode}-table").parent().parent().parent().scrollTo(selector)
 
       google.maps.event.addListener marker, 'mouseout', ->
         activeInfoWindow.close() if activeInfoWindow
@@ -259,7 +260,7 @@ $ ->
   onPlacesRowMouseEnter = ->
     id = ($ @).attr('data-id')
     marker = markers[id]
-    google.maps.event.trigger marker, 'mouseover'
+    google.maps.event.trigger marker, 'mouseover', {noscroll: true}
     $(@).addClass('highlight')
 
   onPlacesRowMouseLeave = ->
@@ -276,7 +277,7 @@ $ ->
   onDishesRowMouseEnter = ->
     id = ($ @).attr('data-id')
     marker = markers[id]
-    google.maps.event.trigger marker, 'mouseover'
+    google.maps.event.trigger marker, 'mouseover', {noscroll: true}
     $(@).addClass('highlight')
 
   onDishesRowMouseLeave = ->
