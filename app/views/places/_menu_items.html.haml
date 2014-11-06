@@ -6,9 +6,6 @@
         - if user_signed_in?
           %button.btn.btn-sm.btn-danger.btn-outline.pull-right#new-menu-item Add Dish
   .panel-body
-    %table.table.js-dynamic-table#menu-items-table
-      %tbody
-
     - if user_signed_in?
       = form_for [@place, MenuItem.new], html: {class: 'form menu-items-form', style: 'display:none;'} do |f|
         .form-group.col-md-10.col-md-offset-1
@@ -23,6 +20,10 @@
         .form-group
           = f.submit "Add Menu Item", class: 'btn btn-sm btn-primary btn-outline col-md-offset-9 col-sm-offset-7'
         .clearfix
+
+    %table.table.js-dynamic-table#menu-items-table
+      %tbody
+
 :javascript
   $(document).ready(function() {
     $('.menu-items-form').bootstrapValidator({
