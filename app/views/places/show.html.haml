@@ -13,16 +13,16 @@
                 = @place.title.titleize
                 &nbsp;
                 - upvoted_class = @place.voted_by?(current_user) ? "upvoted" : ""
-                %a{class:"js-upvote pull-right btn btn-sm btn-default glyphicon glyphicon-chevron-up #{upvoted_class}",
+                %a{class:"js-upvote btn btn-sm btn-default glyphicon glyphicon-chevron-up #{upvoted_class}",
                   href:"/api/places/#{@place.id}/up_vote",
                   style: "font-size:14px;border-color:#e8e8e8;background:#fff;"}
                   = @place.votes.count
               %h4
-                %br
                   = @place.address
               - if @place.website && @place.website.present?
                 %strong
                   = link_to @place.website, get_url_from_model(@place.website)
+              %br
               - if @place.phone_number && @place.phone_number.present?
                 = number_to_phone(@place.phone_number)
               - href = "http://maps.google.com/?saddr=#{@lat},#{@long}&daddr=#{@place.latitude},#{@place.longitude}"
