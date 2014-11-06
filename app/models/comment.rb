@@ -4,8 +4,9 @@ class Comment < ActiveRecord::Base
   include Concerns::Votable
 
   belongs_to :commentable, :polymorphic => true
-  delegate :email, to: :user, prefix: true
-  delegate :name, to: :user, prefix: true
+  delegate :email, to: :user, prefix: true, allow_nil: true
+  delegate :name, to: :user, prefix: true, allow_nil: true
+  delegate :image, to: :user, prefix: true, allow_nil: true
 
   default_scope -> { order('created_at ASC') }
 
@@ -20,7 +21,7 @@ class Comment < ActiveRecord::Base
     json = super(options)
     json["user_email"] = self.user_email
     json["user_name"] = self.user_name
-    json["user_image"] = self.user.image.url(:small)
+    json["user_image"] = self.user_image.try(:url, :small)
     json
   end
 end

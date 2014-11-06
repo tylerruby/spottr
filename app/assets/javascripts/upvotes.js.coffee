@@ -15,3 +15,4 @@ $ ->
           $this.addClass('upvoted')
     false
   $('.js-dynamic-table').on('click', '.js-upvote', onUpvoteClick)
+  $('.js-upvotable').on('click', '.js-upvote', onUpvoteClick)
