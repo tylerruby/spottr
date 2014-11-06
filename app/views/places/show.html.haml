@@ -8,28 +8,27 @@
           .row
             .col-md-12.col-sm-12.col-xs-6
               = image_tag @place.image.url, class: 'img-responsive'
-            .col-md-8.col-md-offset-2.col-sm-10.col-sm-offset-1
-              %h4
+            .col-md-10.col-md-offset-1.col-sm-10.col-sm-offset-1
+              %h3
                 = @place.title.titleize
-                - href = "http://maps.google.com/?saddr=#{@lat},#{@long}&daddr=#{@place.latitude},#{@place.longitude}"
-                %a.btn.btn-sm.btn-default.btn-outline.fa.fa-car.pull-right.js-route-link{:href=> href, :target => "_blank"}
+                &nbsp;
                 - upvoted_class = @place.voted_by?(current_user) ? "upvoted" : ""
-                %a{class:"js-upvote btn btn-sm btn-default glyphicon glyphicon-chevron-up #{upvoted_class}",
+                %a{class:"js-upvote pull-right btn btn-sm btn-default glyphicon glyphicon-chevron-up #{upvoted_class}",
                   href:"/api/places/#{@place.id}/up_vote",
                   style: "font-size:14px;border-color:#e8e8e8;background:#fff;"}
-                  &nbsp;
                   = @place.votes.count
-              = @place.address
-              - if @place.website && @place.website.present?
+              %h4
                 %br
+                  = @place.address
+              - if @place.website && @place.website.present?
                 %strong
                   = link_to @place.website, get_url_from_model(@place.website)
               - if @place.phone_number && @place.phone_number.present?
-                %br
-                %span.glyphicon.glyphicon-earphone
-                  = number_to_phone(@place.phone_number)
-                %br
-                %br
+                = number_to_phone(@place.phone_number)
+              - href = "http://maps.google.com/?saddr=#{@lat},#{@long}&daddr=#{@place.latitude},#{@place.longitude}"
+              %a.btn.btn-sm.btn-default.btn-outline.fa.fa-car.pull-right.js-route-link{:href=> href, :target => "_blank"} &nbsp; Directions
+              %br
+              %br
       .panel.panel-default
         .panel-body{:style => "padding:0;"}
           .row
