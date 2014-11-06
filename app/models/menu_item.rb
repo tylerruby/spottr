@@ -16,7 +16,8 @@ class MenuItem < ActiveRecord::Base
   def as_json(options={})
     json = super(options)
     json["title"] = self.name
-    json["image_url"] = self.image.url(:thumb)
+    json["preview_image_url"] = self.image.url(:thumb)
+    json["image_url"] = self.place.image.url(:tiny)
     json["place_title"] = self.place.title
     json["latitude"] = self.place.latitude
     json["longitude"] = self.place.longitude
