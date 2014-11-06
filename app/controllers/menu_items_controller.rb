@@ -10,7 +10,7 @@ class MenuItemsController < ApplicationController
 
   def menu_item_params
     params.require(:menu_item).
-      permit(:name, :price, :image)
+      permit(:name, :price, :image, :description)
       .merge(user: current_user)
   end
 
