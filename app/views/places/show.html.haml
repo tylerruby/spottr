@@ -12,7 +12,7 @@
               %h4
                 = @place.title.titleize
                 - href = "http://maps.google.com/?saddr=#{@lat},#{@long}&daddr=#{@place.latitude},#{@place.longitude}"
-                %a.btn.btn-sm.btn-default.btn-outline.fa.fa-car.pull-right{:href=> href, :target => "_blank"}
+                %a.btn.btn-sm.btn-default.btn-outline.fa.fa-car.pull-right.js-route-link{:href=> href, :target => "_blank"}
               = @place.address
               - if @place.website && @place.website.present?
                 %br
@@ -31,7 +31,6 @@
               #place-map{style: "height: 400px;"}
               :javascript
                 function init() {
-                  var currentLatLng = new google.maps.LatLng(#{@lat}, #{@long});
                   var latLng = new google.maps.LatLng(#{@place.latitude}, #{@place.longitude});
                   var mapOptions = {
                     center: latLng,
@@ -43,6 +42,14 @@
                     position: latLng,
                     map: map,
                     title: "#{@place.title}"
+                  });
+                  navigator.geolocation && navigator.geolocation.getCurrentPosition(function(position) {
+                    var fromLat = position.coords.latitude;
+                    var fromLng = position.coords.longitude;
+                    var href = "http://maps.google.com/?saddr=" +
+                      fromLat + "," + fromLng +
+                      "&daddr=#{@place.latitude},#{@place.longitude}"
+                    $('.js-route-link').attr('href', href);
                   });
                 }
                 google.maps.event.addDomListener(window, 'load', init);
