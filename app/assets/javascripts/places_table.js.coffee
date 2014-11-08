@@ -27,7 +27,7 @@ $ ->
     distanceMiles = util.toMiles(distance / 1000)
     p.distance = "#{util.formatDec(distanceMiles)} miles"
     p.upvoted_class = if p.upvoted_by_user then "upvoted" else ""
-    p.organic_label = if p.is_organic then "<span class='label label-success' data-toggle='tooltip' data-placement='top' title='Organic'>O</span>" else ""
+    p.organic_label = if p.is_organic then "<span class='label label-success fa fa-leaf' data-toggle='tooltip' data-placement='top' title='Organic'></span>" else ""
     p.direction_link = "http://maps.google.com/?saddr=#{window.latitude},#{window.longitude}&daddr=#{p.latitude},#{p.longitude}"
     return p
 
