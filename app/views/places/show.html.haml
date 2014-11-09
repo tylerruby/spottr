@@ -33,6 +33,8 @@
                 = number_to_phone(@place.phone_number)
               - href = "http://maps.google.com/?saddr=#{@lat},#{@long}&daddr=#{@place.latitude},#{@place.longitude}"
               %a.btn.btn-sm.btn-default.btn-outline.fa.fa-car.pull-right.js-route-link{:href=> href, :target => "_blank"} &nbsp; Directions
+              %br
+              %br
 
       .panel.panel-default
         .panel-body{:style => "padding:0;"}
