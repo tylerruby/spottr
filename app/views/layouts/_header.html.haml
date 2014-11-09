@@ -17,10 +17,12 @@
     .collapse.navbar-collapse
       %ul.nav.navbar-nav
       %ul.nav.navbar-nav.navbar-right
+        %li
+          %a{href: '#places-pane', role: :tab, data: {toggle: :tab}} Places
+        %li
+          %a{href: '#dishes-pane', role: :tab, data: {toggle: :tab}} Dishes
         - if user_signed_in?
           %li
-            %a{href: '#places-pane', role: :tab, data: {toggle: :tab}} Places
-            %a{href: '#dishes-pane', role: :tab, data: {toggle: :tab}} Dishes
             %a{style: "cursor: pointer;", data: {toggle: "modal", target: "#add-place-modal"}} Add Restaurant
           %li.dropdown
             %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
