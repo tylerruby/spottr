@@ -7,10 +7,10 @@
           #map
     .col-md-5.col-sm-6{:style => "padding-left:0px;padding-right:0px;height:100%;"}
       .panel.panel-default.map-control-panel
-        .panel-heading
+        .panel-heading{:style => "padding: 5px 5px 0px 10px; border-bottom:none;"}
           .row
             .col-md-12
-              %ul.nav.nav-tabs{role: :tablist}
+              %ul.nav.nav-tabs{:style => "border-bottom: none;", role: :tablist}
                 %li.active
                   %a{href: '#places-pane', role: :tab, data: {toggle: :tab}} Places
                 %li
@@ -19,6 +19,7 @@
                   = render 'shared/controls/time_mode_select'
                   = render 'shared/controls/price_select'
                   = render 'shared/controls/cuisine_select'
+        }
         .panel-body{:style => "padding:0px;"}
           .tab-content
             #places-pane.tab-pane.active
