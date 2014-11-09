@@ -21,7 +21,7 @@
                 = @place.address.chomp(', USA')
               - if @place.website && @place.website.present?
                 %strong
-                  = link_to @place.website, get_url_from_model(@place.website)
+                  = link_to @place.website, get_url_from_model(@place.website), :target => "_blank"
               %br
               - if @place.phone_number && @place.phone_number.present?
                 = number_to_phone(@place.phone_number)
