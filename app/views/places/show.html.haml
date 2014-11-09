@@ -18,7 +18,7 @@
                   style: "font-size:14px;border-color:#e8e8e8;background:#fff;"}
                   = @place.votes.count
               %h4
-                = @place.address
+                = @place.address.chomp(', USA')
               - if @place.website && @place.website.present?
                 %strong
                   = link_to @place.website, get_url_from_model(@place.website)
