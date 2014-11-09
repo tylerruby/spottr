@@ -19,10 +19,10 @@
                   = @place.votes.count
                 .btn-group.btn-group-sm
                   %button.not-voted.btn{:type => "button"}
-                    %i.fa.fa-caret-up
-                  %button.btn.not-voted{:type => "button"} +503
+                    %i.fa.fa-2x.fa-caret-up
+                  %button.btn.not-voted{:type => "button"} 503
                   %button.not-voted.btn{:type => "button"}
-                    %i.fa.fa-caret-down
+                    %i.fa.fa-2x.fa-caret-down
               %h4
                 = @place.address
               - if @place.website && @place.website.present?
