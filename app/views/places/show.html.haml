@@ -17,6 +17,12 @@
                   href:"/api/places/#{@place.id}/up_vote",
                   style: "font-size:14px;border-color:#e8e8e8;background:#fff;"}
                   = @place.votes.count
+                .btn-group.btn-group-sm
+                  %button.not-voted.btn{:type => "button"}
+                    %i.fa.fa-caret-up
+                  %button.btn.not-voted{:type => "button"} +503
+                  %button.not-voted.btn{:type => "button"}
+                    %i.fa.fa-caret-down
               %h4
                 = @place.address
               - if @place.website && @place.website.present?
@@ -27,13 +33,6 @@
                 = number_to_phone(@place.phone_number)
               - href = "http://maps.google.com/?saddr=#{@lat},#{@long}&daddr=#{@place.latitude},#{@place.longitude}"
               %a.btn.btn-sm.btn-default.btn-outline.fa.fa-car.pull-right.js-route-link{:href=> href, :target => "_blank"} &nbsp; Directions
-              
-              .btn-group.btn-group-xs
-                %button.not-voted.btn{:type => "button"}
-                  %i.fa.fa-caret-up
-                %button.btn.not-voted{:type => "button", :style => "color:#5cb85c !important;"} +503
-                %button.not-voted.btn{:type => "button"}
-                  %i.fa.fa-caret-down
 
       .panel.panel-default
         .panel-body{:style => "padding:0;"}
