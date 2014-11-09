@@ -3,8 +3,8 @@ class Place < ActiveRecord::Base
 
   acts_as_commentable
 
-  CUISINE_TYPES = ['Mexican', 'American', 'Italian', 'Asian', 'Seafood',
-                   'Breakfast', 'Sandwiches', 'Pizza', 'BBQ','Steakhouse', 'Sandwhich', 'Pub', 'Other']
+  CUISINE_TYPES = ['American', 'Breakfast', 'Asian', 'Mexican', 'Italian', 'Seafood', 'Pizza', 'BBQ',
+                   'Deli/Bakery', 'Steakhouse', 'Burger', 'Dessert', 'Bar', 'Other']
   PRICE_RANGES = ['Under 7', '7-12', '12-20', '20-30', 'Over 30']
 
   has_attached_file :image, :styles => { :thumb => "70x70#", :tiny => "150x120#", :small => "200x140#", :medium => "501x270#" }
