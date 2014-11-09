@@ -35,12 +35,12 @@ class Api::MenuItemsController < ApplicationController
     if params[:price_range] && params[:price_range] != "all"
       query += " AND menu_items.price >= ? AND menu_items.price < ?"
       query_params += case params[:price_range]
-                      when "Under 7"
-                        [0, 7]
-                      when "7-12"
-                        [7, 12]
-                      when "12-20"
-                        [12, 20]
+                      when "Under 8"
+                        [0, 8]
+                      when "8-13"
+                        [8, 13]
+                      when "13-20"
+                        [13, 20]
                       when "20-30"
                         [20, 30]
                       when "Over 30"

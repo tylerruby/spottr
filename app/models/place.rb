@@ -5,7 +5,7 @@ class Place < ActiveRecord::Base
 
   CUISINE_TYPES = ['American', 'Asian', 'BBQ', 'Breakfast', 'Burgers', 'Italian', 'Mexican', 'Pizza', 'Seafood',
                    'Bar', 'Deli', 'Bakery', 'Dessert', 'Steakhouse', 'Other']
-  PRICE_RANGES = ['Under 7', '7-12', '12-20', '20-30', 'Over 30']
+  PRICE_RANGES = ['Under 8', '8-13', '13-20', '20-30', 'Over 30']
 
   has_attached_file :image, :styles => { :thumb => "70x70#", :tiny => "150x120#", :small => "200x140#", :medium => "501x270#" }
   validates_attachment_content_type :image,

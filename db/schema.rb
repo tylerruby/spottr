@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141106165322) do
+ActiveRecord::Schema.define(version: 20141109235035) do
 
   create_table "comments", force: true do |t|
     t.string   "title",            limit: 50, default: ""
@@ -70,7 +70,7 @@ ActiveRecord::Schema.define(version: 20141106165322) do
     t.string   "cuisine_type"
     t.string   "website"
     t.string   "phone_number"
-    t.string   "price_range",             default: "Under 7"
+    t.string   "price_range",             default: "Under 8"
     t.boolean  "is_organic",              default: false
   end
 
