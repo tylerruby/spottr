@@ -17,12 +17,6 @@
                   href:"/api/places/#{@place.id}/up_vote",
                   style: "font-size:14px;border-color:#e8e8e8;background:#fff;"}
                   = @place.votes.count
-                .btn-group.btn-group-sm
-                  %button.btn.not-voted{:type => "button"}
-                    %i.fa.fa-caret-up
-                  %button.btn.not-voted{:type => "button"} 503
-                  %button.btn.not-voted{:type => "button"}
-                    %i.fa.fa-caret-down
               %h4
                 = @place.address
               - if @place.website && @place.website.present?
