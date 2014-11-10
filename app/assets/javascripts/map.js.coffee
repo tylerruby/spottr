@@ -1,5 +1,5 @@
 $ ->
-  mapZoom = 12
+  mapZoom = 14
   mapMode = "places"
   mapLatitude = window.latitude
   mapLongitude = window.longitude
@@ -59,7 +59,7 @@ $ ->
     latLng = new google.maps.LatLng(lat, lng)
     currentMarker.setPosition(latLng)
     handler.map.centerOn(latLng)
-    handler.getMap().setZoom(12)
+    handler.getMap().setZoom(14)
 
   # SOME CONFIG VARIABLES
   DEFAULT_PLACES_LIMIT = 10
@@ -117,7 +117,7 @@ $ ->
 
    handleFoundPlace = (place) ->
       handler.getMap().setCenter(place.geometry.location)
-      handler.getMap().setZoom(12)
+      handler.getMap().setZoom(14)
 
 
   ######################################
