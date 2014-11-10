@@ -4,14 +4,14 @@
       <strong class="count" style="font-size:18px;">
       </strong>
     </td>
+    <td style="border-top:none;" class="hidden-xs">
+      <a href="/places/<%%=id%>" class="place">
+        <img src="<%%= preview_image_url %>">
+      </a>
+    </td>
     <td>
       <a class="js-upvote btn btn-sm btn-default glyphicon glyphicon-chevron-up <%%=upvoted_class%>" href="/api/places/<%%=id%>/up_vote" style="font-size:14px;border-color:#e8e8e8;background:#fff;">
         &nbsp;<%%=votes_count%>
-      </a>
-    </td>
-    <td style="border-top:none;" class="hidden-xs">
-      <a href="/places/<%%=id%>" class="place">
-        <img class="pull-right" src="<%%= preview_image_url %>">
       </a>
     </td>
     <td>
