@@ -6,6 +6,7 @@
 
   .panel-body {
     max-height: 565px;
-    overflow: scroll;
+	overflow-y: scroll;
+	overflow-x: hidden;
   }
 }
