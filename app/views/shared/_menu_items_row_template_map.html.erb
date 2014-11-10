@@ -8,6 +8,11 @@
         <%%=votes_count%>
       </a>
     </td>
+    <td style="border-top:none;" class="hidden-xs">
+      <a href="/places/<%%=place_id%>" class="place">
+        <img class="img-rounded pull-right" src="<%%= preview_image_url %>">
+      </a>
+    </td>
     <td>
       <span style="font-size:16px;margin-left:5px;margin-top:5px;">
         <a href="/places/<%%=place_id%>" class="place">
@@ -20,11 +25,6 @@
     <td style="border-top:none;">$<%%= price %></td>
     <td>
       <a href="<%%=direction_link%>" target="_blank" class="btn btn-sm btn-default btn-outline fa fa-car pull-right">
-      </a>
-    </td>
-    <td style="border-top:none;" class="hidden-xs">
-      <a href="/places/<%%=place_id%>" class="place">
-        <img class="img-rounded pull-right" src="<%%= preview_image_url %>">
       </a>
     </td>
   </tr>
