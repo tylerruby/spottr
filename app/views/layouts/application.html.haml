@@ -13,6 +13,7 @@
     %script{:src => "//google-maps-utility-library-v3.googlecode.com/svn/trunk/styledmarker/src/StyledMarker.js", :type => "text/javascript"}
     %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}
     = csrf_meta_tags
+    = favicon_link_tag 'favicon.ico'
   %body
     = render 'layouts/header'
     :javascript
