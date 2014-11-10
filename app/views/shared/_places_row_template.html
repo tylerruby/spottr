@@ -1,4 +1,9 @@
 <script type="text/html" id="place-row-template">
+  <thead>
+    <tr>
+      <th>Test</th>
+    </tr>
+  </thead>
   <tr data-id="<%%=id%>" id="place-<%%=id%>">
     <td>
       <strong class="count" style="font-size:18px;">
@@ -22,7 +27,7 @@
     </td>
     <td>
       <a href="<%%=direction_link%>" target="_blank" class="btn btn-sm btn-default btn-outline fa fa-car pull-right">
-        <%%=distance%>
+        &nbsp;<%%=distance%>
       </a>
     </td>
     <td style="border-top:none;" class="hidden-xs">
