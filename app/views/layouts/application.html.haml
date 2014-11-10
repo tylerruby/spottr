@@ -11,13 +11,6 @@
     %link{rel:"stylesheet", href:"//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/css/bootstrapValidator.min.css"}
     %script{type:"text/javascript", src:"//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/js/bootstrapValidator.min.js"}
     %script{:src => "//google-maps-utility-library-v3.googlecode.com/svn/trunk/styledmarker/src/StyledMarker.js", :type => "text/javascript"}
-    
-    :javascript
-     $(document).ready(function () {
-     if ($("[rel=tooltip]").length) {
-     $("[rel=tooltip]").tooltip();
-     }
-   });
 
     %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}
     = csrf_meta_tags
@@ -50,3 +43,9 @@
         }
     = yield :scripts if content_for? :scripts
     = render 'shared/modals'
+
+    :javascript
+     $(document).ready(function () {
+     if ($("[rel=tooltip]").length) {
+     $("[rel=tooltip]").tooltip();
+     }
