@@ -59,13 +59,13 @@ background-color: whitesmoke;
   }
 }
 @media(min-width:768px){
-  html, body, div.container-fluid, div.row, div.col-md-7.col-sm-6, div.panel.panel-default, div#map-container, div#map{ height: 100%; }
+  html, body, div.container-fluid, div.row, div.col-md-8.col-sm-6, div.panel.panel-default, div#map-container, div#map{ height: 100%; }
 }
 @media(min-width:992px){
-  html, body, div.container-fluid, div.row, div.col-md-7.col-sm-6, div.panel.panel-default, div#map-container, div#map{ height: 100%; }
+  html, body, div.container-fluid, div.row, div.col-md-8.col-sm-6, div.panel.panel-default, div#map-container, div#map{ height: 100%; }
 }
 @media(min-width:1200px){
-  html, body, div.container-fluid, div.row, div.col-md-7.col-sm-6, div.panel.panel-default, div#map-container, div#map{ height: 100%; }
+  html, body, div.container-fluid, div.row, div.col-md-8.col-sm-6, div.panel.panel-default, div#map-container, div#map{ height: 100%; }
   #place-search {
     width: 400px !important;
   }
