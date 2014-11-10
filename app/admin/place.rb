@@ -14,5 +14,4 @@ ActiveAdmin.register Place do
   #   permitted
   # end
 
-
 end
