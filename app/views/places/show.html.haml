@@ -17,6 +17,8 @@
                   href:"/api/places/#{@place.id}/up_vote",
                   style: "font-size:14px;border-color:#e8e8e8;background:#fff;"}
                   = @place.votes.count
+                &nbsp;&nbsp;
+                = @place.price_range
               %h4
                 = @place.address.chomp(', USA')
               - if @place.website && @place.website.present?
