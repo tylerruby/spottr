@@ -11,7 +11,7 @@
     </td>
     <td style="border-top:none;" class="hidden-xs">
       <a href="/places/<%%=id%>" class="place">
-        <img class="img-rounded pull-right" src="<%%= preview_image_url %>">
+        <img class="pull-right" src="<%%= preview_image_url %>">
       </a>
     </td>
     <td>
@@ -20,10 +20,9 @@
           <%%= title %>
         </a>
         <%%= organic_label %>
+        <br />
+        $<%%= price_range %>
       </span>
-    </td>
-    <td>
-      <p>$<%%= price_range %></p>
     </td>
     <td>
       <a href="<%%=direction_link%>" target="_blank" class="btn btn-sm btn-default btn-outline fa fa-car pull-right">
