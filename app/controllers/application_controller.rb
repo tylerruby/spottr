@@ -40,6 +40,6 @@ class ApplicationController < ActionController::Base
   end
 
   def set_limit
-    @limit = params[:limit] || 20
+    @limit = params[:limit] || 10
   end
 end

@@ -34,6 +34,7 @@ class Place < ActiveRecord::Base
   def as_json(options={})
     json = super(options)
     json["image_url"] = self.image.url(:tiny)
+    json["preview_image_url"] = self.image.url(:thumb)
     json
   end
 

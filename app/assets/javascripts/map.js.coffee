@@ -62,9 +62,9 @@ $ ->
     handler.getMap().setZoom(12)
 
   # SOME CONFIG VARIABLES
-  DEFAULT_PLACES_LIMIT = 20
+  DEFAULT_PLACES_LIMIT = 10
   fetchPlacesLimit = DEFAULT_PLACES_LIMIT
-  DEFAULT_DISHES_LIMIT = 20
+  DEFAULT_DISHES_LIMIT = 10
   fetchDishesLimit = DEFAULT_DISHES_LIMIT
 
   ######################################
