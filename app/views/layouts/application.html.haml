@@ -43,10 +43,3 @@
         }
     = yield :scripts if content_for? :scripts
     = render 'shared/modals'
-
-    :javascript
-      $(document).ready(function () {
-        if ($("[rel=tooltip]").length) {
-          $("[rel=tooltip]").tooltip();
-        }
-      }
