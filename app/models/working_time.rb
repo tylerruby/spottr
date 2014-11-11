@@ -1,6 +1,13 @@
 class WorkingTime < ActiveRecord::Base
   belongs_to :place
 
+  default_scope { order(:wday, :start_hours) }
+
+  def humanized_time
+    "" + WorkingTime.time_pairs[self.start_hours] +
+      " - " + WorkingTime.time_pairs[self.end_hours]
+  end
+
   class << self
     # in this model working day is 6a.m. - 6a.m.
     # 12-60 are stored in start_time and end_time integer fields
@@ -31,6 +38,7 @@ class WorkingTime < ActiveRecord::Base
     end
 
     def time_pairs
+      @time_pairs if @time_pairs
       hash = {}
       (12..60).to_a.each do |val|
         hour = val / 2
@@ -41,10 +49,10 @@ class WorkingTime < ActiveRecord::Base
         minute = val % 2 == 0 ? 0 : 30
         next_day = val >= 48
 
-        hash[val] = "#{nn hour}:#{nn minute} #{ampm} #{next_day ? '(next day)' : ''}"
+        hash[val] = "#{nn hour}:#{nn minute} #{ampm}#{next_day ? ' (next day)' : ''}"
       end
 
-      hash
+      @time_pairs = hash
     end
 
     protected

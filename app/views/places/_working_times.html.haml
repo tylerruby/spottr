@@ -1,0 +1,18 @@
+- if @place.working_times.any?
+  .panel.panel-default.map-control-panel
+    .panel-heading
+      .row
+        .col-md-12
+          %h4 Working times
+    .panel-body
+      - hash = {}
+      - @place.working_times.each do |wt|
+        - day_of_week = WorkingTime.day_pairs[wt.wday]
+        - hash[day_of_week] ||= []
+        - hash[day_of_week].push wt.humanized_time
+      %table.table
+        - hash.each_pair do |dow, times|
+          %tr
+            %td
+              %strong= dow
+            %td= times.join(', ')
