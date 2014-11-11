@@ -9,6 +9,26 @@ $ ->
     if $daysDiv.children().length > 1
       $(@).parent().remove()
 
+  $workingTimesDiv.on 'change', '.js-start', ->
+    val = +$(@).val()
+    if val == 60
+      $(@).val(59)
+    else
+      $end = $(@).parent().find('.js-end')
+      endVal = +$end.val()
+      if endVal <= val
+        $end.val(val + 1)
+
+  $workingTimesDiv.on 'change', '.js-end', ->
+    val = +$(@).val()
+    if val == 12
+      $(@).val(13)
+    else
+      $start = $(@).parent().find('.js-start')
+      startVal = +$start.val()
+      if startVal > val
+        $start.val(val - 1)
+
   $workingTimesDiv.find('.js-add-btn').click ->
     $fg = $('<div class="form-group"></div>')
     $fg.html($daysDiv.find('.form-group').last().html())
