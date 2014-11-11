@@ -208,6 +208,9 @@ $ ->
       infoWindow = new google.maps.InfoWindow
         content: """
           <h5>#{item.title}</h5>
+          <span style="font-size:12px;">
+            #{item.price}
+          </span>
           <img src="#{item.image_url}">
         """
         disableAutoPan: true
