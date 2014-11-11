@@ -13,6 +13,16 @@ class PlacesController < ApplicationController
 
   def show
     @place = Place.find(params[:id])
+
+    if current_user.try(:is_admin)
+      @edit_place_mode = true
+
+      @new_place = @place
+      if @new_place.working_times.empty?
+        @new_place.working_times.
+          build(wday: 1, start_hours: 18, end_hours: 34)
+      end
+    end
   end
 
   def create
@@ -31,6 +41,22 @@ class PlacesController < ApplicationController
     redirect_to root_path
   end
 
+  def update
+    place = Place.find(params[:id])
+    place.assign_attributes(place_params)
+    current_coordinates = CoordinatesConverter.new(session_coordinates)
+    place.latitude ||= current_coordinates.latitude
+    place.longitude ||= current_coordinates.longitude
+
+    if place.save
+      flash[:notice] = 'Place updated'
+    else
+      flash[:alert] = "<strong>Error creating the place:</strong> #{place.errors.keys.first.to_s.titleize} #{place.errors.first[1]}"
+    end
+
+    redirect_to place
+  end
+
   def up_vote
     @place = Place.find(params[:id])
     @place.liked_by current_user
@@ -43,8 +69,9 @@ class PlacesController < ApplicationController
     params.require(:place).
       permit(:title, :cuisine_type, :price_range, :image,
              :phone_number, :website, :is_organic,
-             :latitude, :longitude, working_times_attributes: [
-               :wday, :start_hours, :end_hours
+             :location, :latitude, :longitude,
+             working_times_attributes: [
+               :wday, :start_hours, :end_hours, :id, :_destroy
              ]).merge(user_id: current_user.id)
   end
 

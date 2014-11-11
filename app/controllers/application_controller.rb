@@ -9,6 +9,8 @@ class ApplicationController < ActionController::Base
     session[:coordinates]
   end
 
+  before_action :set_place_for_new_form
+
   protected
 
   def set_time_back
@@ -41,5 +43,10 @@ class ApplicationController < ActionController::Base
 
   def set_limit
     @limit = params[:limit] || 15
+  end
+
+  def set_place_for_new_form
+    @new_place = Place.new
+    @new_place.working_times.build(wday: 1, start_hours: 18, end_hours: 34)
   end
 end

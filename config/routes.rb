@@ -15,7 +15,7 @@ Rails.application.routes.draw do
    resources :users, only: :show
 
    post 'session_coordinates' => 'session_coordinates#create'
-   resources :places, only: [:create, :index, :show] do
+   resources :places, only: [:create, :index, :show, :update] do
      resources :comments, only: [:create]
      resources :menu_items, only: [:create]
    end

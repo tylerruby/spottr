@@ -19,7 +19,11 @@
       %ul.nav.navbar-nav.navbar-right
         - if user_signed_in?
           %li
-            %a{style: "cursor: pointer;", data: {toggle: "modal", target: "#add-place-modal"}} Add Restaurant
+            %a{style: "cursor: pointer;", data: {toggle: "modal", target: "#add-place-modal"}}
+              - if @edit_place_mode
+                Edit this restaraunt
+              - else
+                Add Restaurant
           %li.dropdown
             %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
               %img.img-responsive{:src => current_user.image.url(:small), :style => "width:25px;height:25px;padding:0px;display:inline-block;border-radius:4px;"}

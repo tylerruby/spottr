@@ -1,19 +1,20 @@
 .modal.fade#add-place-modal
-  - place = Place.new
-  - place.working_times.build(wday: 1, start_hours: 18, end_hours: 34)
-  = form_for place, html: {class: "modal-dialog", multipart: true} do |f|
+  = form_for @new_place, html: {class: "modal-dialog", multipart: true} do |f|
     .modal-content
       .modal-header
         %button.close{:type => 'button', 'data-dismiss' => 'modal'}
           %span{'aria-hidden' => true} &times;
           %span.sr-only Close
-        %h4.modal-title Add a Restaurant
+        - if @edit_place_mode
+          %h4.modal-title Edit Restaurant (Admin superpower)
+        - else
+          %h4.modal-title Add a Restaurant
       .modal-body
         .form-group
           %label.control-label Location
-          %input.form-control#place-location{type: 'text', value: 'Type in address'}
-          %input#place-latitude{type: :hidden, name: "place[latitude]", value: @lat}
-          %input#place-longitude{type: :hidden, name: "place[longitude]", value: @long}
+          = f.text_field :location, placeholder: "Type in address", class: 'form-control'
+          = f.hidden_field :latitude
+          = f.hidden_field :longitude
         .form-group
           %label.control-label Name
           = f.text_field :title, class: 'form-control', placeholder: 'Restaurant Name'
@@ -40,9 +41,11 @@
         %hr
         %h4 Working times
         .js-working-times
-          = f.fields_for :working_times do |wf|
-            .days
+          .days
+            = f.fields_for :working_times do |wf|
               .form-group
+                = wf.hidden_field :id, class: 'js-id'
+                = wf.hidden_field :_destroy, class: 'js-_destroy'
                 = wf.select :wday,
                   WorkingTime.day_pairs.map {|k,v| [v,k]},
                   {},
@@ -58,13 +61,16 @@
 
                 %a.btn.js-delete-btn.btn-xs.js-rm-btn X
 
-            %a.btn.btn-default.btn-sm.js-add-btn Add
+          %a.btn.btn-default.btn-sm.js-add-btn Add
       .modal-footer
-        = f.submit 'Add Restaurant', class: 'btn btn-sm btn-primary btn-outline'
+        - if @edit_place_mode
+          = f.submit 'Update Restaurant', class: 'btn btn-sm btn-primary btn-outline'
+        - else
+          = f.submit 'Add Restaurant', class: 'btn btn-sm btn-primary btn-outline'
 
 :javascript
   $(function() {
-    $('#place-location').focus(function() {
+    $('#place_location').focus(function() {
       if ($(this).val() == "Type in address") {
         $(this).val('');
       }
@@ -74,14 +80,14 @@
     setTimeout(function() {
 
 
-      var searchInput = document.getElementById('place-location');
+      var searchInput = document.getElementById('place_location');
       var searchBox = new google.maps.places.SearchBox(searchInput);
       google.maps.event.addListener(searchBox, 'places_changed', function() {
         var places = searchBox.getPlaces();
         if (places.length === 0) { return false; }
         var place = places[0];
-        $('#place-latitude').val(place.geometry.location.lat());
-        $('#place-longitude').val(place.geometry.location.lng());
+        $('#place_latitude').val(place.geometry.location.lat());
+        $('#place_longitude').val(place.geometry.location.lng());
       });
     }, 500);
   });

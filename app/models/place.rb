@@ -26,7 +26,7 @@ class Place < ActiveRecord::Base
   has_many :menu_items
 
   has_many :working_times
-  accepts_nested_attributes_for :working_times
+  accepts_nested_attributes_for :working_times, allow_destroy: true
 
   validates_presence_of :user_id
   validates_inclusion_of :cuisine_type, in: CUISINE_TYPES
