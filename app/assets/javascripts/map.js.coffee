@@ -207,7 +207,8 @@ $ ->
       position = new google.maps.LatLng(item.latitude, item.longitude)
       infoWindow = new google.maps.InfoWindow
         content: """
-          <img src="#{item.image_url}">
+          <h5>#{item.title} - #{item.price}</h5>
+          <img style="width:100%;" src="#{item.image_url}">
         """
         disableAutoPan: true
 
