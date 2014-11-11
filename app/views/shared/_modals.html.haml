@@ -1,5 +1,7 @@
 .modal.fade#add-place-modal
-  = form_for Place.new, html: {class: "modal-dialog", multipart: true} do |f|
+  - place = Place.new
+  - place.working_times.build(wday: 1, start_hours: 18, end_hours: 34)
+  = form_for place, html: {class: "modal-dialog", multipart: true} do |f|
     .modal-content
       .modal-header
         %button.close{:type => 'button', 'data-dismiss' => 'modal'}
@@ -34,6 +36,29 @@
         .form-group
           %label.control-label Place Image:
           = f.file_field :image
+
+        %hr
+        %h4 Working times
+        .js-working-times
+          = f.fields_for :working_times do |wf|
+            .days
+              .form-group
+                = wf.select :wday,
+                  WorkingTime.day_pairs.map {|k,v| [v,k]},
+                  {},
+                  class: 'js-wday'
+                = wf.select :start_hours,
+                  WorkingTime.time_pairs.map {|k,v| [v,k]},
+                  {},
+                  class: 'js-start'
+                = wf.select :end_hours,
+                  WorkingTime.time_pairs.map {|k,v| [v,k]},
+                  {},
+                  class: 'js-end'
+
+                %a.btn.js-delete-btn.btn-xs.js-rm-btn X
+
+            %a.btn.btn-default.btn-sm.js-add-btn Add
       .modal-footer
         = f.submit 'Add Restaurant', class: 'btn btn-sm btn-primary btn-outline'
 

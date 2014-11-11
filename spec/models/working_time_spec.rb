@@ -15,4 +15,12 @@ describe WorkingTime do
       expect(result).to eq([1, 2*8+1])
     end
   end
+
+  describe "time_pairs" do
+    it "test" do
+      WorkingTime.time_pairs.each_pair do |k, v|
+        puts "#{k} => #{v}"
+      end
+    end
+  end
 end

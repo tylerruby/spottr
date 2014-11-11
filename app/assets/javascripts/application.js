@@ -26,3 +26,4 @@
 //= require map
 //= require search_box
 //= require util
+//= require working_times

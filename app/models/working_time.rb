@@ -17,5 +17,44 @@ class WorkingTime < ActiveRecord::Base
 
       [wday, hour]
     end
+
+    def day_pairs
+      {
+        1 => "Monday",
+        2 => "Tuesday",
+        3 => "Wednesday",
+        4 => "Thursday",
+        5 => "Friday",
+        6 => "Saturday",
+        0 => "Sunday"
+      }
+    end
+
+    def time_pairs
+      hash = {}
+      (12..60).to_a.each do |val|
+        hour = val / 2
+        hour -= 24 if hour >= 24
+        ampm = hour >= 12 ? "PM" : "AM"
+        hour -= 12 if hour >= 12
+        hour = 12 if hour == 0
+        minute = val % 2 == 0 ? 0 : 30
+        next_day = val >= 48
+
+        hash[val] = "#{nn hour}:#{nn minute} #{ampm} #{next_day ? '(next day)' : ''}"
+      end
+
+      hash
+    end
+
+    protected
+
+    def nn(i)
+      if i < 10
+        "0#{i}"
+      else
+        "#{i}"
+      end
+    end
   end
 end
