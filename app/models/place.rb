@@ -22,6 +22,20 @@ class Place < ActiveRecord::Base
   end
   after_validation :reverse_geocode  # auto-fetch address
 
+  scope :open, ->(time) {
+    dow, hour = WorkingTime.normalized_day_of_week_and_hour(time)
+
+    query = <<-EOQ
+      working_times.wday = ? AND
+      working_times.start_hours < ? AND
+      working_times.end_hours >= ?
+    EOQ
+
+    joins(:working_times).
+      where(query, dow, hour, hour).
+      group("places.id")
+  }
+
   belongs_to :user
   has_many :menu_items
 
