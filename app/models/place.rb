@@ -24,6 +24,7 @@ class Place < ActiveRecord::Base
 
   belongs_to :user
   has_many :menu_items
+  has_many :working_times
 
   validates_presence_of :user_id
   validates_inclusion_of :cuisine_type, in: CUISINE_TYPES

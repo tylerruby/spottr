@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  wday: 1
+  start_hours: 1
+  end_hours: 1
+  place_id: 
+
+two:
+  wday: 1
+  start_hours: 1
+  end_hours: 1
+  place_id: 
