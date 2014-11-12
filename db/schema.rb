@@ -13,9 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20141111223707) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
     t.text     "body"
@@ -27,15 +24,9 @@ ActiveRecord::Schema.define(version: 20141111223707) do
     t.datetime "updated_at"
   end
 
-  add_index "active_admin_comments", ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id", using: :btree
-  add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
-  add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
-
-  create_table "add_is_admin_to_users", force: true do |t|
-    t.boolean  "is_admin"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+  add_index "active_admin_comments", ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
+  add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace"
+  add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
 
   create_table "admin_users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -52,8 +43,8 @@ ActiveRecord::Schema.define(version: 20141111223707) do
     t.datetime "updated_at"
   end
 
-  add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
-  add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
+  add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true
+  add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
 
   create_table "comments", force: true do |t|
     t.string   "title",            limit: 50, default: ""
@@ -66,9 +57,9 @@ ActiveRecord::Schema.define(version: 20141111223707) do
     t.datetime "updated_at"
   end
 
-  add_index "comments", ["commentable_id"], name: "index_comments_on_commentable_id", using: :btree
-  add_index "comments", ["commentable_type"], name: "index_comments_on_commentable_type", using: :btree
-  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+  add_index "comments", ["commentable_id"], name: "index_comments_on_commentable_id"
+  add_index "comments", ["commentable_type"], name: "index_comments_on_commentable_type"
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id"
 
   create_table "menu_items", force: true do |t|
     t.integer  "place_id"
@@ -84,8 +75,8 @@ ActiveRecord::Schema.define(version: 20141111223707) do
     t.text     "description"
   end
 
-  add_index "menu_items", ["place_id"], name: "index_menu_items_on_place_id", using: :btree
-  add_index "menu_items", ["user_id"], name: "index_menu_items_on_user_id", using: :btree
+  add_index "menu_items", ["place_id"], name: "index_menu_items_on_place_id"
+  add_index "menu_items", ["user_id"], name: "index_menu_items_on_user_id"
 
   create_table "places", force: true do |t|
     t.string   "title"
@@ -117,14 +108,14 @@ ActiveRecord::Schema.define(version: 20141111223707) do
     t.string   "location"
   end
 
-  add_index "places", ["cached_votes_down"], name: "index_places_on_cached_votes_down", using: :btree
-  add_index "places", ["cached_votes_score"], name: "index_places_on_cached_votes_score", using: :btree
-  add_index "places", ["cached_votes_total"], name: "index_places_on_cached_votes_total", using: :btree
-  add_index "places", ["cached_votes_up"], name: "index_places_on_cached_votes_up", using: :btree
-  add_index "places", ["cached_weighted_average"], name: "index_places_on_cached_weighted_average", using: :btree
-  add_index "places", ["cached_weighted_score"], name: "index_places_on_cached_weighted_score", using: :btree
-  add_index "places", ["cached_weighted_total"], name: "index_places_on_cached_weighted_total", using: :btree
-  add_index "places", ["latitude", "longitude"], name: "index_places_on_latitude_and_longitude", using: :btree
+  add_index "places", ["cached_votes_down"], name: "index_places_on_cached_votes_down"
+  add_index "places", ["cached_votes_score"], name: "index_places_on_cached_votes_score"
+  add_index "places", ["cached_votes_total"], name: "index_places_on_cached_votes_total"
+  add_index "places", ["cached_votes_up"], name: "index_places_on_cached_votes_up"
+  add_index "places", ["cached_weighted_average"], name: "index_places_on_cached_weighted_average"
+  add_index "places", ["cached_weighted_score"], name: "index_places_on_cached_weighted_score"
+  add_index "places", ["cached_weighted_total"], name: "index_places_on_cached_weighted_total"
+  add_index "places", ["latitude", "longitude"], name: "index_places_on_latitude_and_longitude"
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -149,8 +140,8 @@ ActiveRecord::Schema.define(version: 20141111223707) do
     t.boolean  "is_admin"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
   create_table "votes", force: true do |t|
     t.integer  "votable_id"
@@ -164,8 +155,8 @@ ActiveRecord::Schema.define(version: 20141111223707) do
     t.datetime "updated_at"
   end
 
-  add_index "votes", ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope", using: :btree
-  add_index "votes", ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope", using: :btree
+  add_index "votes", ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope"
+  add_index "votes", ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope"
 
   create_table "working_times", force: true do |t|
     t.integer  "wday"
@@ -176,7 +167,7 @@ ActiveRecord::Schema.define(version: 20141111223707) do
     t.datetime "updated_at"
   end
 
-  add_index "working_times", ["place_id"], name: "index_working_times_on_place_id", using: :btree
-  add_index "working_times", ["wday", "start_hours", "end_hours"], name: "index_working_times_on_wday_and_start_hours_and_end_hours", using: :btree
+  add_index "working_times", ["place_id"], name: "index_working_times_on_place_id"
+  add_index "working_times", ["wday", "start_hours", "end_hours"], name: "index_working_times_on_wday_and_start_hours_and_end_hours"
 
 end
