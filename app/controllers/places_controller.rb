@@ -44,9 +44,6 @@ class PlacesController < ApplicationController
   def update
     place = Place.find(params[:id])
     place.assign_attributes(place_params)
-    current_coordinates = CoordinatesConverter.new(session_coordinates)
-    place.latitude ||= current_coordinates.latitude
-    place.longitude ||= current_coordinates.longitude
 
     if place.save
       flash[:notice] = 'Place updated'
