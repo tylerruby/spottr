@@ -1,6 +1,6 @@
-.btn-group.mode-select.currently-open-select{data: {mode: params[:open] || "open"}}
+.btn-group.mode-select.currently-open-select{data: {mode: params[:all] || "all"}}
   %button.btn.btn-sm.btn-success.btn-outline.dropdown-toggle{"data-toggle" => "dropdown", :type => "button"}
-    %span.text Open
+    %span.text All
     %span.caret
   %ul.dropdown-menu{:role => "menu"}
     %li

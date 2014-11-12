@@ -10,7 +10,7 @@
         - day_of_week = WorkingTime.day_pairs[wt.wday]
         - hash[day_of_week] ||= []
         - hash[day_of_week].push wt.humanized_time
-      %table.table
+      %table.table.table-condensed
         - hash.each_pair do |dow, times|
           %tr
             %td
