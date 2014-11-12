@@ -61,7 +61,4 @@ $ ->
     $wday = $fg.find('.js-wday')
     $wday.val((+$daysDiv.children().last().find('.js-wday').val() + 1) % 7)
 
-    $fg.find('.js-start').val(18)
-    $fg.find('.js-end').val(34)
-
     $fg.appendTo($daysDiv)
