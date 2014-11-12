@@ -11,10 +11,11 @@
           %h4.modal-title Add a Restaurant
       .modal-body
         .form-group
-          %label.control-label Location
-          = f.text_field :location, placeholder: "Type in address", class: 'form-control'
-          = f.hidden_field :latitude
-          = f.hidden_field :longitude
+          - if @edit_place_mode
+            %label.control-label Location
+            = f.text_field :location, placeholder: "Type in address", class: 'form-control'
+            = f.hidden_field :latitude
+            = f.hidden_field :longitude
         .form-group
           %label.control-label Name
           = f.text_field :title, class: 'form-control', placeholder: 'Restaurant Name'
