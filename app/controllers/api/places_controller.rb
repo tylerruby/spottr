@@ -27,6 +27,13 @@ class Api::PlacesController < ApplicationController
     end
 
     @places = Place.where(query, *query_params)
+    if params[:open] == "true"
+      time = Time.now # TODO: take time zone into account
+      # offset = params[:offset].to_i # offset from utc in minutes
+      # time = Time.now.utc - offset.minutes
+
+      @places = @places.open(time)
+    end
 
     total_places_count = @places.count
 

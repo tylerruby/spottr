@@ -16,6 +16,7 @@
                 %li
                   %a{href: '#dishes-pane', role: :tab, data: {toggle: :tab}} Dishes
                 .pull-right
+                  = render 'shared/controls/currently_open_select'
                   = render 'shared/controls/time_mode_select'
                   = render 'shared/controls/price_select'
                   = render 'shared/controls/cuisine_select'

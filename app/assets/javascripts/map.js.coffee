@@ -142,7 +142,9 @@ $ ->
       time_mode: $('.date-mode-select').attr('data-mode'),
       cuisine_type: $('.cuisine-select').attr('data-mode'),
       price_range: $('.price-range-select').attr('data-mode')
+      open: $('.currently-open-select').attr('data-mode') == 'open'
     )
+
 
     if tableMode == "places"
       url = "#{PLACES_URL}?#{$.param(params)}"
@@ -320,4 +322,7 @@ $ ->
     setTimeout doFetch, 50
 
   $('.price-range-select').on 'change', ->
+    setTimeout doFetch, 50
+
+  $('.currently-open-select').on 'change', ->
     setTimeout doFetch, 50
