@@ -42,6 +42,7 @@
         %hr
         %h4 Working times
         .js-working-times
+          %a.btn.btn-default.btn-sm.js-add-btn Add
           .days
             = f.fields_for :working_times do |wf|
               .form-group
@@ -61,8 +62,6 @@
                   class: 'js-end'
 
                 %a.btn.js-delete-btn.btn-xs.js-rm-btn X
-
-          %a.btn.btn-default.btn-sm.js-add-btn Add
       .modal-footer
         - if @edit_place_mode
           = f.submit 'Update Restaurant', class: 'btn btn-sm btn-primary btn-outline'
