@@ -46,7 +46,7 @@ class Place < ActiveRecord::Base
   validates_inclusion_of :cuisine_type, in: CUISINE_TYPES
   validates_inclusion_of :price_range, in: PRICE_RANGES
 
-  # validate :uniqueness_of_place
+  validate :uniqueness_of_place, on: :create
 
   def as_json(options={})
     json = super(options)
