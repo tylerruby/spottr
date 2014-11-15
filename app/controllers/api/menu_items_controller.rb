@@ -49,6 +49,15 @@ class Api::MenuItemsController < ApplicationController
     end
 
     @menu_items = MenuItem.joins(:place).where(query, *query_params)
+    if params[:open] == "true"
+      time = if params[:timezone_offset]
+               Time.now
+             else
+               Time.now.utc - params[:timezone_offset].to_i.minutes
+             end
+
+      @menu_items = @menu_items.open(time)
+    end
 
     total_menu_items_count = @menu_items.count
 

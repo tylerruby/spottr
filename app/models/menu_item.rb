@@ -13,6 +13,20 @@ class MenuItem < ActiveRecord::Base
   validates_presence_of :price
   validates :price, inclusion: { in: 0..10000 }
 
+  scope :open, ->(time) {
+    dow, hour = WorkingTime.normalized_day_of_week_and_hour(time)
+
+    query = <<-EOQ
+      working_times.wday = ? AND
+      working_times.start_hours < ? AND
+      working_times.end_hours >= ?
+    EOQ
+
+    joins(:place => :working_times).
+      where(query, dow, hour, hour).
+      group("menu_items.id")
+  }
+
   def as_json(options={})
     json = super(options)
     json["title"] = self.name
