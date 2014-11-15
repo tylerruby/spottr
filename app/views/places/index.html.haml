@@ -1,5 +1,5 @@
 = render 'preload_images'
-.container-fluid
+.container-fluid{:style => "margin-top:50px;"}
   .row
     .col-md-8.col-sm-6{:style => "padding-left:0px;padding-right:0px;"}
       .panel.panel-default
@@ -28,6 +28,7 @@
             #dishes-pane.tab-pane
               %table.table.table-condensed.js-dynamic-table#dishes-table
               %a.btn.btn-outline.btn-primary.btn-block.js-more-dishes.hidden{:style => "margin-left:10px;margin-bottom:10px;"} Load More
+}
 
 = render 'shared/places_row_template'
 = render 'shared/menu_items_row_template_map'
