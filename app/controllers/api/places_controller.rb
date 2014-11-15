@@ -28,9 +28,11 @@ class Api::PlacesController < ApplicationController
 
     @places = Place.where(query, *query_params)
     if params[:open] == "true"
-      time = Time.now # TODO: take time zone into account
-      # offset = params[:offset].to_i # offset from utc in minutes
-      # time = Time.now.utc - offset.minutes
+      time = if params[:timezone_offset]
+               Time.now
+             else
+               Time.now.utc - params[:timezone_offset].to_i.minutes
+             end
 
       @places = @places.open(time)
     end

@@ -141,8 +141,9 @@ $ ->
       limit: fetchPlacesLimit,
       time_mode: $('.date-mode-select').attr('data-mode'),
       cuisine_type: $('.cuisine-select').attr('data-mode'),
-      price_range: $('.price-range-select').attr('data-mode')
-      open: $('.currently-open-select').attr('data-mode') == 'open'
+      price_range: $('.price-range-select').attr('data-mode'),
+      open: $('.currently-open-select').attr('data-mode') == 'open',
+      timezone_offset: (new Date()).getTimezoneOffset()
     )
 
 
