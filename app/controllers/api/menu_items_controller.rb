@@ -51,9 +51,9 @@ class Api::MenuItemsController < ApplicationController
     @menu_items = MenuItem.joins(:place).where(query, *query_params)
     if params[:open] == "true"
       time = if params[:timezone_offset]
-               Time.now
-             else
                Time.now.utc - params[:timezone_offset].to_i.minutes
+             else
+               Time.now
              end
 
       @menu_items = @menu_items.open(time)
