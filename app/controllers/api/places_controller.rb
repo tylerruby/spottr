@@ -29,9 +29,9 @@ class Api::PlacesController < ApplicationController
     @places = Place.where(query, *query_params)
     if params[:open] == "true"
       time = if params[:timezone_offset]
-               Time.now
-             else
                Time.now.utc - params[:timezone_offset].to_i.minutes
+             else
+               Time.now
              end
 
       @places = @places.open(time)

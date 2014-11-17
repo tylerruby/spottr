@@ -35,6 +35,7 @@ gem 'rspec-rails'
 gem 'spring',        group: :development
 gem 'geocoder'
 gem 'bootstrap-sass'
+gem 'tzinfo'
 
 group :development do
 	gem 'sqlite3'
