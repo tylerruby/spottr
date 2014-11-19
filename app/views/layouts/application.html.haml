@@ -19,7 +19,7 @@
     = render 'layouts/header'
     :javascript
       window.user_logged_in = #{!!current_user};
-    #sign-in-alert.alert.alert-warning.hidden
+    #sign-in-alert.alert.alert-warning.hidden{:style => "margin-top:50px;"}
       Please
       = link_to "Sign in", new_user_session_path
       or
