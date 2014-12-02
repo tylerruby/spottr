@@ -34,7 +34,8 @@
               %li.divider
               %li= link_to('Logout', destroy_user_session_path, :method => :delete)
         - else
-          %li= button_to "Log in", new_user_session_path, style: "margin-right:3px;", class: "btn btn-success navbar-btn btn-sm", :method => :get
+          %li= button_to "Log in", new_user_session_path, style: "margin-right:3px;", class: "btn btn-primary navbar-btn btn-sm", :method => :get
+          %li= button_to "Sign up", new_user_registration_path, style: "margin-right:3px;", class: "btn btn-success navbar-btn btn-sm", :method => :get
 :javascript
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
